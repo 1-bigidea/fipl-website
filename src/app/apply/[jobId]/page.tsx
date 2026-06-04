@@ -42,59 +42,41 @@ export default async function ApplyPage({ params }: { params: { jobId: string } 
 
       <div className="bg-[var(--fipl-surface)] border-b border-[var(--fipl-border)]">
         <div className="max-w-2xl mx-auto px-6 py-8">
-          <Link
-            href="/careers"
-            className="inline-flex items-center gap-1.5 text-sm text-[var(--fipl-body)] hover:text-[#DB1B0C] transition-colors mb-6"
-          >
-            <svg
-              className="w-4 h-4"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M19 12H5M12 5l-7 7 7 7" />
-            </svg>
-            Back to Careers
-          </Link>
+          <div className="flex items-start justify-between gap-4 mb-4">
+            <div>
+              <span className="inline-flex items-center gap-1.5 text-sm text-[#DB1B0C] mb-3">
+                Job Application{' '}
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7.5 0.5L1 7.5h5L4.5 12.5l7.5-8h-5z" />
+                </svg>
+              </span>
+              <h1 className="text-2xl md:text-3xl font-bold text-[var(--fipl-heading)] mb-2">
+                {job.title}
+              </h1>
+              <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--fipl-body)]">
+                <span className="flex items-center gap-1.5">
+                  <svg className="w-3.5 h-3.5 text-[#DB1B0C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="7" width="20" height="14" rx="2" />
+                    <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
+                  </svg>
+                  {job.department}
+                </span>
+                <span className="w-1 h-1 rounded-full bg-[var(--fipl-border)]" />
+                <span>{job.location}</span>
+                <span className="w-1 h-1 rounded-full bg-[var(--fipl-border)]" />
+                <span>{job.type}</span>
+              </div>
+            </div>
 
-          <span className="inline-flex items-center gap-1.5 text-sm text-[#DB1B0C] mb-3">
-            Job Application{' '}
-            <svg
-              width="13"
-              height="13"
-              viewBox="0 0 13 13"
-              fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg"
+            <Link
+              href="/careers"
+              className="shrink-0 inline-flex items-center gap-1.5 text-sm text-[var(--fipl-body)] hover:text-[#DB1B0C] transition-colors border border-[var(--fipl-border)] rounded-lg px-3 py-1.5 hover:border-[#DB1B0C]/40"
             >
-              <path d="M7.5 0.5L1 7.5h5L4.5 12.5l7.5-8h-5z" />
-            </svg>
-          </span>
-          <h1 className="text-2xl md:text-3xl font-bold text-[var(--fipl-heading)] mb-2">
-            {job.title}
-          </h1>
-          <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--fipl-body)]">
-            <span className="flex items-center gap-1.5">
-              <svg
-                className="w-3.5 h-3.5 text-[#DB1B0C]"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <rect x="2" y="7" width="20" height="14" rx="2" />
-                <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M19 12H5M12 5l-7 7 7 7" />
               </svg>
-              {job.department}
-            </span>
-            <span className="w-1 h-1 rounded-full bg-[var(--fipl-border)]" />
-            <span>{job.location}</span>
-            <span className="w-1 h-1 rounded-full bg-[var(--fipl-border)]" />
-            <span>{job.type}</span>
+              Back to Careers
+            </Link>
           </div>
         </div>
       </div>
