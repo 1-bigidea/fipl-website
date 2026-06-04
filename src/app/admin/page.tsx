@@ -1,22 +1,24 @@
 import { createServerClient } from '@/lib/supabase-server'
 import Link from 'next/link'
-import { Newspaper, ImageIcon, Briefcase, Mail, Plus, Bell } from 'lucide-react'
+import { Newspaper, ImageIcon, Briefcase, Mail, FileText, Plus, Bell } from 'lucide-react'
 
 export const dynamic = 'force-dynamic'
 
 async function getCounts() {
   const supabase = createServerClient()
-  const [articles, jobs, media, submissions] = await Promise.all([
+  const [articles, jobs, media, submissions, applications] = await Promise.all([
     supabase.from('news_articles').select('id', { count: 'exact', head: true }),
     supabase.from('jobs').select('id', { count: 'exact', head: true }),
     supabase.from('media_kits').select('id', { count: 'exact', head: true }),
     supabase.from('contact_submissions').select('id', { count: 'exact', head: true }),
+    supabase.from('job_applications').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
   ])
   return {
     articles: articles.count ?? 0,
     jobs: jobs.count ?? 0,
     media: media.count ?? 0,
     submissions: submissions.count ?? 0,
+    applications: applications.count ?? 0,
   }
 }
 
@@ -60,6 +62,15 @@ export default async function AdminDashboard() {
       iconColor: '#16a34a',
       iconBg: 'rgba(22,163,74,0.08)',
     },
+    {
+      label: 'Pending Applications',
+      value: counts.applications,
+      href: '/admin/applications',
+      action: 'Review',
+      icon: FileText,
+      iconColor: '#7c3aed',
+      iconBg: 'rgba(124,58,237,0.08)',
+    },
   ]
 
   const quickActions = [
@@ -94,7 +105,7 @@ export default async function AdminDashboard() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
         {stats.map(({ label, value, href, action, icon: Icon, iconColor, iconBg }) => (
           <Link
             key={label}

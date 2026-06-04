@@ -295,12 +295,12 @@ export default async function CareersPage() {
                         {job.description}
                       </p>
                     )}
-                    <a
-                      href={`mailto:careers@fipl-ng.com?subject=Application: ${encodeURIComponent(job.title)}`}
+                    <Link
+                      href={`/apply/${job.id}`}
                       className="inline-flex items-center gap-1 text-sm font-semibold text-[#DB1B0C] mt-4 hover:gap-2 transition-all"
                     >
                       Apply Now ↗
-                    </a>
+                    </Link>
                   </div>
                 </Reveal>
               ))}

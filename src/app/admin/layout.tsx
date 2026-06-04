@@ -11,6 +11,7 @@ import {
   Briefcase,
   AlertTriangle,
   Mail,
+  FileText,
   LogOut,
   ChevronLeft,
   ChevronRight,
@@ -27,6 +28,7 @@ const NAV = [
   { href: '/admin/jobs', label: 'Jobs', icon: Briefcase },
   { href: '/admin/alerts', label: 'Site Alerts', icon: AlertTriangle },
   { href: '/admin/submissions', label: 'Submissions', icon: Mail },
+  { href: '/admin/applications', label: 'Applications', icon: FileText },
 ]
 
 function getPageTitle(pathname: string): string {
