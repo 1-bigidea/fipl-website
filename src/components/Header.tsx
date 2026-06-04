@@ -83,7 +83,7 @@ export function Header() {
     item.href ? pathname === item.href : (item.children?.some((c) => pathname === c.href) ?? false)
 
   const topLinkCls = (active: boolean) =>
-    `flex items-center gap-1 px-3 py-2 rounded transition-colors whitespace-nowrap border-b-2 ${
+    `flex items-center gap-1 px-3 py-2 rounded transition-colors duration-300 ease-in-out whitespace-nowrap border-b-2 ${
       active
         ? transparent
           ? 'text-white border-white'
@@ -156,7 +156,7 @@ export function Header() {
               ),
             )}
             <ThemeToggle
-              className={`ml-2 ${transparent ? 'text-white hover:bg-white/10' : 'text-gray-700 dark:text-gray-200'}`}
+              className={`ml-2 transition-colors duration-300 ease-in-out ${transparent ? 'text-white hover:bg-white/10' : 'text-gray-700 dark:text-gray-200'}`}
             />
           </nav>
 
@@ -170,7 +170,7 @@ export function Header() {
               {[0, 1, 2].map((i) => (
                 <span
                   key={i}
-                  className={`block w-[22px] h-[2px] rounded transition-colors ${
+                  className={`block w-[22px] h-[2px] rounded transition-colors duration-300 ease-in-out ${
                     transparent ? 'bg-white' : 'bg-gray-700 dark:bg-gray-200'
                   }`}
                 />
