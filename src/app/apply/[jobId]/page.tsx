@@ -36,17 +36,30 @@ export default async function ApplyPage({ params }: { params: { jobId: string } 
 
   const job = data as JobRow
 
+  const requirementLines = job.requirements
+    ? job.requirements
+        .split('\n')
+        .map((r) => r.trim().replace(/^[-*•]\s*/, ''))
+        .filter(Boolean)
+    : []
+
   return (
     <div className="min-h-screen bg-[var(--fipl-bg)]">
       <div className="h-[72px]" aria-hidden="true" />
 
       <div className="bg-[var(--fipl-surface)] border-b border-[var(--fipl-border)]">
         <div className="max-w-2xl mx-auto px-6 py-8">
-          <div className="flex items-start justify-between gap-4 mb-4">
+          <div className="flex items-start justify-between gap-4">
             <div>
               <span className="inline-flex items-center gap-1.5 text-sm text-[#DB1B0C] mb-3">
                 Job Application{' '}
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 13 13"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path d="M7.5 0.5L1 7.5h5L4.5 12.5l7.5-8h-5z" />
                 </svg>
               </span>
@@ -55,7 +68,15 @@ export default async function ApplyPage({ params }: { params: { jobId: string } 
               </h1>
               <div className="flex flex-wrap items-center gap-3 text-sm text-[var(--fipl-body)]">
                 <span className="flex items-center gap-1.5">
-                  <svg className="w-3.5 h-3.5 text-[#DB1B0C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    className="w-3.5 h-3.5 text-[#DB1B0C]"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <rect x="2" y="7" width="20" height="14" rx="2" />
                     <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
                   </svg>
@@ -72,7 +93,15 @@ export default async function ApplyPage({ params }: { params: { jobId: string } 
               href="/careers"
               className="shrink-0 inline-flex items-center gap-1.5 text-sm text-[var(--fipl-body)] hover:text-[#DB1B0C] transition-colors border border-[var(--fipl-border)] rounded-lg px-3 py-1.5 hover:border-[#DB1B0C]/40"
             >
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                className="w-4 h-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M19 12H5M12 5l-7 7 7 7" />
               </svg>
               Back to Careers
@@ -82,7 +111,7 @@ export default async function ApplyPage({ params }: { params: { jobId: string } 
       </div>
 
       <div className="max-w-2xl mx-auto px-6 py-10 space-y-6">
-        {(job.description || job.requirements) && (
+        {(job.description || requirementLines.length > 0) && (
           <div className="space-y-5">
             {job.description && (
               <div>
@@ -94,35 +123,36 @@ export default async function ApplyPage({ params }: { params: { jobId: string } 
                 </p>
               </div>
             )}
-            {job.requirements && (
+
+            {requirementLines.length > 0 && (
               <div>
                 <h2 className="text-sm font-semibold text-[var(--fipl-heading)] mb-3">
                   Requirements
                 </h2>
                 <ul className="space-y-2">
-                  {job.requirements
-                    .split('\n')
-                    .map((r) => r.trim())
-                    .filter(Boolean)
-                    .map((req, i) => (
-                      <li key={i} className="flex items-start gap-2.5 text-sm text-[var(--fipl-body)]">
-                        <svg
-                          className="w-4 h-4 text-[#DB1B0C] shrink-0 mt-0.5"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M20 6L9 17l-5-5" />
-                        </svg>
-                        {req.replace(/^[-•*]\s*/, '')}
-                      </li>
-                    ))}
+                  {requirementLines.map((req, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-2.5 text-sm text-[var(--fipl-body)]"
+                    >
+                      <svg
+                        className="w-4 h-4 text-[#DB1B0C] shrink-0 mt-0.5"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M20 6L9 17l-5-5" />
+                      </svg>
+                      {req}
+                    </li>
+                  ))}
                 </ul>
               </div>
             )}
+
             <div className="border-t border-[var(--fipl-border)]" />
           </div>
         )}
