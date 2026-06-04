@@ -77,7 +77,7 @@ export function Header() {
   }, [menuOpen])
 
   const { theme } = useTheme()
-  const transparent = !scrolled
+  const transparent = !scrolled && !pathname.startsWith('/apply')
 
   const isItemActive = (item: NavItem) =>
     item.href ? pathname === item.href : (item.children?.some((c) => pathname === c.href) ?? false)
