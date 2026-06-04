@@ -38,26 +38,28 @@ export default async function ApplyPage({ params }: { params: { jobId: string } 
 
   return (
     <div className="min-h-screen bg-[var(--fipl-bg)]">
-      <div className="max-w-2xl mx-auto px-6 pt-28 pb-16">
-        <Link
-          href="/careers"
-          className="inline-flex items-center gap-1.5 text-sm text-[var(--fipl-body)] hover:text-[#DB1B0C] transition-colors mb-8"
-        >
-          <svg
-            className="w-4 h-4"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M19 12H5M12 5l-7 7 7 7" />
-          </svg>
-          Back to Careers
-        </Link>
+      <div className="h-[72px]" aria-hidden="true" />
 
-        <div className="mb-8">
+      <div className="bg-[var(--fipl-surface)] border-b border-[var(--fipl-border)]">
+        <div className="max-w-2xl mx-auto px-6 py-8">
+          <Link
+            href="/careers"
+            className="inline-flex items-center gap-1.5 text-sm text-[var(--fipl-body)] hover:text-[#DB1B0C] transition-colors mb-6"
+          >
+            <svg
+              className="w-4 h-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M19 12H5M12 5l-7 7 7 7" />
+            </svg>
+            Back to Careers
+          </Link>
+
           <span className="inline-flex items-center gap-1.5 text-sm text-[#DB1B0C] mb-3">
             Job Application{' '}
             <svg
@@ -95,7 +97,9 @@ export default async function ApplyPage({ params }: { params: { jobId: string } 
             <span>{job.type}</span>
           </div>
         </div>
+      </div>
 
+      <div className="max-w-2xl mx-auto px-6 py-10">
         <div className="bg-[var(--fipl-card)] border border-[var(--fipl-border)] rounded-2xl p-6 md:p-8">
           <ApplicationForm jobId={job.id} jobTitle={job.title} />
         </div>

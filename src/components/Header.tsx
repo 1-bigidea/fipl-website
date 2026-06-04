@@ -99,7 +99,7 @@ export function Header() {
         className="fixed top-0 left-0 right-0 z-50"
         style={{
           backgroundColor: transparent ? 'transparent' : 'var(--fipl-nav-bg)',
-          boxShadow: transparent ? 'none' : '0 4px 6px -1px rgb(0 0 0 / 0.08)',
+          boxShadow: transparent ? 'none' : '0 1px 0 0 var(--fipl-border), 0 4px 16px -2px rgb(0 0 0 / 0.06)',
           transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
         }}
       >
