@@ -38,7 +38,7 @@ export default async function ApplyPage({ params }: { params: { jobId: string } 
 
   return (
     <div className="min-h-screen bg-[var(--fipl-bg)]">
-      <div className="max-w-2xl mx-auto px-6 py-16">
+      <div className="max-w-2xl mx-auto px-6 pt-28 pb-16">
         <Link
           href="/careers"
           className="inline-flex items-center gap-1.5 text-sm text-[var(--fipl-body)] hover:text-[#DB1B0C] transition-colors mb-8"
