@@ -2,14 +2,13 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState, useTransition } from 'react'
+import { useState } from 'react'
 import { ExternalLink } from 'lucide-react'
 import { useToast } from '@/components/AdminToast'
 
 export default function NewsArticleActions({ id, slug }: { id: string; slug: string }) {
   const router = useRouter()
   const { toast } = useToast()
-  const [isPending, startTransition] = useTransition()
   const [confirming, setConfirming] = useState(false)
   const [deleting, setDeleting] = useState(false)
   const [error, setError] = useState('')
@@ -19,6 +18,12 @@ export default function NewsArticleActions({ id, slug }: { id: string; slug: str
     setError('')
     try {
       const res = await fetch(`/api/admin/news/${id}`, { method: 'DELETE' })
+      if (res.status === 404) {
+        toast('Already deleted — refreshing list', 'info')
+        router.refresh()
+        setDeleting(false)
+        return
+      }
       if (!res.ok) {
         const json = await res.json().catch(() => ({}))
         setError(json.error || `Failed (${res.status})`)
@@ -27,7 +32,7 @@ export default function NewsArticleActions({ id, slug }: { id: string; slug: str
       }
       toast('Article deleted')
       setConfirming(false)
-      startTransition(() => router.refresh())
+      router.refresh()
     } catch {
       setError('Network error')
     }
@@ -54,7 +59,7 @@ export default function NewsArticleActions({ id, slug }: { id: string; slug: str
         <span className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">Delete?</span>
         <button
           onClick={handleDelete}
-          disabled={deleting || isPending}
+          disabled={deleting}
           className="text-xs font-semibold text-white bg-red-500 hover:bg-red-600 px-2.5 py-1 rounded-lg transition-colors disabled:opacity-50"
         >
           {deleting ? '…' : 'Yes'}

@@ -29,14 +29,8 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
   const supabase = createServerClient()
-  const { data, error } = await supabase
-    .from('news_articles')
-    .delete()
-    .eq('id', params.id)
-    .select('id')
+  const { error } = await supabase.from('news_articles').delete().eq('id', params.id)
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-  if (!data || data.length === 0)
-    return NextResponse.json({ error: 'Article not found' }, { status: 404 })
   revalidatePath('/news')
   revalidatePath('/news/[slug]', 'page')
   return NextResponse.json({ ok: true })

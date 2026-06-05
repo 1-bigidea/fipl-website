@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useState, useTransition } from 'react'
+import { useState } from 'react'
 import { FileText } from 'lucide-react'
 import type { MediaKitRow } from '@/lib/database.types'
 import { useToast } from '@/components/AdminToast'
@@ -16,7 +16,6 @@ const CATEGORY_COLOR: Record<string, string> = {
 function MediaCard({ item }: { item: MediaKitRow }) {
   const router = useRouter()
   const { toast } = useToast()
-  const [isPending, startTransition] = useTransition()
   const [confirming, setConfirming] = useState(false)
   const [deleting, setDeleting] = useState(false)
   const [deleteError, setDeleteError] = useState('')
@@ -38,7 +37,7 @@ function MediaCard({ item }: { item: MediaKitRow }) {
       }
       toast('Media deleted')
       setConfirming(false)
-      startTransition(() => router.refresh())
+      router.refresh()
     } catch {
       setDeleteError('Network error')
     }

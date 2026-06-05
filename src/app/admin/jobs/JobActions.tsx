@@ -2,13 +2,12 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState, useTransition } from 'react'
+import { useState } from 'react'
 import { useToast } from '@/components/AdminToast'
 
 export default function JobActions({ id, isActive }: { id: string; isActive: boolean }) {
   const router = useRouter()
   const { toast } = useToast()
-  const [isPending, startTransition] = useTransition()
   const [toggling, setToggling] = useState(false)
   const [confirming, setConfirming] = useState(false)
   const [deleting, setDeleting] = useState(false)
@@ -21,7 +20,7 @@ export default function JobActions({ id, isActive }: { id: string; isActive: boo
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ is_active: !isActive }),
     })
-    startTransition(() => router.refresh())
+    router.refresh()
     setToggling(false)
   }
 
@@ -38,7 +37,7 @@ export default function JobActions({ id, isActive }: { id: string; isActive: boo
       }
       toast('Job deleted')
       setConfirming(false)
-      startTransition(() => router.refresh())
+      router.refresh()
     } catch {
       setDeleteError('Network error')
     }
@@ -65,7 +64,7 @@ export default function JobActions({ id, isActive }: { id: string; isActive: boo
         <span className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">Delete?</span>
         <button
           onClick={handleDelete}
-          disabled={deleting || isPending}
+          disabled={deleting}
           className="text-xs font-semibold text-white bg-red-500 hover:bg-red-600 px-2.5 py-1 rounded-lg transition-colors disabled:opacity-50"
         >
           {deleting ? '…' : 'Yes'}
@@ -85,7 +84,7 @@ export default function JobActions({ id, isActive }: { id: string; isActive: boo
     <div className="flex items-center gap-1 justify-end">
       <button
         onClick={toggleStatus}
-        disabled={toggling || isPending}
+        disabled={toggling}
         className="text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white px-3 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors disabled:opacity-50"
       >
         {toggling ? '…' : isActive ? 'Close' : 'Reopen'}
