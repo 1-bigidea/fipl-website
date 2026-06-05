@@ -69,7 +69,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   alt="FIPL"
                   width={52}
                   height={20}
-                  className="object-contain shrink-0 dark:brightness-0 dark:invert dark:opacity-80"
+                  className="object-contain shrink-0"
                 />
                 <div className="w-px h-4 bg-gray-200 dark:bg-gray-700 shrink-0" />
                 <span className="text-[11px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider truncate">
