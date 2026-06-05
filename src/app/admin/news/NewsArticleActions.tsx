@@ -9,12 +9,38 @@ export default function NewsArticleActions({ id, slug }: { id: string; slug: str
   const router = useRouter()
   const [confirming, setConfirming] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [error, setError] = useState('')
 
   async function handleDelete() {
     setDeleting(true)
-    await fetch(`/api/admin/news/${id}`, { method: 'DELETE' })
-    router.refresh()
-    setDeleting(false)
+    setError('')
+    try {
+      const res = await fetch(`/api/admin/news/${id}`, { method: 'DELETE' })
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}))
+        setError(json.error || `Failed (${res.status})`)
+        setDeleting(false)
+        return
+      }
+      router.refresh()
+    } catch {
+      setError('Network error')
+      setDeleting(false)
+    }
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center gap-2 justify-end">
+        <span className="text-xs text-red-500 dark:text-red-400">{error}</span>
+        <button
+          onClick={() => { setError(''); setConfirming(false) }}
+          className="text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+        >
+          Dismiss
+        </button>
+      </div>
+    )
   }
 
   if (confirming) {
