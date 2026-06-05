@@ -6,7 +6,7 @@ import { Upload, X, RotateCcw } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import type { NewsArticleRow } from '@/lib/database.types'
 
-const RichTextEditor = dynamic(() => import('./RichTextEditor'), {
+const RichTextEditor = dynamic(() => import('../RichTextEditor'), {
   ssr: false,
   loading: () => (
     <div className="border border-gray-200 dark:border-gray-700 rounded-lg h-64 bg-gray-50 dark:bg-gray-800/40 animate-pulse" />

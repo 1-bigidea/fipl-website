@@ -2,7 +2,15 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import dynamic from 'next/dynamic'
 import type { JobRow } from '@/lib/database.types'
+
+const RichTextEditor = dynamic(() => import('../RichTextEditor'), {
+  ssr: false,
+  loading: () => (
+    <div className="border border-gray-200 dark:border-gray-700 rounded-lg h-48 bg-gray-50 dark:bg-gray-800/40 animate-pulse" />
+  ),
+})
 
 const JOB_TYPES = ['Full Time', 'Part Time', 'Contract', 'Internship'] as const
 
@@ -10,8 +18,12 @@ interface Props {
   job?: JobRow
 }
 
-function wordCount(text: string): number {
-  return text.trim().split(/\s+/).filter(Boolean).length
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+}
+
+function wordCount(html: string): number {
+  return stripHtml(html).split(/\s+/).filter(Boolean).length
 }
 
 export default function JobForm({ job }: Props) {
@@ -61,7 +73,8 @@ export default function JobForm({ job }: Props) {
 
   const inputCls =
     'w-full border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2.5 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#DB1B0C] focus:ring-2 focus:ring-[#DB1B0C]/10'
-  const labelCls = 'block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1.5'
+  const labelCls = 'block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1'
+  const hintCls = 'text-[11px] text-gray-400 dark:text-gray-500 mt-1'
 
   const descWords = wordCount(form.description)
   const reqWords = wordCount(form.requirements)
@@ -72,6 +85,7 @@ export default function JobForm({ job }: Props) {
         <div className="flex-1 min-w-0 space-y-5">
           <div>
             <label className={labelCls}>Job Title</label>
+            <p className={`${hintCls} mb-1.5`}>The position name shown on the careers page</p>
             <input
               name="title"
               value={form.title}
@@ -83,7 +97,7 @@ export default function JobForm({ job }: Props) {
           </div>
 
           <div>
-            <div className="flex items-center justify-between mb-1.5">
+            <div className="flex items-center justify-between mb-1">
               <label className={`${labelCls} mb-0`}>Job Description</label>
               {descWords > 0 && (
                 <span className="text-[11px] text-gray-400 dark:text-gray-500 tabular-nums">
@@ -91,18 +105,19 @@ export default function JobForm({ job }: Props) {
                 </span>
               )}
             </div>
-            <textarea
-              name="description"
+            <p className={`${hintCls} mb-2`}>
+              Describe the role, key responsibilities, and what a typical day looks like. Use headings and bullet points to keep it easy to read.
+            </p>
+            <RichTextEditor
               value={form.description}
-              onChange={handleChange}
-              rows={14}
-              placeholder="<p>Describe the role, responsibilities, and what success looks like…</p>"
-              className={`${inputCls} font-mono text-xs leading-relaxed resize-y`}
+              onChange={(html) => setForm((prev) => ({ ...prev, description: html }))}
+              placeholder="Describe the role and what the person will be doing day-to-day…"
+              minHeight={240}
             />
           </div>
 
           <div>
-            <div className="flex items-center justify-between mb-1.5">
+            <div className="flex items-center justify-between mb-1">
               <label className={`${labelCls} mb-0`}>Requirements</label>
               {reqWords > 0 && (
                 <span className="text-[11px] text-gray-400 dark:text-gray-500 tabular-nums">
@@ -110,13 +125,14 @@ export default function JobForm({ job }: Props) {
                 </span>
               )}
             </div>
-            <textarea
-              name="requirements"
+            <p className={`${hintCls} mb-2`}>
+              List the qualifications, experience, and skills needed. A bullet list works best here — one requirement per line.
+            </p>
+            <RichTextEditor
               value={form.requirements}
-              onChange={handleChange}
-              rows={10}
-              placeholder="<ul><li>Minimum 5 years experience…</li></ul>"
-              className={`${inputCls} font-mono text-xs leading-relaxed resize-y`}
+              onChange={(html) => setForm((prev) => ({ ...prev, requirements: html }))}
+              placeholder="• Bachelor's degree in Electrical Engineering or related field&#10;• Minimum 5 years experience in power generation…"
+              minHeight={200}
             />
           </div>
         </div>
@@ -151,28 +167,32 @@ export default function JobForm({ job }: Props) {
 
             <div>
               <label className={labelCls}>Department</label>
+              <p className={`${hintCls} mb-1.5`}>The team or division this role belongs to</p>
               <input
                 name="department"
                 value={form.department}
                 onChange={handleChange}
                 required
-                placeholder="e.g. Engineering"
+                placeholder="e.g. Engineering, Finance, Operations"
                 className={inputCls}
               />
             </div>
 
             <div>
               <label className={labelCls}>Location</label>
+              <p className={`${hintCls} mb-1.5`}>Where the role is based</p>
               <input
                 name="location"
                 value={form.location}
                 onChange={handleChange}
+                placeholder="e.g. Port Harcourt, Rivers State"
                 className={inputCls}
               />
             </div>
 
             <div>
               <label className={labelCls}>Employment Type</label>
+              <p className={`${hintCls} mb-1.5`}>The nature of the engagement</p>
               <select name="type" value={form.type} onChange={handleChange} className={inputCls}>
                 {JOB_TYPES.map((t) => (
                   <option key={t}>{t}</option>
@@ -182,6 +202,7 @@ export default function JobForm({ job }: Props) {
 
             <div>
               <label className={labelCls}>Posted Date</label>
+              <p className={`${hintCls} mb-1.5`}>The date this role was opened</p>
               <input
                 name="posted_date"
                 type="date"

@@ -19,6 +19,8 @@ import {
 interface Props {
   value: string
   onChange: (html: string) => void
+  placeholder?: string
+  minHeight?: number
 }
 
 function Divider() {
@@ -55,13 +57,13 @@ function ToolBtn({
   )
 }
 
-export default function RichTextEditor({ value, onChange }: Props) {
+export default function RichTextEditor({ value, onChange, placeholder, minHeight = 280 }: Props) {
   const editor = useEditor({
     extensions: [
       StarterKit,
       Underline,
       Placeholder.configure({
-        placeholder: 'Start writing your article here…',
+        placeholder: placeholder ?? 'Start writing here…',
       }),
     ],
     content: value || '',
@@ -70,9 +72,7 @@ export default function RichTextEditor({ value, onChange }: Props) {
       onChange(html === '<p></p>' ? '' : html)
     },
     editorProps: {
-      attributes: {
-        class: 'rich-editor-content',
-      },
+      attributes: { class: 'rich-editor-content' },
     },
     immediatelyRender: false,
   })
@@ -122,7 +122,7 @@ export default function RichTextEditor({ value, onChange }: Props) {
         </ToolBtn>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 min-h-[320px]">
+      <div className="bg-white dark:bg-gray-800" style={{ minHeight }}>
         <EditorContent editor={editor} />
       </div>
     </div>
