@@ -35,9 +35,7 @@ export default async function SubmissionsPage({
   let query = supabase.from('contact_submissions').select('*', { count: 'exact' })
   if (subject) query = query.eq('subject', subject)
   if (q) {
-    query = query.or(
-      `first_name.ilike.%${q}%,last_name.ilike.%${q}%,email.ilike.%${q}%`,
-    )
+    query = query.or(`first_name.ilike.%${q}%,last_name.ilike.%${q}%,email.ilike.%${q}%`)
   }
   const { data, count } = await query.order('created_at', { ascending: false }).range(from, to)
 

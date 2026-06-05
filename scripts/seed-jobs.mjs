@@ -209,7 +209,10 @@ if (toInsert.length === 0) {
 
 console.log(`Inserting ${toInsert.length} job(s)…`)
 
-const { data, error } = await supabase.from('jobs').insert(toInsert).select('title, type, is_active')
+const { data, error } = await supabase
+  .from('jobs')
+  .insert(toInsert)
+  .select('title, type, is_active')
 if (error) {
   console.error('Error:', error.message)
   process.exit(1)

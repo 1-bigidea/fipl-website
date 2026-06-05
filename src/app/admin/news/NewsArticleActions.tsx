@@ -42,7 +42,10 @@ export default function NewsArticleActions({ id, slug }: { id: string; slug: str
       <div className="flex items-center gap-2 justify-end">
         <span className="text-xs text-red-500 dark:text-red-400">{error}</span>
         <button
-          onClick={() => { setError(''); setConfirming(false) }}
+          onClick={() => {
+            setError('')
+            setConfirming(false)
+          }}
           className="text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
         >
           Dismiss

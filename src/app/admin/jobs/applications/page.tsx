@@ -42,13 +42,29 @@ export default async function ApplicationsPage({
   const totalPages = Math.ceil(totalCount / PAGE_SIZE)
 
   const [pendingRes, reviewedRes, shortlistedRes, rejectedRes] = await Promise.all([
-    supabase.from('job_applications').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
-    supabase.from('job_applications').select('id', { count: 'exact', head: true }).eq('status', 'reviewed'),
-    supabase.from('job_applications').select('id', { count: 'exact', head: true }).eq('status', 'shortlisted'),
-    supabase.from('job_applications').select('id', { count: 'exact', head: true }).eq('status', 'rejected'),
+    supabase
+      .from('job_applications')
+      .select('id', { count: 'exact', head: true })
+      .eq('status', 'pending'),
+    supabase
+      .from('job_applications')
+      .select('id', { count: 'exact', head: true })
+      .eq('status', 'reviewed'),
+    supabase
+      .from('job_applications')
+      .select('id', { count: 'exact', head: true })
+      .eq('status', 'shortlisted'),
+    supabase
+      .from('job_applications')
+      .select('id', { count: 'exact', head: true })
+      .eq('status', 'rejected'),
   ])
   const statusCounts = {
-    '': (pendingRes.count ?? 0) + (reviewedRes.count ?? 0) + (shortlistedRes.count ?? 0) + (rejectedRes.count ?? 0),
+    '':
+      (pendingRes.count ?? 0) +
+      (reviewedRes.count ?? 0) +
+      (shortlistedRes.count ?? 0) +
+      (rejectedRes.count ?? 0),
     pending: pendingRes.count ?? 0,
     reviewed: reviewedRes.count ?? 0,
     shortlisted: shortlistedRes.count ?? 0,

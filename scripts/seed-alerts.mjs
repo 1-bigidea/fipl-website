@@ -43,7 +43,8 @@ const alerts = [
   },
   {
     title: 'Public Holiday Office Hours',
-    message: 'Our offices will be closed on the upcoming public holiday and reopen the next working day.',
+    message:
+      'Our offices will be closed on the upcoming public holiday and reopen the next working day.',
     type: 'warning',
     is_active: false,
   },
@@ -65,7 +66,10 @@ if (toInsert.length === 0) {
 
 console.log(`Inserting ${toInsert.length} alert(s)…`)
 
-const { data, error } = await supabase.from('alerts').insert(toInsert).select('title, type, is_active')
+const { data, error } = await supabase
+  .from('alerts')
+  .insert(toInsert)
+  .select('title, type, is_active')
 if (error) {
   console.error('Error:', error.message)
   process.exit(1)

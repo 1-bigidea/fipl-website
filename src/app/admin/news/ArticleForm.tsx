@@ -35,7 +35,10 @@ function formatDisplayDate(iso: string): string {
 }
 
 function stripHtml(html: string): string {
-  return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+  return html
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
 }
 
 function estimateReadTime(html: string): string {
@@ -211,7 +214,9 @@ export default function ArticleForm({ article }: Props) {
                 </button>
               )}
             </div>
-            <p className={hintCls + ' mb-1.5'}>The URL-friendly version of the title — auto-generated, edit only if needed</p>
+            <p className={hintCls + ' mb-1.5'}>
+              The URL-friendly version of the title — auto-generated, edit only if needed
+            </p>
             <input
               name="slug"
               value={form.slug}
@@ -236,7 +241,8 @@ export default function ArticleForm({ article }: Props) {
               )}
             </div>
             <p className={hintCls + ' mb-2'}>
-              Write the full article here. Use the toolbar to add headings, bold text, bullet points, and more.
+              Write the full article here. Use the toolbar to add headings, bold text, bullet
+              points, and more.
             </p>
             <RichTextEditor value={form.content} onChange={handleContentChange} />
           </div>
@@ -343,7 +349,9 @@ export default function ArticleForm({ article }: Props) {
             <p className="text-[11px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-widest">
               Cover Image
             </p>
-            <p className={hintCls}>The main image shown at the top of the article and in listings</p>
+            <p className={hintCls}>
+              The main image shown at the top of the article and in listings
+            </p>
 
             {imagePreview ? (
               <div className="relative">
@@ -363,11 +371,19 @@ export default function ArticleForm({ article }: Props) {
                     ? 'border-[#DB1B0C] bg-[#DB1B0C]/5'
                     : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                 }`}
-                onDragOver={(e) => { e.preventDefault(); setIsDragOver(true) }}
+                onDragOver={(e) => {
+                  e.preventDefault()
+                  setIsDragOver(true)
+                }}
                 onDragLeave={() => setIsDragOver(false)}
                 onDrop={handleDrop}
               >
-                <input type="file" accept="image/*" className="sr-only" onChange={handleImageChange} />
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="sr-only"
+                  onChange={handleImageChange}
+                />
                 <Upload className="w-5 h-5 text-gray-400" />
                 <span className="text-xs text-gray-500 dark:text-gray-400 text-center leading-relaxed">
                   Drop image or click to upload

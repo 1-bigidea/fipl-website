@@ -56,10 +56,7 @@ export default function SubmissionCard({ s }: { s: ContactSubmissionRow }) {
                 {s.first_name} {s.last_name}
               </p>
               <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-0.5">
-                <a
-                  href={`mailto:${s.email}`}
-                  className="text-xs text-[#DB1B0C] hover:underline"
-                >
+                <a href={`mailto:${s.email}`} className="text-xs text-[#DB1B0C] hover:underline">
                   {s.email}
                 </a>
                 {s.subject && (
@@ -80,7 +77,15 @@ export default function SubmissionCard({ s }: { s: ContactSubmissionRow }) {
               {deleteError ? (
                 <div className="flex items-center gap-1.5">
                   <span className="text-xs text-red-500 dark:text-red-400">{deleteError}</span>
-                  <button onClick={() => { setDeleteError(''); setConfirming(false) }} className="text-xs text-gray-400 hover:text-gray-600 transition-colors">Dismiss</button>
+                  <button
+                    onClick={() => {
+                      setDeleteError('')
+                      setConfirming(false)
+                    }}
+                    className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    Dismiss
+                  </button>
                 </div>
               ) : confirming ? (
                 <div className="flex items-center gap-1.5">

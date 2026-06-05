@@ -8,13 +8,7 @@ const inputCls =
 const labelCls = 'block text-xs font-semibold text-[var(--fipl-heading)] mb-1'
 const hintCls = 'text-[11px] text-[var(--fipl-body)] opacity-70 mb-2'
 
-export default function ApplicationForm({
-  jobId,
-  jobTitle,
-}: {
-  jobId: string
-  jobTitle: string
-}) {
+export default function ApplicationForm({ jobId, jobTitle }: { jobId: string; jobTitle: string }) {
   const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
   const [cvFile, setCvFile] = useState<File | null>(null)
@@ -79,7 +73,10 @@ export default function ApplicationForm({
     <form onSubmit={handleSubmit} encType="multipart/form-data" className="space-y-5">
       <div>
         <h2 className="text-base font-bold text-[var(--fipl-heading)] mb-1">Your Application</h2>
-        <p className={hintCls}>Fill in your details below. Fields marked <span className="text-[#DB1B0C]">*</span> are required.</p>
+        <p className={hintCls}>
+          Fill in your details below. Fields marked <span className="text-[#DB1B0C]">*</span> are
+          required.
+        </p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -144,10 +141,12 @@ export default function ApplicationForm({
 
       <div>
         <label className={labelCls} htmlFor="coverLetter">
-          Cover Letter <span className="text-[var(--fipl-body)] font-normal opacity-70">(optional)</span>
+          Cover Letter{' '}
+          <span className="text-[var(--fipl-body)] font-normal opacity-70">(optional)</span>
         </label>
         <p className={hintCls}>
-          Briefly introduce yourself, explain why you are interested in this role, and highlight any relevant experience. 3–5 sentences is ideal.
+          Briefly introduce yourself, explain why you are interested in this role, and highlight any
+          relevant experience. 3–5 sentences is ideal.
         </p>
         <textarea
           id="coverLetter"
@@ -236,7 +235,8 @@ export default function ApplicationForm({
                 <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" />
               </svg>
               <p className="text-sm text-[var(--fipl-body)]">
-                <span className="font-semibold text-[#DB1B0C]">Click to upload</span> or drag and drop your CV
+                <span className="font-semibold text-[#DB1B0C]">Click to upload</span> or drag and
+                drop your CV
               </p>
               <p className="text-xs text-[var(--fipl-body)] mt-1 opacity-70">PDF only · max 5 MB</p>
             </div>

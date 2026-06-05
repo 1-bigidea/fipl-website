@@ -98,7 +98,9 @@ export default async function AdminNewsPage({
 
       {articles.length === 0 ? (
         <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-10 text-center text-gray-400 dark:text-gray-500 text-sm">
-          {q || category ? 'No articles match your filters.' : 'No articles yet. Publish your first article.'}
+          {q || category
+            ? 'No articles match your filters.'
+            : 'No articles yet. Publish your first article.'}
         </div>
       ) : (
         <>
@@ -147,7 +149,8 @@ export default async function AdminNewsPage({
                     <td className="px-4 py-3 hidden sm:table-cell">
                       <span
                         className={`inline-block text-xs font-semibold px-2 py-0.5 rounded ${
-                          CATEGORY_COLOR[a.category] ?? 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400'
+                          CATEGORY_COLOR[a.category] ??
+                          'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400'
                         }`}
                       >
                         {a.category}

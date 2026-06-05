@@ -31,9 +31,7 @@ function timeAgo(iso: string): string {
 
 export default function DashboardActivityFeed({ items }: { items: FeedItem[] }) {
   if (items.length === 0) {
-    return (
-      <div className="py-8 text-center text-sm text-gray-400">No recent activity</div>
-    )
+    return <div className="py-8 text-center text-sm text-gray-400">No recent activity</div>
   }
 
   return (
@@ -52,12 +50,8 @@ export default function DashboardActivityFeed({ items }: { items: FeedItem[] }) 
               <Icon className="w-3.5 h-3.5" strokeWidth={1.8} />
             </div>
             <div className="flex-1 min-w-0">
-              <span className="text-sm font-medium text-gray-800 dark:text-white">
-                {item.name}
-              </span>
-              <span className="text-sm text-gray-400 dark:text-gray-500 ml-1.5">
-                {item.detail}
-              </span>
+              <span className="text-sm font-medium text-gray-800 dark:text-white">{item.name}</span>
+              <span className="text-sm text-gray-400 dark:text-gray-500 ml-1.5">{item.detail}</span>
             </div>
             {item.status && (
               <span

@@ -72,7 +72,11 @@ export default async function AdminMediaPage({
           {CATEGORIES.map((cat) => (
             <Link
               key={cat}
-              href={q ? `/admin/media?category=${encodeURIComponent(cat)}&q=${q}` : `/admin/media?category=${encodeURIComponent(cat)}`}
+              href={
+                q
+                  ? `/admin/media?category=${encodeURIComponent(cat)}&q=${q}`
+                  : `/admin/media?category=${encodeURIComponent(cat)}`
+              }
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
                 category === cat
                   ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'

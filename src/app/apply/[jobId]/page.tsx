@@ -111,10 +111,7 @@ export default async function ApplyPage({ params }: { params: { jobId: string } 
                 <h2 className="text-sm font-semibold text-[var(--fipl-heading)] mb-3">
                   About the Role
                 </h2>
-                <div
-                  className="fipl-prose"
-                  dangerouslySetInnerHTML={{ __html: job.description }}
-                />
+                <div className="fipl-prose" dangerouslySetInnerHTML={{ __html: job.description }} />
               </div>
             )}
 

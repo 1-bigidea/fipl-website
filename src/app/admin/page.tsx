@@ -72,9 +72,7 @@ async function getDashboardData() {
       .limit(5),
   ])
 
-  const countsByMonth: Record<string, number> = Object.fromEntries(
-    months.map((m) => [m.key, 0]),
-  )
+  const countsByMonth: Record<string, number> = Object.fromEntries(months.map((m) => [m.key, 0]))
   for (const row of articleDates.data ?? []) {
     const key = row.date_iso.slice(0, 7)
     if (key in countsByMonth) countsByMonth[key]++
@@ -129,8 +127,7 @@ async function getDashboardData() {
 }
 
 export default async function AdminDashboard() {
-  const { counts, chartData, pipelineSegments, pipelineTotal, feedItems } =
-    await getDashboardData()
+  const { counts, chartData, pipelineSegments, pipelineTotal, feedItems } = await getDashboardData()
 
   const stats = [
     {

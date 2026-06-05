@@ -19,10 +19,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   }
 
   const supabase = createServerClient()
-  const { error } = await supabase
-    .from('job_applications')
-    .update({ status })
-    .eq('id', params.id)
+  const { error } = await supabase.from('job_applications').update({ status }).eq('id', params.id)
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 })

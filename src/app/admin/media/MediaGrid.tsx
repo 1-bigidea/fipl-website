@@ -83,8 +83,18 @@ function MediaCard({ item }: { item: MediaKitRow }) {
         <div className="mt-2.5">
           {deleteError ? (
             <div className="flex items-center gap-1.5">
-              <span className="text-[11px] text-red-500 dark:text-red-400 truncate">{deleteError}</span>
-              <button onClick={() => { setDeleteError(''); setConfirming(false) }} className="text-[11px] text-gray-400 hover:text-gray-600 shrink-0 transition-colors">✕</button>
+              <span className="text-[11px] text-red-500 dark:text-red-400 truncate">
+                {deleteError}
+              </span>
+              <button
+                onClick={() => {
+                  setDeleteError('')
+                  setConfirming(false)
+                }}
+                className="text-[11px] text-gray-400 hover:text-gray-600 shrink-0 transition-colors"
+              >
+                ✕
+              </button>
             </div>
           ) : confirming ? (
             <div className="flex items-center gap-2">

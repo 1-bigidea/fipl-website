@@ -294,7 +294,8 @@ export function NewsTabs({ articles, mediaKits }: Props) {
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                 {pagedMedia.map((item) => {
-                  const preview = item.thumbnail_url || (isImageUrl(item.file_url) ? item.file_url : null)
+                  const preview =
+                    item.thumbnail_url || (isImageUrl(item.file_url) ? item.file_url : null)
                   return (
                     <button
                       key={item.id}

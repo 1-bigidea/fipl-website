@@ -84,40 +84,76 @@ export default function RichTextEditor({ value, onChange, placeholder, minHeight
   return (
     <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden focus-within:border-[#DB1B0C] focus-within:ring-2 focus-within:ring-[#DB1B0C]/10 transition-shadow">
       <div className="flex items-center flex-wrap gap-0.5 px-2 py-1.5 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/60">
-        <ToolBtn onClick={() => editor.chain().focus().toggleBold().run()} active={a('bold')} title="Bold (Ctrl+B)">
+        <ToolBtn
+          onClick={() => editor.chain().focus().toggleBold().run()}
+          active={a('bold')}
+          title="Bold (Ctrl+B)"
+        >
           <Bold className="w-3.5 h-3.5" />
         </ToolBtn>
-        <ToolBtn onClick={() => editor.chain().focus().toggleItalic().run()} active={a('italic')} title="Italic (Ctrl+I)">
+        <ToolBtn
+          onClick={() => editor.chain().focus().toggleItalic().run()}
+          active={a('italic')}
+          title="Italic (Ctrl+I)"
+        >
           <Italic className="w-3.5 h-3.5" />
         </ToolBtn>
-        <ToolBtn onClick={() => editor.chain().focus().toggleUnderline().run()} active={a('underline')} title="Underline (Ctrl+U)">
+        <ToolBtn
+          onClick={() => editor.chain().focus().toggleUnderline().run()}
+          active={a('underline')}
+          title="Underline (Ctrl+U)"
+        >
           <UnderlineIcon className="w-3.5 h-3.5" />
         </ToolBtn>
 
         <Divider />
 
-        <ToolBtn onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} active={a('heading', { level: 2 })} title="Heading 2">
+        <ToolBtn
+          onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+          active={a('heading', { level: 2 })}
+          title="Heading 2"
+        >
           <Heading2 className="w-3.5 h-3.5" />
         </ToolBtn>
-        <ToolBtn onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} active={a('heading', { level: 3 })} title="Heading 3">
+        <ToolBtn
+          onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+          active={a('heading', { level: 3 })}
+          title="Heading 3"
+        >
           <Heading3 className="w-3.5 h-3.5" />
         </ToolBtn>
 
         <Divider />
 
-        <ToolBtn onClick={() => editor.chain().focus().toggleBulletList().run()} active={a('bulletList')} title="Bullet list">
+        <ToolBtn
+          onClick={() => editor.chain().focus().toggleBulletList().run()}
+          active={a('bulletList')}
+          title="Bullet list"
+        >
           <List className="w-3.5 h-3.5" />
         </ToolBtn>
-        <ToolBtn onClick={() => editor.chain().focus().toggleOrderedList().run()} active={a('orderedList')} title="Numbered list">
+        <ToolBtn
+          onClick={() => editor.chain().focus().toggleOrderedList().run()}
+          active={a('orderedList')}
+          title="Numbered list"
+        >
           <ListOrdered className="w-3.5 h-3.5" />
         </ToolBtn>
 
         <Divider />
 
-        <ToolBtn onClick={() => editor.chain().focus().toggleBlockquote().run()} active={a('blockquote')} title="Blockquote">
+        <ToolBtn
+          onClick={() => editor.chain().focus().toggleBlockquote().run()}
+          active={a('blockquote')}
+          title="Blockquote"
+        >
           <Quote className="w-3.5 h-3.5" />
         </ToolBtn>
-        <ToolBtn onClick={() => editor.chain().focus().setHorizontalRule().run()} active={false} title="Divider line">
+        <ToolBtn
+          onClick={() => editor.chain().focus().setHorizontalRule().run()}
+          active={false}
+          title="Divider line"
+        >
           <Minus className="w-3.5 h-3.5" />
         </ToolBtn>
       </div>

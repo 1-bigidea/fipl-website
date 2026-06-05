@@ -21,7 +21,7 @@ const articles = [
     date_iso: '2026-03-31',
     read_time: '3 min read',
     excerpt:
-      'First Independent Power Limited has reached a landmark operational milestone, achieving an aggregate output of 500 megawatts across its portfolio of gas-fired power plants for the first time in the company\'s history.',
+      "First Independent Power Limited has reached a landmark operational milestone, achieving an aggregate output of 500 megawatts across its portfolio of gas-fired power plants for the first time in the company's history.",
     image_url: '',
     content: `<h2>Milestone Achievement</h2>
 <p>First Independent Power Limited (FIPL) has announced the achievement of a 500 megawatt aggregate generation milestone across its combined plant portfolio. The record output was sustained for a continuous 72-hour period during the final week of March 2026, marking a new high for the company since operations commenced.</p>
@@ -151,7 +151,7 @@ const articles = [
     date_iso: '2025-10-14',
     read_time: '3 min read',
     excerpt:
-      'A targeted efficiency improvement programme implemented across FIPL\'s plant portfolio has delivered a 12% reduction in auxiliary power consumption, freeing up additional megawatts for dispatch to the national grid.',
+      "A targeted efficiency improvement programme implemented across FIPL's plant portfolio has delivered a 12% reduction in auxiliary power consumption, freeing up additional megawatts for dispatch to the national grid.",
     image_url: '',
     content: `<h2>Programme Overview</h2>
 <p>First Independent Power Limited (FIPL) has concluded its first-phase Auxiliary Power Reduction Programme, delivering measurable improvements in plant efficiency across its three operational sites. The initiative, which ran from April to September 2025, targeted parasitic loads — power consumed by the plant itself rather than exported to the grid.</p>
@@ -238,7 +238,7 @@ const articles = [
     date_iso: '2025-07-15',
     read_time: '2 min read',
     excerpt:
-      'The Nigeria Employers Consultative Association has recognised FIPL with the HSE Excellence Award for the third consecutive year, citing the company\'s sustained zero Lost-Time Injury record and industry-leading safety culture.',
+      "The Nigeria Employers Consultative Association has recognised FIPL with the HSE Excellence Award for the third consecutive year, citing the company's sustained zero Lost-Time Injury record and industry-leading safety culture.",
     image_url: '',
     content: `<h2>Award Recognition</h2>
 <p>First Independent Power Limited (FIPL) has received the Nigeria Employers Consultative Association (NECA) HSE Excellence Award for the third consecutive year at the annual Health, Safety and Environment Forum held in Lagos on 12 July 2025. The award recognises organisations that demonstrate outstanding commitment to workplace safety and environmental stewardship.</p>
@@ -263,7 +263,7 @@ const articles = [
     date_iso: '2025-06-20',
     read_time: '2 min read',
     excerpt:
-      'FIPL has opened the second phase of its local vendor registration programme, inviting Nigerian-owned businesses in engineering, logistics, catering, and maintenance to apply for inclusion on the company\'s approved supplier list.',
+      "FIPL has opened the second phase of its local vendor registration programme, inviting Nigerian-owned businesses in engineering, logistics, catering, and maintenance to apply for inclusion on the company's approved supplier list.",
     image_url: '',
     content: `<h2>Phase 2 Registration Open</h2>
 <p>First Independent Power Limited (FIPL) is pleased to announce the opening of Phase 2 of its Local Vendor Registration Programme. The programme is designed to expand FIPL's supply chain to include more Nigerian-owned small and medium enterprises (SMEs), consistent with its local content commitments under the Nigerian Oil and Gas Industry Content Development Act.</p>

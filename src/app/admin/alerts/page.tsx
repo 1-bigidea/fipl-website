@@ -45,9 +45,7 @@ export default async function AdminAlertsPage({
   const supabase = createServerClient()
   let query = supabase.from('alerts').select('*', { count: 'exact' })
   if (type) query = query.eq('type', type)
-  const { data, count } = await query
-    .order('created_at', { ascending: false })
-    .range(from, to)
+  const { data, count } = await query.order('created_at', { ascending: false }).range(from, to)
 
   const alerts = (data ?? []) as AlertRow[]
   const totalCount = count ?? 0

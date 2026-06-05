@@ -114,7 +114,15 @@ export default function ApplicationRow({ app }: { app: JobApplicationRow }) {
             {deleteError ? (
               <div className="flex items-center gap-1">
                 <span className="text-xs text-red-500 dark:text-red-400">{deleteError}</span>
-                <button onClick={() => { setDeleteError(''); setConfirming(false) }} className="text-xs text-gray-400 hover:text-gray-600 transition-colors">✕</button>
+                <button
+                  onClick={() => {
+                    setDeleteError('')
+                    setConfirming(false)
+                  }}
+                  className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  ✕
+                </button>
               </div>
             ) : confirming ? (
               <div className="flex items-center gap-1">

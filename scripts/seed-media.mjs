@@ -43,9 +43,7 @@ const items = [
   makeItem('Primary Health Centre Handover', 'FIPL Foundation', 'fipl-health-centre'),
 ]
 
-const { data: existing, error: readError } = await supabase
-  .from('media_kits')
-  .select('title')
+const { data: existing, error: readError } = await supabase.from('media_kits').select('title')
 
 if (readError) {
   console.error('Error reading existing media:', readError.message)

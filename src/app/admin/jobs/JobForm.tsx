@@ -19,7 +19,10 @@ interface Props {
 }
 
 function stripHtml(html: string): string {
-  return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+  return html
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
 }
 
 function wordCount(html: string): number {
@@ -106,7 +109,8 @@ export default function JobForm({ job }: Props) {
               )}
             </div>
             <p className={`${hintCls} mb-2`}>
-              Describe the role, key responsibilities, and what a typical day looks like. Use headings and bullet points to keep it easy to read.
+              Describe the role, key responsibilities, and what a typical day looks like. Use
+              headings and bullet points to keep it easy to read.
             </p>
             <RichTextEditor
               value={form.description}
@@ -126,7 +130,8 @@ export default function JobForm({ job }: Props) {
               )}
             </div>
             <p className={`${hintCls} mb-2`}>
-              List the qualifications, experience, and skills needed. A bullet list works best here — one requirement per line.
+              List the qualifications, experience, and skills needed. A bullet list works best here
+              — one requirement per line.
             </p>
             <RichTextEditor
               value={form.requirements}
