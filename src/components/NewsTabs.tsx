@@ -31,8 +31,10 @@ export function NewsTabs({ articles, mediaKits }: Props) {
   const [query, setQuery] = useState('')
   const [mkTab, setMkTab] = useState<string>(MK_TABS[0])
   const [page, setPage] = useState(1)
+  const [mkPage, setMkPage] = useState(1)
   const [selected, setSelected] = useState<MediaKitRow | null>(null)
   const PER_PAGE = 3
+  const MK_PER_PAGE = 4
 
   useEffect(() => {
     if (!selected) return
@@ -61,6 +63,8 @@ export function NewsTabs({ articles, mediaKits }: Props) {
     .slice(0, 7)
 
   const filteredMedia = mediaKits.filter((m) => m.category === mkTab)
+  const mkTotalPages = Math.ceil(filteredMedia.length / MK_PER_PAGE)
+  const pagedMedia = filteredMedia.slice((mkPage - 1) * MK_PER_PAGE, mkPage * MK_PER_PAGE)
 
   return (
     <section className="py-16 bg-[var(--fipl-surface)]">
@@ -269,7 +273,10 @@ export function NewsTabs({ articles, mediaKits }: Props) {
               {MK_TABS.map((tab) => (
                 <button
                   key={tab}
-                  onClick={() => setMkTab(tab)}
+                  onClick={() => {
+                    setMkTab(tab)
+                    setMkPage(1)
+                  }}
                   className={`px-5 py-2 rounded-full text-sm font-medium border transition-colors ${
                     mkTab === tab
                       ? 'bg-primary text-white border-primary'
@@ -286,7 +293,7 @@ export function NewsTabs({ articles, mediaKits }: Props) {
               </p>
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                {filteredMedia.map((item) => {
+                {pagedMedia.map((item) => {
                   const preview = item.thumbnail_url || (isImageUrl(item.file_url) ? item.file_url : null)
                   return (
                     <button
@@ -314,6 +321,32 @@ export function NewsTabs({ articles, mediaKits }: Props) {
                     </button>
                   )
                 })}
+              </div>
+            )}
+
+            {mkTotalPages > 1 && (
+              <div className="flex gap-2 justify-center mt-7">
+                {Array.from({ length: mkTotalPages }, (_, i) => i + 1).map((p) => (
+                  <button
+                    key={p}
+                    onClick={() => setMkPage(p)}
+                    className={`w-9 h-9 rounded-md text-sm font-medium border transition-colors ${
+                      p === mkPage
+                        ? 'bg-primary text-white border-primary'
+                        : 'bg-[var(--fipl-bg)] text-[var(--fipl-body)] border-[var(--fipl-border)] hover:border-primary hover:text-primary'
+                    }`}
+                  >
+                    {p}
+                  </button>
+                ))}
+                {mkPage < mkTotalPages && (
+                  <button
+                    onClick={() => setMkPage(mkPage + 1)}
+                    className="w-9 h-9 rounded-md text-sm font-medium border bg-[var(--fipl-bg)] text-[var(--fipl-body)] border-[var(--fipl-border)] hover:border-primary hover:text-primary transition-colors"
+                  >
+                    ›
+                  </button>
+                )}
               </div>
             )}
           </>
