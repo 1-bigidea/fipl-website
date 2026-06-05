@@ -82,6 +82,18 @@ create index if not exists job_applications_created_at_idx on job_applications (
 
 alter table job_applications enable row level security;
 
+create table if not exists alerts (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  message text not null,
+  type text not null default 'info' check (type in ('info', 'warning', 'critical')),
+  is_active boolean not null default true,
+  created_at timestamptz default now()
+);
+
+alter table alerts enable row level security;
+create policy "Public read active alerts" on alerts for select using (is_active = true);
+
 insert into storage.buckets (id, name, public) values ('news-images', 'news-images', true) on conflict do nothing;
 insert into storage.buckets (id, name, public) values ('media-kit-assets', 'media-kit-assets', true) on conflict do nothing;
 insert into storage.buckets (id, name, public) values ('job-applications', 'job-applications', true) on conflict do nothing;
