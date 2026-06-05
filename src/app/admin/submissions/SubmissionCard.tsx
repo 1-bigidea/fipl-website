@@ -19,12 +19,26 @@ export default function SubmissionCard({ s }: { s: ContactSubmissionRow }) {
   const router = useRouter()
   const [confirming, setConfirming] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [deleteError, setDeleteError] = useState('')
 
   async function handleDelete() {
     setDeleting(true)
-    await fetch(`/api/admin/submissions/${s.id}`, { method: 'DELETE' })
-    router.refresh()
-    setDeleting(false)
+    setDeleteError('')
+    try {
+      const res = await fetch(`/api/admin/submissions/${s.id}`, { method: 'DELETE' })
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}))
+        setDeleteError(json.error || `Failed (${res.status})`)
+        setDeleting(false)
+        return
+      }
+      router.refresh()
+      setDeleting(false)
+      setConfirming(false)
+    } catch {
+      setDeleteError('Network error')
+      setDeleting(false)
+    }
   }
 
   const initials = `${s.first_name[0] ?? ''}${s.last_name[0] ?? ''}`.toUpperCase()
@@ -64,7 +78,12 @@ export default function SubmissionCard({ s }: { s: ContactSubmissionRow }) {
               <span className="text-[11px] text-gray-400 dark:text-gray-500 tabular-nums whitespace-nowrap hidden sm:block">
                 {formatDate(s.created_at)}
               </span>
-              {confirming ? (
+              {deleteError ? (
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs text-red-500 dark:text-red-400">{deleteError}</span>
+                  <button onClick={() => { setDeleteError(''); setConfirming(false) }} className="text-xs text-gray-400 hover:text-gray-600 transition-colors">Dismiss</button>
+                </div>
+              ) : confirming ? (
                 <div className="flex items-center gap-1.5">
                   <span className="text-xs text-gray-500 dark:text-gray-400">Delete?</span>
                   <button

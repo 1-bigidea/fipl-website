@@ -23,6 +23,8 @@ export default function NewsArticleActions({ id, slug }: { id: string; slug: str
         return
       }
       router.refresh()
+      setDeleting(false)
+      setConfirming(false)
     } catch {
       setError('Network error')
       setDeleting(false)

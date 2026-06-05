@@ -18,12 +18,26 @@ export default function ApplicationRow({ app }: { app: JobApplicationRow }) {
   const [expanded, setExpanded] = useState(false)
   const [confirming, setConfirming] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [deleteError, setDeleteError] = useState('')
 
   async function handleDelete() {
     setDeleting(true)
-    await fetch(`/api/admin/applications/${app.id}`, { method: 'DELETE' })
-    router.refresh()
-    setDeleting(false)
+    setDeleteError('')
+    try {
+      const res = await fetch(`/api/admin/applications/${app.id}`, { method: 'DELETE' })
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}))
+        setDeleteError(json.error || `Failed (${res.status})`)
+        setDeleting(false)
+        return
+      }
+      router.refresh()
+      setDeleting(false)
+      setConfirming(false)
+    } catch {
+      setDeleteError('Network error')
+      setDeleting(false)
+    }
   }
 
   return (
@@ -83,7 +97,12 @@ export default function ApplicationRow({ app }: { app: JobApplicationRow }) {
               </button>
             )}
 
-            {confirming ? (
+            {deleteError ? (
+              <div className="flex items-center gap-1">
+                <span className="text-xs text-red-500 dark:text-red-400">{deleteError}</span>
+                <button onClick={() => { setDeleteError(''); setConfirming(false) }} className="text-xs text-gray-400 hover:text-gray-600 transition-colors">✕</button>
+              </div>
+            ) : confirming ? (
               <div className="flex items-center gap-1">
                 <button
                   onClick={handleDelete}

@@ -16,6 +16,7 @@ function MediaCard({ item }: { item: MediaKitRow }) {
   const router = useRouter()
   const [confirming, setConfirming] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [deleteError, setDeleteError] = useState('')
 
   const isImageFile = /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(item.file_url)
   const isPdf = /\.pdf$/i.test(item.file_url)
@@ -23,9 +24,22 @@ function MediaCard({ item }: { item: MediaKitRow }) {
 
   async function handleDelete() {
     setDeleting(true)
-    await fetch(`/api/admin/media/${item.id}`, { method: 'DELETE' })
-    router.refresh()
-    setDeleting(false)
+    setDeleteError('')
+    try {
+      const res = await fetch(`/api/admin/media/${item.id}`, { method: 'DELETE' })
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}))
+        setDeleteError(json.error || `Failed (${res.status})`)
+        setDeleting(false)
+        return
+      }
+      router.refresh()
+      setDeleting(false)
+      setConfirming(false)
+    } catch {
+      setDeleteError('Network error')
+      setDeleting(false)
+    }
   }
 
   return (
@@ -66,7 +80,12 @@ function MediaCard({ item }: { item: MediaKitRow }) {
         </span>
 
         <div className="mt-2.5">
-          {confirming ? (
+          {deleteError ? (
+            <div className="flex items-center gap-1.5">
+              <span className="text-[11px] text-red-500 dark:text-red-400 truncate">{deleteError}</span>
+              <button onClick={() => { setDeleteError(''); setConfirming(false) }} className="text-[11px] text-gray-400 hover:text-gray-600 shrink-0 transition-colors">✕</button>
+            </div>
+          ) : confirming ? (
             <div className="flex items-center gap-2">
               <span className="text-[11px] text-gray-500 dark:text-gray-400">Delete?</span>
               <button

@@ -9,6 +9,7 @@ export default function JobActions({ id, isActive }: { id: string; isActive: boo
   const [toggling, setToggling] = useState(false)
   const [confirming, setConfirming] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [deleteError, setDeleteError] = useState('')
 
   async function toggleStatus() {
     setToggling(true)
@@ -23,9 +24,36 @@ export default function JobActions({ id, isActive }: { id: string; isActive: boo
 
   async function handleDelete() {
     setDeleting(true)
-    await fetch(`/api/admin/jobs/${id}`, { method: 'DELETE' })
-    router.refresh()
-    setDeleting(false)
+    setDeleteError('')
+    try {
+      const res = await fetch(`/api/admin/jobs/${id}`, { method: 'DELETE' })
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}))
+        setDeleteError(json.error || `Failed (${res.status})`)
+        setDeleting(false)
+        return
+      }
+      router.refresh()
+      setDeleting(false)
+      setConfirming(false)
+    } catch {
+      setDeleteError('Network error')
+      setDeleting(false)
+    }
+  }
+
+  if (deleteError) {
+    return (
+      <div className="flex items-center gap-2 justify-end">
+        <span className="text-xs text-red-500 dark:text-red-400">{deleteError}</span>
+        <button
+          onClick={() => { setDeleteError(''); setConfirming(false) }}
+          className="text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+        >
+          Dismiss
+        </button>
+      </div>
+    )
   }
 
   if (confirming) {
