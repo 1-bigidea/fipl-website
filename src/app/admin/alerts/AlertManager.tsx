@@ -4,8 +4,9 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useToast } from '@/components/AdminToast'
+import { ADMIN_PAGE_SIZE } from '@/lib/pagination'
 
-const PAGE_SIZE = 10
+const PAGE_SIZE = ADMIN_PAGE_SIZE
 
 type AlertType = 'info' | 'warning' | 'critical'
 

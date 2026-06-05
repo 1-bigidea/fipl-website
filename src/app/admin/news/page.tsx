@@ -5,10 +5,11 @@ import { Suspense } from 'react'
 import NewsArticleActions from './NewsArticleActions'
 import AdminPagination from '@/components/AdminPagination'
 import ArticleSearchInput from './ArticleSearchInput'
+import { ADMIN_PAGE_SIZE } from '@/lib/pagination'
 
 export const dynamic = 'force-dynamic'
 
-const PAGE_SIZE = 20
+const PAGE_SIZE = ADMIN_PAGE_SIZE
 const CATEGORIES = ['Operations', 'Community', 'Corporate', 'Partnerships', 'Updates'] as const
 
 const CATEGORY_COLOR: Record<string, string> = {

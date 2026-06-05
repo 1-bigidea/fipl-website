@@ -6,10 +6,11 @@ import AdminPagination from '@/components/AdminPagination'
 import ApplicationRow from './ApplicationRow'
 import ApplicationSearchInput from './ApplicationSearchInput'
 import JobsTabNav from '../JobsTabNav'
+import { ADMIN_PAGE_SIZE } from '@/lib/pagination'
 
 export const dynamic = 'force-dynamic'
 
-const PAGE_SIZE = 20
+const PAGE_SIZE = ADMIN_PAGE_SIZE
 
 const STATUS_FILTERS = [
   { label: 'All', value: '' },

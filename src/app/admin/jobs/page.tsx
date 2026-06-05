@@ -6,10 +6,11 @@ import JobActions from './JobActions'
 import AdminPagination from '@/components/AdminPagination'
 import JobSearchInput from './JobSearchInput'
 import JobsTabNav from './JobsTabNav'
+import { ADMIN_PAGE_SIZE } from '@/lib/pagination'
 
 export const dynamic = 'force-dynamic'
 
-const PAGE_SIZE = 20
+const PAGE_SIZE = ADMIN_PAGE_SIZE
 
 const TYPE_COLOR: Record<string, string> = {
   'Full Time': 'bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400',

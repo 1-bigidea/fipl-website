@@ -4,10 +4,11 @@ import { Suspense } from 'react'
 import AdminPagination from '@/components/AdminPagination'
 import SubmissionCard from './SubmissionCard'
 import SubmissionSearchInput from './SubmissionSearchInput'
+import { ADMIN_PAGE_SIZE } from '@/lib/pagination'
 
 export const dynamic = 'force-dynamic'
 
-const PAGE_SIZE = 15
+const PAGE_SIZE = ADMIN_PAGE_SIZE
 
 export default async function SubmissionsPage({
   searchParams,
