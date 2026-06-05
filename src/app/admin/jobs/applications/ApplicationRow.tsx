@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { ExternalLink, ChevronDown, ChevronUp } from 'lucide-react'
+import { ExternalLink, ChevronDown, ChevronUp, FileText, X } from 'lucide-react'
 import type { JobApplicationRow } from '@/lib/database.types'
 import ApplicationStatusSelect from './ApplicationStatusSelect'
 import { useToast } from '@/components/AdminToast'
@@ -18,9 +18,23 @@ export default function ApplicationRow({ app }: { app: JobApplicationRow }) {
   const router = useRouter()
   const { toast } = useToast()
   const [expanded, setExpanded] = useState(false)
+  const [cvOpen, setCvOpen] = useState(false)
   const [confirming, setConfirming] = useState(false)
   const [deleting, setDeleting] = useState(false)
   const [deleteError, setDeleteError] = useState('')
+
+  useEffect(() => {
+    if (!cvOpen) return
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setCvOpen(false)
+    }
+    document.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [cvOpen])
 
   async function handleDelete() {
     setDeleting(true)
@@ -74,15 +88,14 @@ export default function ApplicationRow({ app }: { app: JobApplicationRow }) {
 
         <td className="px-4 py-3">
           <div className="flex items-center gap-2 justify-end">
-            <a
-              href={app.cv_url}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => setCvOpen(true)}
               className="inline-flex items-center gap-1 text-xs font-semibold text-[#DB1B0C] hover:underline whitespace-nowrap"
             >
-              <ExternalLink className="w-3 h-3" />
+              <FileText className="w-3 h-3" />
               CV
-            </a>
+            </button>
 
             {app.cover_letter && (
               <button
@@ -128,6 +141,56 @@ export default function ApplicationRow({ app }: { app: JobApplicationRow }) {
               </button>
             )}
           </div>
+
+          {cvOpen && (
+            <div
+              className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 sm:p-8"
+              onClick={() => setCvOpen(false)}
+              role="dialog"
+              aria-modal="true"
+              aria-label={`CV — ${app.first_name} ${app.last_name}`}
+            >
+              <div
+                className="relative w-full max-w-4xl h-[90vh] flex flex-col bg-white dark:bg-gray-900 rounded-xl overflow-hidden text-left"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-center justify-between gap-3 px-4 py-3 border-b border-gray-200 dark:border-gray-800 shrink-0">
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">
+                      {app.first_name} {app.last_name}
+                    </p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500 truncate">
+                      {app.job_title} · CV
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <a
+                      href={app.cv_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-[#DB1B0C] hover:underline"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      Open in new tab
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => setCvOpen(false)}
+                      aria-label="Close"
+                      className="w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+                <iframe
+                  src={app.cv_url}
+                  title={`CV — ${app.first_name} ${app.last_name}`}
+                  className="w-full flex-1 bg-gray-100 dark:bg-gray-800"
+                />
+              </div>
+            </div>
+          )}
         </td>
       </tr>
 
