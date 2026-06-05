@@ -5,7 +5,8 @@ import Link from 'next/link'
 
 const inputCls =
   'w-full border border-[var(--fipl-border)] rounded-lg px-4 py-3 text-sm bg-[var(--fipl-bg)] text-[var(--fipl-heading)] placeholder:text-[var(--fipl-body)] focus:outline-none focus:border-[#DB1B0C] focus:ring-2 focus:ring-[#DB1B0C]/10'
-const labelCls = 'block text-xs font-semibold text-[var(--fipl-heading)] mb-1.5'
+const labelCls = 'block text-xs font-semibold text-[var(--fipl-heading)] mb-1'
+const hintCls = 'text-[11px] text-[var(--fipl-body)] opacity-70 mb-2'
 
 export default function ApplicationForm({
   jobId,
@@ -75,8 +76,13 @@ export default function ApplicationForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} encType="multipart/form-data">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+    <form onSubmit={handleSubmit} encType="multipart/form-data" className="space-y-5">
+      <div>
+        <h2 className="text-base font-bold text-[var(--fipl-heading)] mb-1">Your Application</h2>
+        <p className={hintCls}>Fill in your details below. Fields marked <span className="text-[#DB1B0C]">*</span> are required.</p>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className={labelCls} htmlFor="firstName">
             First Name <span className="text-[#DB1B0C]">*</span>
@@ -85,7 +91,7 @@ export default function ApplicationForm({
             id="firstName"
             name="firstName"
             type="text"
-            placeholder="John"
+            placeholder="e.g. Chukwuemeka"
             required
             className={inputCls}
           />
@@ -98,23 +104,24 @@ export default function ApplicationForm({
             id="lastName"
             name="lastName"
             type="text"
-            placeholder="Doe"
+            placeholder="e.g. Obi"
             required
             className={inputCls}
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className={labelCls} htmlFor="email">
             Email Address <span className="text-[#DB1B0C]">*</span>
           </label>
+          <p className={hintCls}>We will send updates about your application to this address</p>
           <input
             id="email"
             name="email"
             type="email"
-            placeholder="john@example.com"
+            placeholder="you@example.com"
             required
             className={inputCls}
           />
@@ -123,6 +130,7 @@ export default function ApplicationForm({
           <label className={labelCls} htmlFor="phone">
             Phone Number <span className="text-[#DB1B0C]">*</span>
           </label>
+          <p className={hintCls}>Include country code, e.g. +234</p>
           <input
             id="phone"
             name="phone"
@@ -134,23 +142,27 @@ export default function ApplicationForm({
         </div>
       </div>
 
-      <div className="mb-4">
+      <div>
         <label className={labelCls} htmlFor="coverLetter">
-          Cover Letter <span className="text-[var(--fipl-body)] font-normal">(optional)</span>
+          Cover Letter <span className="text-[var(--fipl-body)] font-normal opacity-70">(optional)</span>
         </label>
+        <p className={hintCls}>
+          Briefly introduce yourself, explain why you are interested in this role, and highlight any relevant experience. 3–5 sentences is ideal.
+        </p>
         <textarea
           id="coverLetter"
           name="coverLetter"
           rows={5}
-          placeholder="Tell us why you're a great fit for this role…"
+          placeholder="e.g. I am a qualified electrical engineer with 7 years of experience in power generation. I am particularly drawn to this role at FIPL because…"
           className={`${inputCls} resize-vertical`}
         />
       </div>
 
-      <div className="mb-6">
+      <div>
         <label className={labelCls} htmlFor="cv">
           CV / Resume <span className="text-[#DB1B0C]">*</span>
         </label>
+        <p className={hintCls}>Upload your most recent CV. PDF format only, maximum 5 MB.</p>
         <div
           onClick={() => fileRef.current?.click()}
           className={`border-2 border-dashed rounded-lg px-4 py-6 cursor-pointer transition-colors text-center ${
@@ -224,16 +236,16 @@ export default function ApplicationForm({
                 <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" />
               </svg>
               <p className="text-sm text-[var(--fipl-body)]">
-                <span className="font-semibold text-[#DB1B0C]">Click to upload</span> your CV
+                <span className="font-semibold text-[#DB1B0C]">Click to upload</span> or drag and drop your CV
               </p>
-              <p className="text-xs text-[var(--fipl-body)] mt-1 opacity-70">PDF only · max 5MB</p>
+              <p className="text-xs text-[var(--fipl-body)] mt-1 opacity-70">PDF only · max 5 MB</p>
             </div>
           )}
         </div>
       </div>
 
       {(status === 'error' || errorMsg) && (
-        <p className="text-sm text-red-600 dark:text-red-400 mb-4">{errorMsg}</p>
+        <p className="text-sm text-red-600 dark:text-red-400">{errorMsg}</p>
       )}
 
       <button

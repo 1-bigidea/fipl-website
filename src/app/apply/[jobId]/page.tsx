@@ -36,13 +36,6 @@ export default async function ApplyPage({ params }: { params: { jobId: string } 
 
   const job = data as JobRow
 
-  const requirementLines = job.requirements
-    ? job.requirements
-        .split('\n')
-        .map((r) => r.trim().replace(/^[-*•]\s*/, ''))
-        .filter(Boolean)
-    : []
-
   return (
     <div className="min-h-screen bg-[var(--fipl-bg)]">
       <div className="h-[72px]" aria-hidden="true" />
@@ -111,45 +104,29 @@ export default async function ApplyPage({ params }: { params: { jobId: string } 
       </div>
 
       <div className="max-w-2xl mx-auto px-6 py-10 space-y-6">
-        {(job.description || requirementLines.length > 0) && (
-          <div className="space-y-5">
+        {(job.description || job.requirements) && (
+          <div className="space-y-6">
             {job.description && (
               <div>
-                <h2 className="text-sm font-semibold text-[var(--fipl-heading)] mb-2">
+                <h2 className="text-sm font-semibold text-[var(--fipl-heading)] mb-3">
                   About the Role
                 </h2>
-                <p className="text-sm text-[var(--fipl-body)] leading-relaxed whitespace-pre-line">
-                  {job.description}
-                </p>
+                <div
+                  className="fipl-prose"
+                  dangerouslySetInnerHTML={{ __html: job.description }}
+                />
               </div>
             )}
 
-            {requirementLines.length > 0 && (
+            {job.requirements && (
               <div>
                 <h2 className="text-sm font-semibold text-[var(--fipl-heading)] mb-3">
                   Requirements
                 </h2>
-                <ul className="space-y-2">
-                  {requirementLines.map((req, i) => (
-                    <li
-                      key={i}
-                      className="flex items-start gap-2.5 text-sm text-[var(--fipl-body)]"
-                    >
-                      <svg
-                        className="w-4 h-4 text-[#DB1B0C] shrink-0 mt-0.5"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M20 6L9 17l-5-5" />
-                      </svg>
-                      {req}
-                    </li>
-                  ))}
-                </ul>
+                <div
+                  className="fipl-prose"
+                  dangerouslySetInnerHTML={{ __html: job.requirements }}
+                />
               </div>
             )}
 
