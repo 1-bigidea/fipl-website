@@ -1,5 +1,7 @@
 import { createServerClient } from '@/lib/supabase-server'
 import type { NewsArticleRow } from '@/lib/database.types'
+import Link from 'next/link'
+import { ChevronLeft } from 'lucide-react'
 import ArticleForm from '../../ArticleForm'
 import { notFound } from 'next/navigation'
 
@@ -10,11 +12,24 @@ export default async function EditArticlePage({ params }: { params: { id: string
   const { data } = await supabase.from('news_articles').select('*').eq('id', params.id).single()
   if (!data) notFound()
 
+  const article = data as NewsArticleRow
+
   return (
-    <div>
-      <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Edit Article</h1>
+    <div className="space-y-5">
+      <div>
+        <Link
+          href="/admin/news"
+          className="inline-flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors mb-3"
+        >
+          <ChevronLeft className="w-3.5 h-3.5" />
+          News Articles
+        </Link>
+        <h1 className="text-xl font-bold text-gray-900 dark:text-white truncate">
+          {article.title}
+        </h1>
+      </div>
       <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-6">
-        <ArticleForm article={data as NewsArticleRow} />
+        <ArticleForm article={article} />
       </div>
     </div>
   )
