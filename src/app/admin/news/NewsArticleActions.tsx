@@ -3,8 +3,9 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { ExternalLink } from 'lucide-react'
 
-export default function NewsArticleActions({ id }: { id: string }) {
+export default function NewsArticleActions({ id, slug }: { id: string; slug: string }) {
   const router = useRouter()
   const [confirming, setConfirming] = useState(false)
   const [deleting, setDeleting] = useState(false)
@@ -39,6 +40,15 @@ export default function NewsArticleActions({ id }: { id: string }) {
 
   return (
     <div className="flex items-center gap-1 justify-end">
+      <a
+        href={`/news/${slug}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1 text-xs font-medium text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 px-3 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+      >
+        <ExternalLink className="w-3 h-3" />
+        View
+      </a>
       <Link
         href={`/admin/news/${id}/edit`}
         className="text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white px-3 py-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"

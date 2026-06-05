@@ -156,7 +156,7 @@ export default async function AdminNewsPage({
                       {a.date}
                     </td>
                     <td className="px-4 py-3">
-                      <NewsArticleActions id={a.id} />
+                      <NewsArticleActions id={a.id} slug={a.slug} />
                     </td>
                   </tr>
                 ))}
