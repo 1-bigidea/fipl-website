@@ -3,7 +3,15 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Upload, X, RotateCcw } from 'lucide-react'
+import dynamic from 'next/dynamic'
 import type { NewsArticleRow } from '@/lib/database.types'
+
+const RichTextEditor = dynamic(() => import('./RichTextEditor'), {
+  ssr: false,
+  loading: () => (
+    <div className="border border-gray-200 dark:border-gray-700 rounded-lg h-64 bg-gray-50 dark:bg-gray-800/40 animate-pulse" />
+  ),
+})
 
 const CATEGORIES = ['Operations', 'Community', 'Corporate', 'Partnerships', 'Updates'] as const
 
@@ -25,13 +33,17 @@ function formatDisplayDate(iso: string): string {
   return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
 }
 
-function estimateReadTime(content: string): string {
-  const words = content.trim().split(/\s+/).filter(Boolean).length
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+}
+
+function estimateReadTime(html: string): string {
+  const words = stripHtml(html).split(/\s+/).filter(Boolean).length
   return `${Math.max(1, Math.round(words / 200))} min read`
 }
 
-function wordCount(text: string): number {
-  return text.trim().split(/\s+/).filter(Boolean).length
+function wordCount(html: string): number {
+  return stripHtml(html).split(/\s+/).filter(Boolean).length
 }
 
 export default function ArticleForm({ article }: Props) {
@@ -69,11 +81,16 @@ export default function ArticleForm({ article }: Props) {
       if (name === 'date_iso' && value) {
         next.date = formatDisplayDate(value)
       }
-      if (name === 'content') {
-        next.read_time = estimateReadTime(value)
-      }
       return next
     })
+  }
+
+  function handleContentChange(html: string) {
+    setForm((prev) => ({
+      ...prev,
+      content: html,
+      read_time: estimateReadTime(html),
+    }))
   }
 
   function handleSlugChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -155,7 +172,8 @@ export default function ArticleForm({ article }: Props) {
 
   const inputCls =
     'w-full border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2.5 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#DB1B0C] focus:ring-2 focus:ring-[#DB1B0C]/10'
-  const labelCls = 'block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1.5'
+  const labelCls = 'block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1'
+  const hintCls = 'text-[11px] text-gray-400 dark:text-gray-500 mt-1'
 
   const words = wordCount(form.content)
 
@@ -165,18 +183,19 @@ export default function ArticleForm({ article }: Props) {
         <div className="flex-1 min-w-0 space-y-5">
           <div>
             <label className={labelCls}>Title</label>
+            <p className={hintCls + ' mb-1.5'}>The main headline shown at the top of the article</p>
             <input
               name="title"
               value={form.title}
               onChange={handleChange}
               required
-              placeholder="Article headline"
+              placeholder="e.g. FIPL Achieves Record Generation Output in Q1 2024"
               className={`${inputCls} text-base font-medium`}
             />
           </div>
 
           <div>
-            <div className="flex items-center justify-between mb-1.5">
+            <div className="flex items-center justify-between mb-1">
               <label className={`${labelCls} mb-0`}>Slug</label>
               {slugManuallyEdited && (
                 <button
@@ -189,6 +208,7 @@ export default function ArticleForm({ article }: Props) {
                 </button>
               )}
             </div>
+            <p className={hintCls + ' mb-1.5'}>The URL-friendly version of the title — auto-generated, edit only if needed</p>
             <input
               name="slug"
               value={form.slug}
@@ -198,41 +218,38 @@ export default function ArticleForm({ article }: Props) {
             />
             {form.slug && (
               <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-1 truncate">
-                fipl.ng/news/
-                <span className="text-gray-600 dark:text-gray-400">{form.slug}</span>
+                fipl.ng/news/<span className="text-gray-600 dark:text-gray-400">{form.slug}</span>
               </p>
             )}
           </div>
 
           <div>
-            <div className="flex items-center justify-between mb-1.5">
-              <label className={`${labelCls} mb-0`}>Content (HTML)</label>
+            <div className="flex items-center justify-between mb-1">
+              <label className={`${labelCls} mb-0`}>Content</label>
               {words > 0 && (
                 <span className="text-[11px] text-gray-400 dark:text-gray-500 tabular-nums">
                   {words.toLocaleString()} words · {estimateReadTime(form.content)}
                 </span>
               )}
             </div>
-            <textarea
-              name="content"
-              value={form.content}
-              onChange={handleChange}
-              rows={20}
-              required
-              placeholder="<p>Article content goes here…</p>"
-              className={`${inputCls} font-mono text-xs leading-relaxed resize-y`}
-            />
+            <p className={hintCls + ' mb-2'}>
+              Write the full article here. Use the toolbar to add headings, bold text, bullet points, and more.
+            </p>
+            <RichTextEditor value={form.content} onChange={handleContentChange} />
           </div>
 
           <div>
             <label className={labelCls}>Excerpt</label>
+            <p className={hintCls + ' mb-1.5'}>
+              A short summary (2–3 sentences) shown on the news listing page and in search results
+            </p>
             <textarea
               name="excerpt"
               value={form.excerpt}
               onChange={handleChange}
               rows={3}
               required
-              placeholder="Brief summary shown in article listings and SEO"
+              placeholder="e.g. FIPL has announced a landmark achievement in power generation, recording its highest quarterly output to date across all three plants."
               className={`${inputCls} resize-none`}
             />
           </div>
@@ -274,6 +291,7 @@ export default function ArticleForm({ article }: Props) {
 
             <div>
               <label className={labelCls}>Category</label>
+              <p className={hintCls + ' mb-1.5'}>The section this article belongs to</p>
               <select
                 name="category"
                 value={form.category}
@@ -288,6 +306,7 @@ export default function ArticleForm({ article }: Props) {
 
             <div>
               <label className={labelCls}>Publish Date</label>
+              <p className={hintCls + ' mb-1.5'}>The date shown on the article</p>
               <input
                 name="date_iso"
                 type="date"
@@ -302,10 +321,11 @@ export default function ArticleForm({ article }: Props) {
             </div>
 
             <div>
-              <div className="flex items-center justify-between mb-1.5">
+              <div className="flex items-center justify-between mb-1">
                 <label className={`${labelCls} mb-0`}>Read Time</label>
                 <span className="text-[11px] text-gray-400 dark:text-gray-500">auto</span>
               </div>
+              <p className={hintCls + ' mb-1.5'}>Calculated from word count — edit to override</p>
               <input
                 name="read_time"
                 value={form.read_time}
@@ -320,14 +340,11 @@ export default function ArticleForm({ article }: Props) {
             <p className="text-[11px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-widest">
               Cover Image
             </p>
+            <p className={hintCls}>The main image shown at the top of the article and in listings</p>
 
             {imagePreview ? (
               <div className="relative">
-                <img
-                  src={imagePreview}
-                  alt=""
-                  className="w-full h-36 object-cover rounded-lg"
-                />
+                <img src={imagePreview} alt="" className="w-full h-36 object-cover rounded-lg" />
                 <button
                   type="button"
                   onClick={clearImage}
@@ -343,19 +360,11 @@ export default function ArticleForm({ article }: Props) {
                     ? 'border-[#DB1B0C] bg-[#DB1B0C]/5'
                     : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600'
                 }`}
-                onDragOver={(e) => {
-                  e.preventDefault()
-                  setIsDragOver(true)
-                }}
+                onDragOver={(e) => { e.preventDefault(); setIsDragOver(true) }}
                 onDragLeave={() => setIsDragOver(false)}
                 onDrop={handleDrop}
               >
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="sr-only"
-                  onChange={handleImageChange}
-                />
+                <input type="file" accept="image/*" className="sr-only" onChange={handleImageChange} />
                 <Upload className="w-5 h-5 text-gray-400" />
                 <span className="text-xs text-gray-500 dark:text-gray-400 text-center leading-relaxed">
                   Drop image or click to upload
