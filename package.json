@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "seed:news": "node scripts/seed-news.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
