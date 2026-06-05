@@ -25,25 +25,34 @@ const TYPE_STYLES: Record<AlertType, string> = {
   critical: 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400',
 }
 
+const TYPE_TABS = [
+  { label: 'All', value: '' },
+  { label: 'Info', value: 'info' },
+  { label: 'Warning', value: 'warning' },
+  { label: 'Critical', value: 'critical' },
+] as const
+
 export default async function AdminAlertsPage({
   searchParams,
 }: {
-  searchParams: { page?: string }
+  searchParams: { page?: string; type?: string }
 }) {
   const page = Math.max(1, parseInt(searchParams.page ?? '1', 10) || 1)
+  const type = searchParams.type ?? ''
   const from = (page - 1) * PAGE_SIZE
   const to = from + PAGE_SIZE - 1
 
   const supabase = createServerClient()
-  const { data, count } = await supabase
-    .from('alerts')
-    .select('*', { count: 'exact' })
+  let query = supabase.from('alerts').select('*', { count: 'exact' })
+  if (type) query = query.eq('type', type)
+  const { data, count } = await query
     .order('created_at', { ascending: false })
     .range(from, to)
 
   const alerts = (data ?? []) as AlertRow[]
   const totalCount = count ?? 0
   const totalPages = Math.ceil(totalCount / PAGE_SIZE)
+  const paginationBase = `/admin/alerts${type ? `?type=${type}` : ''}`
 
   return (
     <div className="space-y-5">
@@ -62,9 +71,25 @@ export default async function AdminAlertsPage({
         </Link>
       </div>
 
+      <div className="flex flex-wrap items-center gap-1">
+        {TYPE_TABS.map(({ label, value }) => (
+          <Link
+            key={value}
+            href={value ? `/admin/alerts?type=${value}` : '/admin/alerts'}
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+              type === value
+                ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900'
+                : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
+            }`}
+          >
+            {label}
+          </Link>
+        ))}
+      </div>
+
       {alerts.length === 0 ? (
         <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-10 text-center text-gray-400 dark:text-gray-500 text-sm">
-          No alerts yet. Publish your first alert.
+          {type ? `No ${type} alerts.` : 'No alerts yet. Publish your first alert.'}
         </div>
       ) : (
         <>
@@ -106,7 +131,7 @@ export default async function AdminAlertsPage({
             totalPages={totalPages}
             totalCount={totalCount}
             pageSize={PAGE_SIZE}
-            basePath="/admin/alerts"
+            basePath={paginationBase}
           />
         </>
       )}
