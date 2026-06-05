@@ -63,7 +63,28 @@ alter table contact_submissions enable row level security;
 
 alter table newsletter_subscribers enable row level security;
 
+create table if not exists job_applications (
+  id uuid primary key default gen_random_uuid(),
+  job_id uuid references jobs(id) on delete set null,
+  job_title text not null,
+  first_name text not null,
+  last_name text not null,
+  email text not null,
+  phone text not null,
+  cover_letter text,
+  cv_url text not null,
+  status text not null default 'pending' check (status in ('pending', 'reviewed', 'shortlisted', 'rejected')),
+  created_at timestamptz default now()
+);
+
+create index if not exists job_applications_status_idx on job_applications (status);
+create index if not exists job_applications_created_at_idx on job_applications (created_at desc);
+
+alter table job_applications enable row level security;
+
 insert into storage.buckets (id, name, public) values ('news-images', 'news-images', true) on conflict do nothing;
 insert into storage.buckets (id, name, public) values ('media-kit-assets', 'media-kit-assets', true) on conflict do nothing;
+insert into storage.buckets (id, name, public) values ('job-applications', 'job-applications', true) on conflict do nothing;
 create policy "Public read news images" on storage.objects for select using (bucket_id = 'news-images');
 create policy "Public read media assets" on storage.objects for select using (bucket_id = 'media-kit-assets');
+create policy "Public read job application files" on storage.objects for select using (bucket_id = 'job-applications');
