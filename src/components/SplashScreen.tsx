@@ -45,11 +45,17 @@ export function SplashScreen() {
       {textReady && (
         <>
           <div className="splash-stage">
-            <p className="splash-we-are-small">WE ARE</p>
+            <p className="splash-we-constant">We</p>
             <div className="splash-word-slot">
-              <p className="splash-word splash-w1">RELIABLE.</p>
-              <p className="splash-word splash-w2">SUSTAINABLE.</p>
-              <p className="splash-word splash-w3">POWERFUL.</p>
+              <p className="splash-word splash-w1">
+                are a people of <span className="splash-accent">Value</span>
+              </p>
+              <p className="splash-word splash-w2">
+                <span className="splash-accent">value</span> people
+              </p>
+              <p className="splash-word splash-w3">
+                add <span className="splash-accent">value</span> to people
+              </p>
             </div>
 
             <div className="splash-finale">

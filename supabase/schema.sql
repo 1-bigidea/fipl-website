@@ -63,7 +63,52 @@ alter table contact_submissions enable row level security;
 
 alter table newsletter_subscribers enable row level security;
 
+create table if not exists job_applications (
+  id uuid primary key default gen_random_uuid(),
+  job_id uuid references jobs(id) on delete set null,
+  job_title text not null,
+  first_name text not null,
+  last_name text not null,
+  email text not null,
+  phone text not null,
+  cover_letter text,
+  cv_url text not null,
+  status text not null default 'pending' check (status in ('pending', 'reviewed', 'shortlisted', 'rejected')),
+  created_at timestamptz default now()
+);
+
+create index if not exists job_applications_status_idx on job_applications (status);
+create index if not exists job_applications_created_at_idx on job_applications (created_at desc);
+
+alter table job_applications enable row level security;
+
+create table if not exists alerts (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  message text not null,
+  type text not null default 'info' check (type in ('info', 'warning', 'critical')),
+  is_active boolean not null default true,
+  created_at timestamptz default now()
+);
+
+alter table alerts enable row level security;
+create policy "Public read active alerts" on alerts for select using (is_active = true);
+
+create table if not exists testimonials (
+  id uuid primary key default gen_random_uuid(),
+  quote text not null,
+  name text not null,
+  role text not null,
+  is_active boolean not null default true,
+  created_at timestamptz default now()
+);
+
+alter table testimonials enable row level security;
+create policy "Public read active testimonials" on testimonials for select using (is_active = true);
+
 insert into storage.buckets (id, name, public) values ('news-images', 'news-images', true) on conflict do nothing;
 insert into storage.buckets (id, name, public) values ('media-kit-assets', 'media-kit-assets', true) on conflict do nothing;
+insert into storage.buckets (id, name, public) values ('job-applications', 'job-applications', true) on conflict do nothing;
 create policy "Public read news images" on storage.objects for select using (bucket_id = 'news-images');
 create policy "Public read media assets" on storage.objects for select using (bucket_id = 'media-kit-assets');
+create policy "Public read job application files" on storage.objects for select using (bucket_id = 'job-applications');

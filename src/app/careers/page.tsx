@@ -295,12 +295,12 @@ export default async function CareersPage() {
                         {job.description}
                       </p>
                     )}
-                    <a
-                      href={`mailto:careers@fipl-ng.com?subject=Application: ${encodeURIComponent(job.title)}`}
+                    <Link
+                      href={`/apply/${job.id}`}
                       className="inline-flex items-center gap-1 text-sm font-semibold text-[#DB1B0C] mt-4 hover:gap-2 transition-all"
                     >
                       Apply Now ↗
-                    </a>
+                    </Link>
                   </div>
                 </Reveal>
               ))}
@@ -320,12 +320,21 @@ export default async function CareersPage() {
                   We&apos;re always looking for talented individuals. Join our talent pool and
                   we&apos;ll reach out when opportunities match your skills.
                 </p>
-                <a
-                  href="mailto:careers@fipl-ng.com?subject=Talent Pool Application"
-                  className="btn-shimmer inline-flex items-center gap-2 bg-white text-[#DB1B0C] font-bold px-7 py-3.5 rounded-md hover:bg-gray-100 transition-colors"
-                >
-                  Join Our Talent Pool ↗
-                </a>
+                <span className="inline-flex items-center gap-2 bg-white/15 border border-white/30 text-white font-semibold px-7 py-3.5 rounded-md cursor-default select-none">
+                  <svg
+                    className="w-4 h-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                  </svg>
+                  Talent Pool — Coming Soon
+                </span>
               </div>
             </div>
           </Reveal>

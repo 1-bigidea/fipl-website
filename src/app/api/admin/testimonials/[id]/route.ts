@@ -1,0 +1,48 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
+import { createServerClient } from '@/lib/supabase-server'
+
+function isAuthorized(req: NextRequest): boolean {
+  return req.cookies.get('admin_token')?.value === process.env.ADMIN_TOKEN
+}
+
+const EDITABLE_FIELDS = ['quote', 'name', 'role', 'is_active'] as const
+
+export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+  if (!isAuthorized(req)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+  const body = await req.json()
+
+  const update: Record<string, unknown> = {}
+  for (const field of EDITABLE_FIELDS) {
+    if (field in body) update[field] = body[field]
+  }
+  if (Object.keys(update).length === 0) {
+    return NextResponse.json({ error: 'No fields to update' }, { status: 400 })
+  }
+
+  const supabase = createServerClient()
+  const { data, error } = await supabase
+    .from('testimonials')
+    .update(update)
+    .eq('id', params.id)
+    .select()
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+  if (!data || data.length === 0) {
+    return NextResponse.json({ error: 'Testimonial not found' }, { status: 404 })
+  }
+  revalidatePath('/about')
+  return NextResponse.json(data[0])
+}
+
+export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+  if (!isAuthorized(req)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+  const supabase = createServerClient()
+  const { error } = await supabase.from('testimonials').delete().eq('id', params.id)
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+  revalidatePath('/about')
+  return NextResponse.json({ ok: true })
+}

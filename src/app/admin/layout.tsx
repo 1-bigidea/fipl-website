@@ -11,6 +11,7 @@ import {
   Briefcase,
   AlertTriangle,
   Mail,
+  Quote,
   LogOut,
   ChevronLeft,
   ChevronRight,
@@ -26,10 +27,12 @@ const NAV = [
   { href: '/admin/media', label: 'Media Kits', icon: ImageIcon },
   { href: '/admin/jobs', label: 'Jobs', icon: Briefcase },
   { href: '/admin/alerts', label: 'Site Alerts', icon: AlertTriangle },
+  { href: '/admin/testimonials', label: 'Testimonials', icon: Quote },
   { href: '/admin/submissions', label: 'Submissions', icon: Mail },
 ]
 
 function getPageTitle(pathname: string): string {
+  if (pathname.startsWith('/admin/jobs/applications')) return 'Applications'
   for (const { href, label, exact } of NAV) {
     if (exact ? pathname === href : pathname.startsWith(href)) return label
   }
@@ -68,7 +71,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   alt="FIPL"
                   width={52}
                   height={20}
-                  className="object-contain shrink-0 dark:brightness-0 dark:invert dark:opacity-80"
+                  className="object-contain shrink-0"
                 />
                 <div className="w-px h-4 bg-gray-200 dark:bg-gray-700 shrink-0" />
                 <span className="text-[11px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider truncate">
@@ -126,7 +129,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
         </aside>
 
-        <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        <div className="flex-1 flex flex-col min-w-0 overflow-hidden page-bolt-bg">
           <header className="h-14 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between px-6 shrink-0">
             <span className="text-sm font-semibold text-gray-800 dark:text-white">
               {getPageTitle(pathname)}

@@ -34,6 +34,11 @@ export default function AdminPagination({
     pages.push(totalPages)
   }
 
+  function pageHref(base: string, p: number) {
+    const sep = base.includes('?') ? '&' : '?'
+    return `${base}${sep}page=${p}`
+  }
+
   const base =
     'w-8 h-8 flex items-center justify-center rounded-lg text-xs font-medium transition-colors'
   const activeCls = `${base} bg-[#DB1B0C] text-white`
@@ -47,7 +52,7 @@ export default function AdminPagination({
       </span>
       <div className="flex items-center gap-1">
         {page > 1 ? (
-          <Link href={`${basePath}?page=${page - 1}`} className={inactiveCls}>
+          <Link href={pageHref(basePath, page - 1)} className={inactiveCls}>
             <ChevronLeft className="w-3.5 h-3.5" strokeWidth={2} />
           </Link>
         ) : (
@@ -67,7 +72,7 @@ export default function AdminPagination({
           ) : (
             <Link
               key={p}
-              href={`${basePath}?page=${p}`}
+              href={pageHref(basePath, p as number)}
               className={p === page ? activeCls : inactiveCls}
             >
               {p}
@@ -76,7 +81,7 @@ export default function AdminPagination({
         )}
 
         {page < totalPages ? (
-          <Link href={`${basePath}?page=${page + 1}`} className={inactiveCls}>
+          <Link href={pageHref(basePath, page + 1)} className={inactiveCls}>
             <ChevronRight className="w-3.5 h-3.5" strokeWidth={2} />
           </Link>
         ) : (

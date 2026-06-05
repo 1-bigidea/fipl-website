@@ -49,3 +49,26 @@ export type NewsletterSubscriberRow = {
   email: string
   subscribed_at: string
 }
+
+export type JobApplicationRow = {
+  id: string
+  job_id: string | null
+  job_title: string
+  first_name: string
+  last_name: string
+  email: string
+  phone: string
+  cover_letter: string | null
+  cv_url: string
+  status: 'pending' | 'reviewed' | 'shortlisted' | 'rejected'
+  created_at: string
+}
+
+export type TestimonialRow = {
+  id: string
+  quote: string
+  name: string
+  role: string
+  is_active: boolean
+  created_at: string
+}

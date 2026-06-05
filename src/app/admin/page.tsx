@@ -1,27 +1,133 @@
 import { createServerClient } from '@/lib/supabase-server'
 import Link from 'next/link'
-import { Newspaper, ImageIcon, Briefcase, Mail, Plus, Bell } from 'lucide-react'
+import nextDynamic from 'next/dynamic'
+import { Newspaper, ImageIcon, Briefcase, Mail, FileText, Plus, Bell } from 'lucide-react'
+import DashboardActivityFeed from './DashboardActivityFeed'
 
 export const dynamic = 'force-dynamic'
 
-async function getCounts() {
+const DashboardAreaChart = nextDynamic(() => import('./DashboardAreaChart'), {
+  ssr: false,
+  loading: () => (
+    <div className="h-[190px] rounded-lg bg-gray-50 dark:bg-gray-800/40 animate-pulse" />
+  ),
+})
+
+const DashboardDonutChart = nextDynamic(() => import('./DashboardDonutChart'), {
+  ssr: false,
+  loading: () => (
+    <div className="h-[170px] rounded-full mx-auto w-[170px] bg-gray-50 dark:bg-gray-800/40 animate-pulse" />
+  ),
+})
+
+function getLast6Months() {
+  const months = []
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date()
+    d.setDate(1)
+    d.setMonth(d.getMonth() - i)
+    months.push({
+      key: `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`,
+      label: d.toLocaleString('en', { month: 'short' }),
+    })
+  }
+  return months
+}
+
+async function getDashboardData() {
   const supabase = createServerClient()
-  const [articles, jobs, media, submissions] = await Promise.all([
+  const months = getLast6Months()
+  const fromDate = `${months[0].key}-01`
+
+  const [
+    articlesCount,
+    jobsCount,
+    mediaCount,
+    submissionsCount,
+    applicationsCount,
+    articleDates,
+    allApplications,
+    recentSubmissions,
+    recentApplications,
+  ] = await Promise.all([
     supabase.from('news_articles').select('id', { count: 'exact', head: true }),
     supabase.from('jobs').select('id', { count: 'exact', head: true }),
     supabase.from('media_kits').select('id', { count: 'exact', head: true }),
     supabase.from('contact_submissions').select('id', { count: 'exact', head: true }),
+    supabase
+      .from('job_applications')
+      .select('id', { count: 'exact', head: true })
+      .eq('status', 'pending'),
+    supabase.from('news_articles').select('date_iso').gte('date_iso', fromDate),
+    supabase.from('job_applications').select('status'),
+    supabase
+      .from('contact_submissions')
+      .select('id, first_name, last_name, subject, created_at')
+      .order('created_at', { ascending: false })
+      .limit(5),
+    supabase
+      .from('job_applications')
+      .select('id, first_name, last_name, job_title, status, created_at')
+      .order('created_at', { ascending: false })
+      .limit(5),
   ])
+
+  const countsByMonth: Record<string, number> = Object.fromEntries(months.map((m) => [m.key, 0]))
+  for (const row of articleDates.data ?? []) {
+    const key = row.date_iso.slice(0, 7)
+    if (key in countsByMonth) countsByMonth[key]++
+  }
+  const chartData = months.map((m) => ({ month: m.label, articles: countsByMonth[m.key] }))
+
+  const pipeline = { pending: 0, reviewed: 0, shortlisted: 0, rejected: 0 }
+  for (const row of allApplications.data ?? []) {
+    if (row.status in pipeline) pipeline[row.status as keyof typeof pipeline]++
+  }
+  const pipelineSegments = [
+    { name: 'Pending', value: pipeline.pending, color: '#F47820' },
+    { name: 'Reviewed', value: pipeline.reviewed, color: '#2563eb' },
+    { name: 'Shortlisted', value: pipeline.shortlisted, color: '#16a34a' },
+    { name: 'Rejected', value: pipeline.rejected, color: '#DB1B0C' },
+  ]
+  const pipelineTotal = Object.values(pipeline).reduce((a, b) => a + b, 0)
+
+  const feedItems = [
+    ...(recentSubmissions.data ?? []).map((s) => ({
+      id: `sub-${s.id}`,
+      type: 'submission' as const,
+      name: `${s.first_name} ${s.last_name}`,
+      detail: s.subject ?? 'Contact inquiry',
+      createdAt: s.created_at,
+    })),
+    ...(recentApplications.data ?? []).map((a) => ({
+      id: `app-${a.id}`,
+      type: 'application' as const,
+      name: `${a.first_name} ${a.last_name}`,
+      detail: `applied for ${a.job_title}`,
+      status: a.status,
+      createdAt: a.created_at,
+    })),
+  ]
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .slice(0, 8)
+
   return {
-    articles: articles.count ?? 0,
-    jobs: jobs.count ?? 0,
-    media: media.count ?? 0,
-    submissions: submissions.count ?? 0,
+    counts: {
+      articles: articlesCount.count ?? 0,
+      jobs: jobsCount.count ?? 0,
+      media: mediaCount.count ?? 0,
+      submissions: submissionsCount.count ?? 0,
+      applications: applicationsCount.count ?? 0,
+    },
+    chartData,
+    pipelineSegments,
+    pipelineTotal,
+    feedItems,
   }
 }
 
 export default async function AdminDashboard() {
-  const counts = await getCounts()
+  const { counts, chartData, pipelineSegments, pipelineTotal, feedItems } = await getDashboardData()
 
   const stats = [
     {
@@ -60,6 +166,15 @@ export default async function AdminDashboard() {
       iconColor: '#16a34a',
       iconBg: 'rgba(22,163,74,0.08)',
     },
+    {
+      label: 'Pending Applications',
+      value: counts.applications,
+      href: '/admin/jobs/applications',
+      action: 'Review',
+      icon: FileText,
+      iconColor: '#7c3aed',
+      iconBg: 'rgba(124,58,237,0.08)',
+    },
   ]
 
   const quickActions = [
@@ -94,7 +209,7 @@ export default async function AdminDashboard() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-3">
         {stats.map(({ label, value, href, action, icon: Icon, iconColor, iconBg }) => (
           <Link
             key={label}
@@ -118,6 +233,53 @@ export default async function AdminDashboard() {
             <div className="text-xs font-medium text-gray-400 dark:text-gray-500">{label}</div>
           </Link>
         ))}
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="lg:col-span-2 bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-5">
+          <div className="mb-4">
+            <p className="text-sm font-semibold text-gray-800 dark:text-white">
+              Publishing Activity
+            </p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
+              Articles published over the last 6 months
+            </p>
+          </div>
+          <DashboardAreaChart data={chartData} />
+        </div>
+
+        <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-5">
+          <p className="text-sm font-semibold text-gray-800 dark:text-white">
+            Application Pipeline
+          </p>
+          <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5 mb-4">
+            Current status breakdown
+          </p>
+          <DashboardDonutChart segments={pipelineSegments} total={pipelineTotal} />
+          <div className="mt-4 space-y-2.5">
+            {pipelineSegments.map(({ name, value, color }) => (
+              <div key={name} className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full shrink-0" style={{ background: color }} />
+                  <span className="text-xs text-gray-500 dark:text-gray-400">{name}</span>
+                </div>
+                <span className="text-xs font-semibold text-gray-800 dark:text-white tabular-nums">
+                  {value}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 p-5">
+        <div className="flex items-center justify-between mb-1">
+          <p className="text-sm font-semibold text-gray-800 dark:text-white">Recent Activity</p>
+          <span className="text-[11px] text-gray-400 dark:text-gray-600">
+            Submissions &amp; applications
+          </span>
+        </div>
+        <DashboardActivityFeed items={feedItems} />
       </div>
 
       <div>

@@ -39,6 +39,42 @@ export async function sendContactNotification(data: {
   })
 }
 
+export async function sendApplicationNotification(data: {
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+  jobTitle: string
+  cvUrl: string
+}) {
+  if (!resend) return
+  await resend.emails.send({
+    from: FROM_NOTIFY,
+    to: [ADMIN_EMAIL],
+    subject: `New application: ${data.jobTitle} — ${data.firstName} ${data.lastName}`,
+    html: `
+      <div style="font-family:sans-serif;max-width:560px;margin:0 auto">
+        <div style="background:#DB1B0C;padding:20px 24px">
+          <h2 style="color:#fff;margin:0;font-size:16px;font-weight:600">New Job Application</h2>
+        </div>
+        <div style="padding:24px;border:1px solid #e5e7eb;border-top:none">
+          <table style="width:100%;border-collapse:collapse;font-size:14px">
+            <tr><td style="padding:8px 0;color:#6b7280;width:100px">Position</td><td style="padding:8px 0;font-weight:600;color:#DB1B0C">${data.jobTitle}</td></tr>
+            <tr><td style="padding:8px 0;color:#6b7280">Name</td><td style="padding:8px 0;font-weight:500">${data.firstName} ${data.lastName}</td></tr>
+            <tr><td style="padding:8px 0;color:#6b7280">Email</td><td style="padding:8px 0"><a href="mailto:${data.email}" style="color:#DB1B0C">${data.email}</a></td></tr>
+            <tr><td style="padding:8px 0;color:#6b7280">Phone</td><td style="padding:8px 0">${data.phone}</td></tr>
+          </table>
+          <div style="margin-top:20px;display:flex;gap:12px">
+            <a href="${data.cvUrl}" style="background:#DB1B0C;color:#fff;padding:10px 20px;text-decoration:none;border-radius:6px;font-size:14px;font-weight:600">Download CV</a>
+            <a href="mailto:${data.email}" style="background:#f3f4f6;color:#374151;padding:10px 20px;text-decoration:none;border-radius:6px;font-size:14px;font-weight:600">Reply to Applicant</a>
+          </div>
+        </div>
+        <div style="padding:16px 24px;font-size:12px;color:#9ca3af">Sent from fipl-ng.com careers portal</div>
+      </div>
+    `,
+  })
+}
+
 export async function sendSubscriberNotification(subscriberEmail: string) {
   if (!resend) return
   await Promise.all([

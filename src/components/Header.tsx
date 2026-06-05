@@ -77,13 +77,13 @@ export function Header() {
   }, [menuOpen])
 
   const { theme } = useTheme()
-  const transparent = !scrolled
+  const transparent = !scrolled && !pathname.startsWith('/apply')
 
   const isItemActive = (item: NavItem) =>
     item.href ? pathname === item.href : (item.children?.some((c) => pathname === c.href) ?? false)
 
   const topLinkCls = (active: boolean) =>
-    `flex items-center gap-1 px-3 py-2 rounded transition-colors whitespace-nowrap border-b-2 ${
+    `flex items-center gap-1 px-3 py-2 rounded transition-colors duration-300 ease-in-out whitespace-nowrap border-b-2 ${
       active
         ? transparent
           ? 'text-white border-white'
@@ -99,7 +99,9 @@ export function Header() {
         className="fixed top-0 left-0 right-0 z-50"
         style={{
           backgroundColor: transparent ? 'transparent' : 'var(--fipl-nav-bg)',
-          boxShadow: transparent ? 'none' : '0 4px 6px -1px rgb(0 0 0 / 0.08)',
+          boxShadow: transparent
+            ? 'none'
+            : '0 1px 0 0 var(--fipl-border), 0 4px 16px -2px rgb(0 0 0 / 0.06)',
           transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
         }}
       >
@@ -156,7 +158,7 @@ export function Header() {
               ),
             )}
             <ThemeToggle
-              className={`ml-2 ${transparent ? 'text-white hover:bg-white/10' : 'text-gray-700 dark:text-gray-200'}`}
+              className={`ml-2 transition-colors duration-300 ease-in-out ${transparent ? 'text-white hover:bg-white/10' : 'text-gray-700 dark:text-gray-200'}`}
             />
           </nav>
 
@@ -170,7 +172,7 @@ export function Header() {
               {[0, 1, 2].map((i) => (
                 <span
                   key={i}
-                  className={`block w-[22px] h-[2px] rounded transition-colors ${
+                  className={`block w-[22px] h-[2px] rounded transition-colors duration-300 ease-in-out ${
                     transparent ? 'bg-white' : 'bg-gray-700 dark:bg-gray-200'
                   }`}
                 />
