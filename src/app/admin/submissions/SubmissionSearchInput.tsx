@@ -4,7 +4,13 @@ import { useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { Search } from 'lucide-react'
 
-export default function SubmissionSearchInput({ defaultValue }: { defaultValue: string }) {
+export default function SubmissionSearchInput({
+  defaultValue,
+  subject,
+}: {
+  defaultValue: string
+  subject: string
+}) {
   const router = useRouter()
   const timerRef = useRef<ReturnType<typeof setTimeout>>()
 
@@ -14,6 +20,7 @@ export default function SubmissionSearchInput({ defaultValue }: { defaultValue: 
     timerRef.current = setTimeout(() => {
       const params = new URLSearchParams()
       if (q) params.set('q', q)
+      if (subject) params.set('subject', subject)
       router.push(`/admin/submissions${params.size ? `?${params}` : ''}`)
     }, 350)
   }
@@ -22,7 +29,7 @@ export default function SubmissionSearchInput({ defaultValue }: { defaultValue: 
     <div className="relative">
       <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400 pointer-events-none" />
       <input
-        key={defaultValue}
+        key={`${defaultValue}-${subject}`}
         defaultValue={defaultValue}
         onChange={handleChange}
         placeholder="Search by name or email…"
