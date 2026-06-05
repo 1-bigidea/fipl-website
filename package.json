@@ -12,7 +12,8 @@
     "seed:news": "node scripts/seed-news.mjs",
     "seed:media": "node scripts/seed-media.mjs",
     "seed:jobs": "node scripts/seed-jobs.mjs",
-    "seed:alerts": "node scripts/seed-alerts.mjs"
+    "seed:alerts": "node scripts/seed-alerts.mjs",
+    "seed:submissions": "node scripts/seed-submissions.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
