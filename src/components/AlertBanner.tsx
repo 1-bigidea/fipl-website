@@ -89,7 +89,7 @@ export default function AlertBanner({ alerts }: { alerts: Alert[] }) {
   if (!ready || visible.length === 0) return null
 
   return (
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-[60] w-full max-w-md px-4 flex flex-col gap-2 pointer-events-none">
+    <div className="fixed bottom-24 sm:bottom-6 left-1/2 -translate-x-1/2 z-[60] w-full max-w-md px-4 flex flex-col gap-2 pointer-events-none">
       {visible.map((alert) => {
         const t = TYPES[alert.type]
         return (
