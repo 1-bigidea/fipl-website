@@ -46,9 +46,15 @@ export function SplashScreen() {
         <>
           <div className="splash-stage">
             <div className="splash-word-slot">
-              <p className="splash-word splash-w1">We are a people of Value</p>
-              <p className="splash-word splash-w2">We value people and</p>
-              <p className="splash-word splash-w3">We add value to people</p>
+              <p className="splash-word splash-w1">
+                We are a people of <span className="splash-accent">Value</span>
+              </p>
+              <p className="splash-word splash-w2">
+                We <span className="splash-accent">value</span> people
+              </p>
+              <p className="splash-word splash-w3">
+                We add <span className="splash-accent">value</span> to people
+              </p>
             </div>
 
             <div className="splash-finale">

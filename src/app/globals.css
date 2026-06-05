@@ -831,30 +831,33 @@
   position: absolute;
   font-family: Arial, sans-serif;
   font-weight: 800;
-  font-size: clamp(26px, 6vw, 56px);
+  font-size: clamp(30px, 7.5vw, 72px);
   letter-spacing: -0.02em;
-  line-height: 1.15;
+  line-height: 1.05;
   margin: 0;
-  max-width: 14ch;
+  max-width: 12ch;
   text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 0 90px rgba(255, 255, 255, 0.12);
   animation: wordCycle 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.splash-accent {
+  color: #f47820;
+  text-shadow:
+    0 0 80px rgba(244, 120, 32, 0.45),
+    0 0 160px rgba(224, 48, 39, 0.2);
+}
+
 .splash-w1 {
-  color: #ffffff;
   animation-delay: 0.1s;
 }
 .splash-w2 {
-  color: #f47820;
   animation-delay: 0.9s;
-  text-shadow: 0 0 80px rgba(244, 120, 32, 0.4);
 }
 .splash-w3 {
-  color: #ffffff;
   animation-delay: 1.7s;
-  text-shadow:
-    0 0 80px rgba(224, 48, 39, 0.45),
-    0 0 160px rgba(224, 48, 39, 0.2);
 }
 
 .splash-finale {
