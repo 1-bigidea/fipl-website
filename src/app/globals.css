@@ -851,7 +851,7 @@
 
 .splash-word-slot {
   position: relative;
-  height: clamp(110px, 24vw, 190px);
+  height: clamp(56px, 11vw, 84px);
   width: 100%;
   display: flex;
   align-items: center;
@@ -862,11 +862,11 @@
   position: absolute;
   font-family: Arial, sans-serif;
   font-weight: 800;
-  font-size: clamp(30px, 7.5vw, 72px);
-  letter-spacing: -0.02em;
-  line-height: 1.05;
+  font-size: clamp(16px, 5vw, 52px);
+  letter-spacing: -0.01em;
+  line-height: 1;
   margin: 0;
-  max-width: 12ch;
+  white-space: nowrap;
   text-align: center;
   text-transform: uppercase;
   color: #ffffff;
