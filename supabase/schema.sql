@@ -94,6 +94,18 @@ create table if not exists alerts (
 alter table alerts enable row level security;
 create policy "Public read active alerts" on alerts for select using (is_active = true);
 
+create table if not exists testimonials (
+  id uuid primary key default gen_random_uuid(),
+  quote text not null,
+  name text not null,
+  role text not null,
+  is_active boolean not null default true,
+  created_at timestamptz default now()
+);
+
+alter table testimonials enable row level security;
+create policy "Public read active testimonials" on testimonials for select using (is_active = true);
+
 insert into storage.buckets (id, name, public) values ('news-images', 'news-images', true) on conflict do nothing;
 insert into storage.buckets (id, name, public) values ('media-kit-assets', 'media-kit-assets', true) on conflict do nothing;
 insert into storage.buckets (id, name, public) values ('job-applications', 'job-applications', true) on conflict do nothing;

@@ -31,6 +31,8 @@ export function TestimonialsBlock({
     return () => clearInterval(id)
   }, [current, goTo])
 
+  if (total === 0) return null
+
   return (
     <section className="py-12 md:py-16 lg:py-20 bg-[var(--fipl-surface)]">
       <div className="max-w-[1280px] mx-auto px-6">

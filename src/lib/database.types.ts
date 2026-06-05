@@ -63,3 +63,12 @@ export type JobApplicationRow = {
   status: 'pending' | 'reviewed' | 'shortlisted' | 'rejected'
   created_at: string
 }
+
+export type TestimonialRow = {
+  id: string
+  quote: string
+  name: string
+  role: string
+  is_active: boolean
+  created_at: string
+}

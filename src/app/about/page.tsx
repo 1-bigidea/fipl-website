@@ -6,10 +6,13 @@ import { TimelineSection } from '@/components/TimelineSection'
 import { AboutHero } from '@/components/PageHeroes'
 import { Reveal } from '@/components/Reveal'
 import { IMAGES } from '@/lib/images'
+import { createServerClient } from '@/lib/supabase-server'
+import type { TestimonialRow } from '@/lib/database.types'
 
 export const metadata: Metadata = { title: 'About Us' }
+export const dynamic = 'force-dynamic'
 
-const testimonials = [
+const fallbackTestimonials = [
   {
     quote:
       "FIPL's commitment to reliable power generation has been transformational. Their professionalism and expertise ensure seamless project execution every time.",
@@ -102,7 +105,17 @@ const values = [
   },
 ]
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const supabase = createServerClient()
+  const { data } = await supabase
+    .from('testimonials')
+    .select('quote, name, role')
+    .eq('is_active', true)
+    .order('created_at', { ascending: false })
+
+  const rows = (data ?? []) as Pick<TestimonialRow, 'quote' | 'name' | 'role'>[]
+  const testimonials = rows.length > 0 ? rows : fallbackTestimonials
+
   return (
     <div className="page-bolt-bg">
       <AboutHero />

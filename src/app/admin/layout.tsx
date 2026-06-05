@@ -11,6 +11,7 @@ import {
   Briefcase,
   AlertTriangle,
   Mail,
+  Quote,
   LogOut,
   ChevronLeft,
   ChevronRight,
@@ -26,6 +27,7 @@ const NAV = [
   { href: '/admin/media', label: 'Media Kits', icon: ImageIcon },
   { href: '/admin/jobs', label: 'Jobs', icon: Briefcase },
   { href: '/admin/alerts', label: 'Site Alerts', icon: AlertTriangle },
+  { href: '/admin/testimonials', label: 'Testimonials', icon: Quote },
   { href: '/admin/submissions', label: 'Submissions', icon: Mail },
 ]
 
