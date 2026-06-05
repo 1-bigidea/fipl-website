@@ -10,7 +10,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "seed:news": "node scripts/seed-news.mjs",
-    "seed:media": "node scripts/seed-media.mjs"
+    "seed:media": "node scripts/seed-media.mjs",
+    "seed:jobs": "node scripts/seed-jobs.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
