@@ -820,14 +820,15 @@
 
 .splash-we-constant {
   font-family: Arial, sans-serif;
-  font-size: clamp(12px, 1.9vw, 15px);
-  font-weight: 700;
-  letter-spacing: 0.35em;
+  font-size: clamp(30px, 7vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  text-align: center;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-  margin: 0 0 14px;
-  padding-left: 0.35em;
+  color: #ffffff;
+  text-shadow: 0 0 60px rgba(255, 255, 255, 0.18);
+  margin: 0 0 12px;
   animation: weConstantLife 2.5s ease both;
 }
 
