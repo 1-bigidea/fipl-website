@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { Upload, X, FileText } from 'lucide-react'
+import { useToast } from '@/components/AdminToast'
 
 const CATEGORIES = ['Our Plants', 'People', 'Events', 'FIPL Foundation'] as const
 
@@ -16,7 +17,7 @@ function isPdf(file: File | null): boolean {
 
 export default function MediaUploader() {
   const router = useRouter()
-  const [resetKey, setResetKey] = useState(0)
+  const { toast } = useToast()
   const [title, setTitle] = useState('')
   const [category, setCategory] = useState<string>(CATEGORIES[0])
   const [file, setFile] = useState<File | null>(null)
@@ -74,18 +75,13 @@ export default function MediaUploader() {
         body: JSON.stringify({ title, category, file_url, thumbnail_url }),
       })
       if (!res.ok) throw new Error('Failed to save')
-      setTitle('')
-      setCategory(CATEGORIES[0])
-      setFile(null)
-      setFilePreview(null)
-      setThumbnail(null)
-      setThumbPreview(null)
-      setResetKey((k) => k + 1)
+      toast('Media uploaded')
+      router.push('/admin/media')
       router.refresh()
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Upload failed')
+      setUploading(false)
     }
-    setUploading(false)
   }
 
   const inputCls =
@@ -93,7 +89,7 @@ export default function MediaUploader() {
   const labelCls = 'block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1.5'
 
   return (
-    <form key={resetKey} onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="flex flex-col lg:flex-row gap-5">
         <div className="flex-1 min-w-0">
           <label className={labelCls}>File (image or PDF)</label>
@@ -250,6 +246,13 @@ export default function MediaUploader() {
             className="w-full bg-[#DB1B0C] text-white font-semibold px-4 py-2.5 rounded-lg text-sm hover:bg-[#b81508] transition-colors disabled:opacity-60"
           >
             {uploading ? 'Uploading…' : 'Upload'}
+          </button>
+          <button
+            type="button"
+            onClick={() => router.push('/admin/media')}
+            className="w-full px-4 py-2 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+          >
+            Cancel
           </button>
         </div>
       </div>

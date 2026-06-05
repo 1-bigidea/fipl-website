@@ -2,7 +2,6 @@ import { createServerClient } from '@/lib/supabase-server'
 import type { MediaKitRow } from '@/lib/database.types'
 import Link from 'next/link'
 import { Suspense } from 'react'
-import MediaUploader from './MediaUploader'
 import MediaGrid from './MediaGrid'
 import AdminPagination from '@/components/AdminPagination'
 import MediaSearchInput from './MediaSearchInput'
@@ -50,13 +49,12 @@ export default async function AdminMediaPage({
             {q ? ` matching "${q}"` : ''}
           </p>
         </div>
-      </div>
-
-      <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-6">
-        <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-widest mb-4">
-          Upload New Media
-        </p>
-        <MediaUploader />
+        <Link
+          href="/admin/media/new"
+          className="bg-[#DB1B0C] text-white font-semibold px-4 py-2 rounded-lg text-sm hover:bg-[#b81508] transition-colors"
+        >
+          + Upload Media
+        </Link>
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-3">
