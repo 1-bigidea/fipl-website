@@ -3,11 +3,11 @@ import type { TestimonialRow } from '@/lib/database.types'
 import Link from 'next/link'
 import AdminPagination from '@/components/AdminPagination'
 import TestimonialActions from './TestimonialActions'
-import { ADMIN_PAGE_SIZE } from '@/lib/pagination'
+import { TESTIMONIALS_PAGE_SIZE } from '@/lib/pagination'
 
 export const dynamic = 'force-dynamic'
 
-const PAGE_SIZE = ADMIN_PAGE_SIZE
+const PAGE_SIZE = TESTIMONIALS_PAGE_SIZE
 
 export default async function AdminTestimonialsPage({
   searchParams,
