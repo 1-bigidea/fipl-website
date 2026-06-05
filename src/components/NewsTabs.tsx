@@ -2,9 +2,13 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import type { NewsArticle } from '@/lib/news'
 import type { MediaKitRow } from '@/lib/database.types'
+
+function isImageUrl(url: string) {
+  return /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(url)
+}
 
 const CATEGORIES = [
   'All',
@@ -27,7 +31,21 @@ export function NewsTabs({ articles, mediaKits }: Props) {
   const [query, setQuery] = useState('')
   const [mkTab, setMkTab] = useState<string>(MK_TABS[0])
   const [page, setPage] = useState(1)
+  const [selected, setSelected] = useState<MediaKitRow | null>(null)
   const PER_PAGE = 3
+
+  useEffect(() => {
+    if (!selected) return
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setSelected(null)
+    }
+    document.addEventListener('keydown', onKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [selected])
 
   const pressArticles = articles.filter((a) => {
     const matchesCategory = filter === 'All' || a.category === filter
@@ -269,14 +287,12 @@ export function NewsTabs({ articles, mediaKits }: Props) {
             ) : (
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                 {filteredMedia.map((item) => {
-                  const isImage = item.file_url.match(/\.(jpg|jpeg|png|gif|webp)$/i)
-                  const preview = item.thumbnail_url || (isImage ? item.file_url : null)
+                  const preview = item.thumbnail_url || (isImageUrl(item.file_url) ? item.file_url : null)
                   return (
-                    <a
+                    <button
                       key={item.id}
-                      href={item.file_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      type="button"
+                      onClick={() => setSelected(item)}
                       className="aspect-square bg-[var(--fipl-surface)] rounded-xl overflow-hidden flex flex-col items-center justify-center text-[var(--fipl-body)] text-xs cursor-pointer hover:scale-[1.03] transition-transform relative group"
                     >
                       {preview ? (
@@ -290,12 +306,12 @@ export function NewsTabs({ articles, mediaKits }: Props) {
                       )}
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-end">
                         <div className="w-full px-3 py-2 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                          <div className="text-white text-xs font-semibold truncate">
+                          <div className="text-white text-xs font-semibold truncate text-left">
                             {item.title}
                           </div>
                         </div>
                       </div>
-                    </a>
+                    </button>
                   )
                 })}
               </div>
@@ -303,6 +319,70 @@ export function NewsTabs({ articles, mediaKits }: Props) {
           </>
         )}
       </div>
+
+      {selected && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 sm:p-8"
+          onClick={() => setSelected(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={selected.title}
+        >
+          <div
+            className="relative w-full max-w-4xl max-h-[90vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setSelected(null)}
+              aria-label="Close"
+              className="absolute -top-3 -right-3 z-10 w-9 h-9 rounded-full bg-white text-gray-900 shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <svg
+                className="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+
+            <div className="bg-[var(--fipl-bg)] rounded-xl overflow-hidden flex flex-col max-h-[90vh]">
+              {isImageUrl(selected.file_url) ? (
+                <img
+                  src={selected.file_url}
+                  alt={selected.title}
+                  className="w-full max-h-[78vh] object-contain bg-black"
+                />
+              ) : (
+                <iframe
+                  src={selected.file_url}
+                  title={selected.title}
+                  className="w-full h-[78vh] bg-white"
+                />
+              )}
+              <div className="flex items-center justify-between gap-3 px-4 py-3 border-t border-[var(--fipl-border)]">
+                <span className="text-sm font-semibold text-[var(--fipl-heading)] truncate">
+                  {selected.title}
+                </span>
+                <a
+                  href={selected.file_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                  className="shrink-0 inline-flex items-center gap-1 text-xs font-semibold text-[#DB1B0C] hover:underline"
+                >
+                  Download ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }
