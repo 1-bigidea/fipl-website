@@ -7,5 +7,10 @@ const nextConfig = {
     ],
     unoptimized: process.env.NODE_ENV === 'development',
   },
+  experimental: {
+    staleTimes: {
+      dynamic: 0,
+    },
+  },
 }
 export default nextConfig
