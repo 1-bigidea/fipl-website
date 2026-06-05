@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Upload, X, RotateCcw } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import type { NewsArticleRow } from '@/lib/database.types'
+import { useToast } from '@/components/AdminToast'
 
 const RichTextEditor = dynamic(() => import('../RichTextEditor'), {
   ssr: false,
@@ -48,6 +49,7 @@ function wordCount(html: string): number {
 
 export default function ArticleForm({ article }: Props) {
   const router = useRouter()
+  const { toast } = useToast()
   const isEdit = !!article
 
   const [form, setForm] = useState({
@@ -161,13 +163,14 @@ export default function ArticleForm({ article }: Props) {
     })
 
     if (res.ok) {
+      toast(isEdit ? 'Article updated' : 'Article published')
       router.push('/admin/news')
       router.refresh()
     } else {
-      const json = await res.json()
+      const json = await res.json().catch(() => ({}))
       setError(json.error || 'Failed to save')
+      setSaving(false)
     }
-    setSaving(false)
   }
 
   const inputCls =
