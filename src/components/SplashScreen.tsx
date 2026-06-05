@@ -45,11 +45,10 @@ export function SplashScreen() {
       {textReady && (
         <>
           <div className="splash-stage">
-            <p className="splash-we-are-small">WE ARE</p>
             <div className="splash-word-slot">
-              <p className="splash-word splash-w1">RELIABLE.</p>
-              <p className="splash-word splash-w2">SUSTAINABLE.</p>
-              <p className="splash-word splash-w3">POWERFUL.</p>
+              <p className="splash-word splash-w1">We are a people of Value</p>
+              <p className="splash-word splash-w2">We value people and</p>
+              <p className="splash-word splash-w3">We add value to people</p>
             </div>
 
             <div className="splash-finale">

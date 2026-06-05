@@ -728,21 +728,6 @@
   background-color: #e03027 !important;
 }
 
-@keyframes weAreSmallLife {
-  0% {
-    opacity: 0;
-  }
-  6% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 @keyframes wordCycle {
   0% {
     opacity: 0;
@@ -833,21 +818,9 @@
   min-height: clamp(160px, 35vw, 280px);
 }
 
-.splash-we-are-small {
-  font-family: Arial, sans-serif;
-  font-size: clamp(10px, 1.6vw, 12px);
-  font-weight: 700;
-  letter-spacing: 0.5em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-  margin: 0 0 12px;
-  animation: weAreSmallLife 2.3s ease 0.1s both;
-}
-
 .splash-word-slot {
   position: relative;
-  height: clamp(58px, 11.5vw, 108px);
+  height: clamp(120px, 26vw, 200px);
   width: 100%;
   display: flex;
   align-items: center;
@@ -858,11 +831,12 @@
   position: absolute;
   font-family: Arial, sans-serif;
   font-weight: 800;
-  font-size: clamp(36px, 10vw, 100px);
-  letter-spacing: -0.025em;
-  line-height: 1;
+  font-size: clamp(26px, 6vw, 56px);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
   margin: 0;
-  white-space: nowrap;
+  max-width: 14ch;
+  text-align: center;
   animation: wordCycle 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
