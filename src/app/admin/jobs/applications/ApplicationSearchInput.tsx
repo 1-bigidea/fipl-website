@@ -20,7 +20,7 @@ export default function ApplicationSearchInput({ defaultValue, status }: Props) 
       const params = new URLSearchParams()
       if (q) params.set('q', q)
       if (status) params.set('status', status)
-      router.push(`/admin/applications${params.size ? `?${params}` : ''}`)
+      router.push(`/admin/jobs/applications${params.size ? `?${params}` : ''}`)
     }, 350)
   }
 

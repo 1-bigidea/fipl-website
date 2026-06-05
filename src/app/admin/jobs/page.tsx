@@ -5,6 +5,7 @@ import { Suspense } from 'react'
 import JobActions from './JobActions'
 import AdminPagination from '@/components/AdminPagination'
 import JobSearchInput from './JobSearchInput'
+import JobsTabNav from './JobsTabNav'
 
 export const dynamic = 'force-dynamic'
 
@@ -46,6 +47,7 @@ export default async function AdminJobsPage({
 
   return (
     <div className="space-y-5">
+      <JobsTabNav />
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-xl font-bold text-gray-900 dark:text-white">Jobs</h1>

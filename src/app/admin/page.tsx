@@ -172,7 +172,7 @@ export default async function AdminDashboard() {
     {
       label: 'Pending Applications',
       value: counts.applications,
-      href: '/admin/applications',
+      href: '/admin/jobs/applications',
       action: 'Review',
       icon: FileText,
       iconColor: '#7c3aed',

@@ -11,7 +11,6 @@ import {
   Briefcase,
   AlertTriangle,
   Mail,
-  FileText,
   LogOut,
   ChevronLeft,
   ChevronRight,
@@ -28,10 +27,10 @@ const NAV = [
   { href: '/admin/jobs', label: 'Jobs', icon: Briefcase },
   { href: '/admin/alerts', label: 'Site Alerts', icon: AlertTriangle },
   { href: '/admin/submissions', label: 'Submissions', icon: Mail },
-  { href: '/admin/applications', label: 'Applications', icon: FileText },
 ]
 
 function getPageTitle(pathname: string): string {
+  if (pathname.startsWith('/admin/jobs/applications')) return 'Applications'
   for (const { href, label, exact } of NAV) {
     if (exact ? pathname === href : pathname.startsWith(href)) return label
   }
@@ -128,7 +127,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
         </aside>
 
-        <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        <div className="flex-1 flex flex-col min-w-0 overflow-hidden page-bolt-bg">
           <header className="h-14 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between px-6 shrink-0">
             <span className="text-sm font-semibold text-gray-800 dark:text-white">
               {getPageTitle(pathname)}

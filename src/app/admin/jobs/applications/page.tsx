@@ -5,6 +5,7 @@ import { Suspense } from 'react'
 import AdminPagination from '@/components/AdminPagination'
 import ApplicationRow from './ApplicationRow'
 import ApplicationSearchInput from './ApplicationSearchInput'
+import JobsTabNav from '../JobsTabNav'
 
 export const dynamic = 'force-dynamic'
 
@@ -56,14 +57,15 @@ export default async function ApplicationsPage({
   const filterParams = new URLSearchParams()
   if (statusFilter) filterParams.set('status', statusFilter)
   if (q) filterParams.set('q', q)
-  const paginationBase = `/admin/applications${filterParams.size ? `?${filterParams}` : ''}`
+  const paginationBase = `/admin/jobs/applications${filterParams.size ? `?${filterParams}` : ''}`
 
   return (
     <div className="space-y-5">
+      <JobsTabNav />
+
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-gray-900 dark:text-white">Applications</h1>
-          <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5 tabular-nums">
+          <p className="text-xs text-gray-400 dark:text-gray-500 tabular-nums">
             {totalCount} application{totalCount !== 1 ? 's' : ''}
             {statusFilter ? ` · ${statusFilter}` : ''}
             {q ? ` matching "${q}"` : ''}
@@ -80,7 +82,7 @@ export default async function ApplicationsPage({
             const p = new URLSearchParams()
             if (value) p.set('status', value)
             if (q) p.set('q', q)
-            return `/admin/applications${p.size ? `?${p}` : ''}`
+            return `/admin/jobs/applications${p.size ? `?${p}` : ''}`
           })()
           const active = statusFilter === value
           const cnt = statusCounts[value as keyof typeof statusCounts] ?? 0
