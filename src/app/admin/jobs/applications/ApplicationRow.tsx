@@ -122,7 +122,7 @@ export default function ApplicationRow({ app }: { app: JobApplicationRow }) {
             ) : (
               <button
                 onClick={() => setConfirming(true)}
-                className="text-xs font-medium text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-colors"
+                className="text-xs font-semibold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40 px-3 py-1.5 rounded-lg transition-colors"
               >
                 Delete
               </button>
