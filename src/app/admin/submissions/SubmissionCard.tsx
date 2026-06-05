@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { Mail } from 'lucide-react'
 import type { ContactSubmissionRow } from '@/lib/database.types'
+import { useToast } from '@/components/AdminToast'
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-GB', {
@@ -17,6 +18,8 @@ function formatDate(iso: string) {
 
 export default function SubmissionCard({ s }: { s: ContactSubmissionRow }) {
   const router = useRouter()
+  const { toast } = useToast()
+  const [isPending, startTransition] = useTransition()
   const [confirming, setConfirming] = useState(false)
   const [deleting, setDeleting] = useState(false)
   const [deleteError, setDeleteError] = useState('')
@@ -32,13 +35,13 @@ export default function SubmissionCard({ s }: { s: ContactSubmissionRow }) {
         setDeleting(false)
         return
       }
-      router.refresh()
-      setDeleting(false)
+      toast('Submission deleted')
       setConfirming(false)
+      startTransition(() => router.refresh())
     } catch {
       setDeleteError('Network error')
-      setDeleting(false)
     }
+    setDeleting(false)
   }
 
   const initials = `${s.first_name[0] ?? ''}${s.last_name[0] ?? ''}`.toUpperCase()

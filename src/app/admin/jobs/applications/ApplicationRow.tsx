@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { ExternalLink, ChevronDown, ChevronUp } from 'lucide-react'
 import type { JobApplicationRow } from '@/lib/database.types'
 import ApplicationStatusSelect from './ApplicationStatusSelect'
+import { useToast } from '@/components/AdminToast'
 
 const STATUS_BADGE: Record<string, string> = {
   pending: 'bg-orange-50 dark:bg-orange-950/40 text-orange-600 dark:text-orange-400',
@@ -15,6 +16,8 @@ const STATUS_BADGE: Record<string, string> = {
 
 export default function ApplicationRow({ app }: { app: JobApplicationRow }) {
   const router = useRouter()
+  const { toast } = useToast()
+  const [isPending, startTransition] = useTransition()
   const [expanded, setExpanded] = useState(false)
   const [confirming, setConfirming] = useState(false)
   const [deleting, setDeleting] = useState(false)
@@ -31,13 +34,13 @@ export default function ApplicationRow({ app }: { app: JobApplicationRow }) {
         setDeleting(false)
         return
       }
-      router.refresh()
-      setDeleting(false)
+      toast('Application deleted')
       setConfirming(false)
+      startTransition(() => router.refresh())
     } catch {
       setDeleteError('Network error')
-      setDeleting(false)
     }
+    setDeleting(false)
   }
 
   return (
