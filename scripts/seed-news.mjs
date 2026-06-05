@@ -290,11 +290,20 @@ const articles = [
   },
 ]
 
-console.log(`Inserting ${articles.length} news articles…`)
+function coverImage(slug) {
+  return `https://picsum.photos/seed/${slug}-cover/1200/675.jpg`
+}
+
+const withImages = articles.map((a) => ({
+  ...a,
+  image_url: a.image_url || coverImage(a.slug),
+}))
+
+console.log(`Upserting ${withImages.length} news articles…`)
 
 const { data, error } = await supabase
   .from('news_articles')
-  .upsert(articles, { onConflict: 'slug', ignoreDuplicates: true })
+  .upsert(withImages, { onConflict: 'slug' })
   .select('slug, title')
 
 if (error) {
@@ -302,5 +311,5 @@ if (error) {
   process.exit(1)
 }
 
-console.log(`\nDone — ${data.length} article(s) inserted:\n`)
+console.log(`\nDone — ${data.length} article(s) upserted:\n`)
 data.forEach((a) => console.log(`  ✓ ${a.title}`))
