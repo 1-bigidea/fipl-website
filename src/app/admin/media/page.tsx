@@ -5,11 +5,11 @@ import { Suspense } from 'react'
 import MediaGrid from './MediaGrid'
 import AdminPagination from '@/components/AdminPagination'
 import MediaSearchInput from './MediaSearchInput'
-import { ADMIN_PAGE_SIZE } from '@/lib/pagination'
+import { MEDIA_PAGE_SIZE } from '@/lib/pagination'
 
 export const dynamic = 'force-dynamic'
 
-const PAGE_SIZE = ADMIN_PAGE_SIZE
+const PAGE_SIZE = MEDIA_PAGE_SIZE
 const CATEGORIES = ['Our Plants', 'People', 'Events', 'FIPL Foundation'] as const
 
 export default async function AdminMediaPage({
