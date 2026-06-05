@@ -34,8 +34,7 @@ export default function ApplicationRow({ app }: { app: JobApplicationRow }) {
         return
       }
       toast('Application deleted')
-      setConfirming(false)
-      router.refresh()
+      window.location.href = '/admin/jobs/applications'
     } catch {
       setDeleteError('Network error')
     }

@@ -36,8 +36,7 @@ export default function JobActions({ id, isActive }: { id: string; isActive: boo
         return
       }
       toast('Job deleted')
-      setConfirming(false)
-      router.refresh()
+      window.location.href = '/admin/jobs'
     } catch {
       setDeleteError('Network error')
     }

@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { Mail } from 'lucide-react'
 import type { ContactSubmissionRow } from '@/lib/database.types'
 import { useToast } from '@/components/AdminToast'
@@ -17,7 +16,6 @@ function formatDate(iso: string) {
 }
 
 export default function SubmissionCard({ s }: { s: ContactSubmissionRow }) {
-  const router = useRouter()
   const { toast } = useToast()
   const [confirming, setConfirming] = useState(false)
   const [deleting, setDeleting] = useState(false)
@@ -35,8 +33,7 @@ export default function SubmissionCard({ s }: { s: ContactSubmissionRow }) {
         return
       }
       toast('Submission deleted')
-      setConfirming(false)
-      router.refresh()
+      window.location.href = '/admin/submissions'
     } catch {
       setDeleteError('Network error')
     }

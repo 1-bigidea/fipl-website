@@ -36,8 +36,7 @@ function MediaCard({ item }: { item: MediaKitRow }) {
         return
       }
       toast('Media deleted')
-      setConfirming(false)
-      router.refresh()
+      window.location.href = '/admin/media'
     } catch {
       setDeleteError('Network error')
     }

@@ -1,13 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { ExternalLink } from 'lucide-react'
 import { useToast } from '@/components/AdminToast'
 
 export default function NewsArticleActions({ id, slug }: { id: string; slug: string }) {
-  const router = useRouter()
   const { toast } = useToast()
   const [confirming, setConfirming] = useState(false)
   const [deleting, setDeleting] = useState(false)
@@ -20,8 +18,7 @@ export default function NewsArticleActions({ id, slug }: { id: string; slug: str
       const res = await fetch(`/api/admin/news/${id}`, { method: 'DELETE' })
       if (res.status === 404) {
         toast('Already deleted — refreshing list', 'info')
-        router.refresh()
-        setDeleting(false)
+        window.location.href = '/admin/news'
         return
       }
       if (!res.ok) {
@@ -31,8 +28,7 @@ export default function NewsArticleActions({ id, slug }: { id: string; slug: str
         return
       }
       toast('Article deleted')
-      setConfirming(false)
-      router.refresh()
+      window.location.href = '/admin/news'
     } catch {
       setError('Network error')
     }
