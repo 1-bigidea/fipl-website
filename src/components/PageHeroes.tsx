@@ -195,6 +195,72 @@ export function PowerPlantsHero() {
   )
 }
 
+export function PlantHero({
+  name,
+  image,
+  supplier,
+}: {
+  name: string
+  image: string
+  supplier: string
+}) {
+  return (
+    <CinematicHero
+      image={image}
+      minHeight="min-h-[380px] md:min-h-[460px] lg:min-h-[560px]"
+      contentAlign="end"
+      overlay="linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.05) 32%, rgba(0,0,0,0.86) 100%)"
+      renderContent={(ready) => (
+        <div className="w-full max-w-[1280px] mx-auto px-6 pb-10 md:pb-14">
+          {ready && (
+            <p
+              style={{
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: '0.28em',
+                textTransform: 'uppercase',
+                color: '#D97300',
+                marginBottom: 16,
+                animation: 'heroBadgeIn 0.5s ease 0.3s both',
+              }}
+            >
+              FIPL Power Plant
+            </p>
+          )}
+          <h1
+            style={{
+              fontFamily: 'Arial',
+              fontWeight: 700,
+              fontSize: 'clamp(32px, 5.5vw, 62px)',
+              lineHeight: 1.15,
+              color: 'white',
+            }}
+          >
+            <HeroWords text={name} startIdx={0} ready={ready} />
+          </h1>
+          {ready && (
+            <div
+              style={{
+                height: 2,
+                width: 80,
+                background: 'linear-gradient(90deg, #DB1B0C, #D97300, transparent)',
+                marginTop: 16,
+                transformOrigin: 'left',
+                animation: 'heroRuleGrow 0.7s cubic-bezier(0.22,1,0.36,1) 1s both',
+              }}
+            />
+          )}
+          {ready && (
+            <p className="hero-tagline" style={{ animation: 'heroStatIn 0.6s ease 1.15s both' }}>
+              Primary Gas Supplier: {supplier}
+            </p>
+          )}
+        </div>
+      )}
+    />
+  )
+}
+
 export function NewsHero() {
   return (
     <CinematicHero
