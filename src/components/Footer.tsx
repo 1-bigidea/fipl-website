@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Logo } from '@/components/Logo'
 import PushSubscribeButton from '@/components/PushSubscribeButton'
+import { plants as powerPlants } from '@/lib/plants-data'
 
 const quickLinks = [
   { href: '/', label: 'Home' },
@@ -10,12 +11,9 @@ const quickLinks = [
   { href: '/careers', label: 'Careers' },
 ]
 
-const plants = [
-  { href: '/power-plants#afam', label: 'Afam' },
-  { href: '/power-plants#eleme', label: 'Eleme' },
-  { href: '/power-plants#omoku', label: 'Omoku' },
-  { href: '/power-plants#trans-amadi', label: 'Trans Amadi' },
-]
+const plants = powerPlants
+  .map(({ slug, name }) => ({ href: `/power-plants/${slug}`, label: name.replace(' Plant', '') }))
+  .sort((a, b) => a.label.localeCompare(b.label))
 
 const socialLinks = [
   {
