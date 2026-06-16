@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import { Logo } from '@/components/Logo'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { useTheme } from '@/components/ThemeProvider'
+import { plants } from '@/lib/plants-data'
 
 type Child = { href: string; label: string }
 type NavItem =
@@ -20,7 +21,13 @@ const NAV: NavItem[] = [
       { href: '/sustainability', label: 'Sustainability & CSR' },
     ],
   },
-  { label: 'Power Plants', href: '/power-plants' },
+  {
+    label: 'Power Plants',
+    children: [
+      { href: '/power-plants', label: 'Overview' },
+      ...plants.map((plant) => ({ href: `/power-plants/${plant.slug}`, label: plant.name })),
+    ],
+  },
   { label: 'News & Media', href: '/news' },
   {
     label: 'Work With Us',
