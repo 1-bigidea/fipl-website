@@ -3,12 +3,13 @@ import { Logo } from '@/components/Logo'
 import PushSubscribeButton from '@/components/PushSubscribeButton'
 import { plants as powerPlants } from '@/lib/plants-data'
 
-const quickLinks = [
+const quickLinks: { href: string; label: string; external?: boolean }[] = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About Us' },
   { href: '/power-plants', label: 'Our Plants' },
   { href: '/power-plants#how-we-work', label: 'How We Work' },
   { href: '/careers', label: 'Careers' },
+  { href: 'https://tip-offs.deloitte.com.ng/', label: 'Whistleblower Portal', external: true },
 ]
 
 const plants = powerPlants
@@ -93,16 +94,29 @@ export function Footer() {
               Quick Links
             </h4>
             <ul className="grid grid-cols-1 gap-y-2.5">
-              {quickLinks.map(({ href, label }) => (
+              {quickLinks.map(({ href, label, external }) => (
                 <li key={href}>
-                  <Link
-                    href={href}
-                    className="text-[13.5px] transition-colors flex items-center gap-1.5 group"
-                    style={{ color: '#888' }}
-                  >
-                    <span style={{ color: '#F47820', fontSize: '11px' }}>↗</span>
-                    <span className="group-hover:text-accent transition-colors">{label}</span>
-                  </Link>
+                  {external ? (
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[13.5px] transition-colors flex items-center gap-1.5 group"
+                      style={{ color: '#888' }}
+                    >
+                      <span style={{ color: '#F47820', fontSize: '11px' }}>↗</span>
+                      <span className="group-hover:text-accent transition-colors">{label}</span>
+                    </a>
+                  ) : (
+                    <Link
+                      href={href}
+                      className="text-[13.5px] transition-colors flex items-center gap-1.5 group"
+                      style={{ color: '#888' }}
+                    >
+                      <span style={{ color: '#F47820', fontSize: '11px' }}>↗</span>
+                      <span className="group-hover:text-accent transition-colors">{label}</span>
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
