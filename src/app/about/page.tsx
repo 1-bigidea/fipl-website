@@ -389,6 +389,74 @@ export default async function AboutPage() {
         </div>
       </section>
 
+      <section className="py-12 md:py-16">
+        <div className="max-w-[1280px] mx-auto px-6">
+          <Reveal variant="up">
+            <div
+              className="relative overflow-hidden rounded-2xl px-8 py-10 md:px-14 md:py-12 flex flex-col md:flex-row items-start md:items-center gap-8"
+              style={{
+                background: 'linear-gradient(135deg, #13132B 60%, #1e1e40 100%)',
+                border: '1px solid rgba(255,255,255,0.08)',
+              }}
+            >
+              <div
+                className="shrink-0 w-14 h-14 rounded-xl flex items-center justify-center"
+                style={{
+                  background: 'rgba(219,27,12,0.15)',
+                  border: '1px solid rgba(219,27,12,0.3)',
+                }}
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  className="w-7 h-7"
+                  fill="none"
+                  stroke="#DB1B0C"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <path d="M12 8v4M12 16h.01" />
+                </svg>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
+                  Integrity &amp; Transparency
+                </h3>
+                <p className="text-white/70 text-sm leading-relaxed max-w-2xl">
+                  First Independent Power Company Limited is committed to integrity and
+                  transparency. If you have concerns about unethical conduct, fraud or misconduct,
+                  you can submit a confidential tip-off report anonymously through our independent
+                  reporting platform powered by Deloitte.
+                </p>
+              </div>
+              <a
+                href="https://tip-offs.deloitte.com.ng/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm text-white transition-opacity hover:opacity-80"
+                style={{ background: 'linear-gradient(135deg, #DB1B0C, #D97300)' }}
+              >
+                Submit a Report
+                <svg
+                  viewBox="0 0 24 24"
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                  <polyline points="15 3 21 3 21 9" />
+                  <line x1="10" y1="14" x2="21" y2="3" />
+                </svg>
+              </a>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       <TestimonialsBlock
         testimonials={testimonials}
         heading={'What Our Stakeholders\nSay About Us.'}
