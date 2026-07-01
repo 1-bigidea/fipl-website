@@ -9,7 +9,7 @@ import { createServerClient } from '@/lib/supabase-server'
 import type { MediaKitRow } from '@/lib/database.types'
 
 export const metadata: Metadata = { title: 'News & Media' }
-export const revalidate = 300
+export const dynamic = 'force-dynamic'
 
 const insightImages = [IMAGES.news.insight1, IMAGES.news.insight2, IMAGES.news.insight3]
 
