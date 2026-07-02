@@ -10,22 +10,6 @@ import type { JobRow } from '@/lib/database.types'
 export const metadata: Metadata = { title: 'Careers' }
 export const revalidate = 300
 
-function Check() {
-  return (
-    <svg
-      className="w-5 h-5 text-[#DB1B0C] shrink-0 mt-0.5"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M20 6L9 17l-5-5" />
-    </svg>
-  )
-}
-
 const evpCards = [
   {
     icon: (
@@ -148,7 +132,7 @@ export default async function CareersPage() {
         <div className="max-w-[1280px] mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <Reveal variant="clip" duration={0.9}>
-              <div className="relative w-full h-[320px] md:h-[400px] lg:h-[460px]">
+              <div className="relative w-full h-[320px] md:h-[400px] lg:h-[460px] rounded-2xl overflow-hidden">
                 <Image src={IMAGES.careers.team} alt="FIPL team" fill className="object-cover" />
               </div>
             </Reveal>
@@ -169,47 +153,19 @@ export default async function CareersPage() {
                 <h2 className="text-2xl md:text-3xl font-bold text-[var(--fipl-heading)] mb-4">
                   Working in FIPL
                 </h2>
-                <p className="text-[var(--fipl-body)] leading-relaxed mb-4 text-base">
-                  FIPL is an active environment where the can-do spirit is very much alive. We at
-                  FIPL are always geared towards creating solutions and making things work. Our work
-                  environment and attitude are tailored towards achieving continuous improvements in
-                  our operations and outputs. Our Human Capital composition includes people from
-                  diverse professional, ethnic, religious, and cultural backgrounds, but united as a
-                  team with a common goal of pursuing productivity, solutions, and results. We are
-                  not gender-biased, even though the major operation of our company is engineering,
-                  we have a good mix of male and female gender, and the opportunities are open to
-                  anyone who can deliver results regardless of gender.
-                </p>
                 <p className="text-[var(--fipl-body)] leading-relaxed mb-6 text-base">
-                  In FIPL, we understand and work with employees individually and collectively to
-                  support them in their aspirations within the company by providing them with
-                  professionally challenging jobs and opportunities to help them attain
-                  self-discovery and grow whilst contributing to the achievement of our corporate
-                  objectives.
+                  FIPL is an active, can-do environment built on a diverse team united by a common
+                  goal of productivity, solutions, and results, with opportunities open to anyone
+                  who can deliver regardless of gender. We work with our people individually and
+                  collectively, offering challenging roles and opportunities for growth as they
+                  contribute to our corporate objectives.
                 </p>
-                <div className="space-y-4">
-                  {[
-                    { title: 'Integrity', desc: "We do what's right, always." },
-                    { title: 'Innovation', desc: 'We challenge limits and improve continuously.' },
-                    { title: 'Safety', desc: 'We put people and environment first.' },
-                    {
-                      title: 'Collaboration & Sustainability',
-                      desc: 'We achieve more, together and are committed to lasting impact.',
-                    },
-                  ].map(({ title, desc }, i) => (
-                    <Reveal key={title} variant="up" delay={i * 0.08}>
-                      <div className="flex items-start gap-3">
-                        <Check />
-                        <div>
-                          <span className="font-semibold text-[var(--fipl-heading)] text-sm">
-                            {title}
-                          </span>
-                          <p className="text-sm text-[var(--fipl-body)] mt-0.5">{desc}</p>
-                        </div>
-                      </div>
-                    </Reveal>
-                  ))}
-                </div>
+                <p className="text-[var(--fipl-body)] leading-relaxed text-base">
+                  Our values guide everything we do: integrity means we do what&apos;s right,
+                  always; innovation drives us to challenge limits and improve continuously; safety
+                  puts people and the environment first; and collaboration and sustainability mean
+                  we achieve more together and remain committed to lasting impact.
+                </p>
               </div>
             </Reveal>
           </div>
