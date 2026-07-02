@@ -7,6 +7,9 @@ export const IMAGES = {
     workerLeft: '/images/home/leftheroimage.png',
     workerRight: '/images/home/rightsideimage.png',
     whoWeAre: '/images/home/who-we-are.jpg',
+    people1: '/images/home/people-1.jpg',
+    people2: '/images/home/people-2.jpg',
+    people3: '/images/home/people-3.jpg',
   },
   about: {
     hero: '/images/about/hero.png',

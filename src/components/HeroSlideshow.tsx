@@ -19,7 +19,7 @@ const SLIDES: Slide[] = [
     src: '/videos/hero.mp4',
     poster: '/images/home/backgroundimage.png',
     line1: ['Committed', 'to'],
-    line2: ['Efficient', 'Power', 'Generation'],
+    line2: ['Efficient', 'and', 'Sustainable', 'Power', 'Generation'],
   },
   {
     type: 'image',

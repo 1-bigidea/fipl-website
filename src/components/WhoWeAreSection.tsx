@@ -86,10 +86,10 @@ export function WhoWeAreSection() {
                 color: 'var(--fipl-body)',
               }}
             >
-              First Independent Power Limited (FIPL) is a leader in responsible and sustainable
-              power generation in Nigeria. Strategically located in Rivers State, we operate four
-              cutting-edge gas turbine power plants in Trans-Amadi Port-Harcourt, Afam, Omoku, and
-              Eleme, with a combined capacity of 541MW.
+              First Independent Power Company Limited (FIPL) is a leading Nigerian power generation
+              company committed to delivering reliable, responsible, and sustainable energy. We
+              operate four gas turbine power plants in Trans-Amadi, Afam, Omoku, and Eleme, with a
+              combined installed capacity of 541MW.
             </p>
             <p
               style={{
