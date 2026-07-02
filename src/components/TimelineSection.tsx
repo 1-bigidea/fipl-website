@@ -64,7 +64,7 @@ const milestones: Milestone[] = [
   {
     year: '2016',
     title: 'Expanding Generation and Grid Access',
-    desc: 'Restored GT02, bringing a previously idle asset back into operation. Trans-Amadi Power Station transitioned from supplying 20MW locally to exporting 88MW to the national grid, while Omoku Plant achieved its first-ever export, raising capacity to 105MW.',
+    desc: 'Restored GT02, growing Trans-Amadi exports to 88MW and Omoku capacity to 105MW.',
     cardLeft: 400,
     cardTop: 760,
     dotLeft: 386,
@@ -100,7 +100,7 @@ const milestones: Milestone[] = [
   {
     year: '2018',
     title: 'Major Technical Milestone',
-    desc: 'Executed the first major turbine overhaul at the Afam Plant since its original commissioning, significantly improving plant reliability and operational performance.',
+    desc: "Completed the Afam Plant's first turbine overhaul since commissioning, boosting reliability and performance.",
     cardLeft: 1000,
     cardTop: 10,
     dotLeft: 856,
@@ -137,7 +137,7 @@ const milestones: Milestone[] = [
   {
     year: '2021',
     title: 'Strengthening Energy Security',
-    desc: 'Constructed a dedicated gas pipeline connecting to Accugas Ikot Abasi, providing a reliable alternative gas supply and enhancing fuel security for sustained operations.',
+    desc: 'Built a dedicated gas pipeline to Accugas Ikot Abasi, securing a reliable alternative fuel supply.',
     cardLeft: 1139,
     cardTop: 760,
     dotLeft: 1156,
