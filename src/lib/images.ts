@@ -25,14 +25,14 @@ export const IMAGES = {
     step4: '/images/plants/step4.png',
   },
   sustainability: {
-    hero: '/images/sustainability/hero.png',
-    nature: '/images/sustainability/nature-planting.jpg',
-    workplace: '/images/sustainability/team-briefing.jpg',
+    hero: '/images/sustainability/hero.jpeg',
+    nature: '/images/sustainability/governance-board.jpg',
+    workplace: '/images/sustainability/health-safety.jpg',
     governance: '/images/sustainability/governance-team.jpg',
     community: '/images/sustainability/community-handover.jpg',
     sdg: '/images/sustainability/sdg.png',
     projectHealth: '/images/sustainability/csr-community.png',
-    projectSchool: '/images/sustainability/nature.png',
+    projectSchool: '/images/sustainability/ube-primary-school.jpg',
   },
   news: {
     hero: '/images/news/hero.png',

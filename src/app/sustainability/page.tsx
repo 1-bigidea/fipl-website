@@ -6,22 +6,6 @@ import { IMAGES } from '@/lib/images'
 
 export const metadata: Metadata = { title: 'Sustainability & CSR' }
 
-function Check() {
-  return (
-    <svg
-      className="w-5 h-5 text-[#DB1B0C] shrink-0 mt-0.5"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M20 6L9 17l-5-5" />
-    </svg>
-  )
-}
-
 const focusAreas = [
   {
     icon: (
@@ -165,41 +149,20 @@ export default function SustainabilityPage() {
                   Sustainability
                 </h2>
                 <p className="text-[var(--fipl-body)] mb-4 text-base leading-relaxed">
-                  Our operations &amp; maintenance philosophy and strategy has evolved and is
-                  aligned with:
+                  Our operations and maintenance philosophy is driven by efficiency,
+                  sustainability, and continuous improvement. We are committed to reducing carbon
+                  and fugitive emissions while exploring hardware upgrades and combined-cycle
+                  integration to enhance plant performance and reliability. Guided by ethical
+                  business practices, we continue to create shared value for our stakeholders and
+                  deliver sustainable growth.
                 </p>
-                <ul className="space-y-2.5 mb-6">
-                  {[
-                    'Improving efficiency through reducing carbon emissions',
-                    'Reducing fugitive emissions',
-                    'Explore hardware upgrade options, combine-cycle integration',
-                    'Maintained Ethical Practices that has fostered shared growth for us and our stakeholders',
-                  ].map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-2.5 text-sm text-[var(--fipl-body)]"
-                    >
-                      <span className="text-[#DB1B0C] font-bold shrink-0 mt-0.5">→</span> {item}
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-[var(--fipl-body)] mb-3 text-base">
-                  We have built strong relationships with host communities in areas of our operation
-                  by:
+                <p className="text-[var(--fipl-body)] text-base leading-relaxed">
+                  We have also built strong partnerships with our host communities through
+                  impactful development initiatives, including skills acquisition programs,
+                  scholarship schemes, and STEM education. By promoting local human capital
+                  integration and community participation in our projects, we continue to foster
+                  inclusive growth and long-term social impact.
                 </p>
-                <ul className="space-y-2.5">
-                  {[
-                    'Executing community development and high impact projects ranging from skills acquisitions, scholarship programs etc.',
-                    'Local human capital integration in projects, participation in special programs e.g STEM',
-                  ].map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-2.5 text-sm text-[var(--fipl-body)]"
-                    >
-                      <span className="text-[#DB1B0C] font-bold shrink-0 mt-0.5">→</span> {item}
-                    </li>
-                  ))}
-                </ul>
               </div>
             </Reveal>
             <Reveal variant="fade" delay={0.15} duration={0.9}>
@@ -207,14 +170,14 @@ export default function SustainabilityPage() {
                 <div
                   className="absolute inset-0 bg-cover bg-center"
                   style={{
-                    backgroundImage: `url('${IMAGES.sustainability.nature}')`,
+                    backgroundImage: `url('${IMAGES.sustainability.governance}')`,
                     clipPath: 'polygon(10% 0, 100% 0, 100% 50%, 22% 50%)',
                   }}
                 />
                 <div
                   className="absolute inset-0 bg-cover bg-center"
                   style={{
-                    backgroundImage: `url('${IMAGES.sustainability.nature}')`,
+                    backgroundImage: `url('${IMAGES.sustainability.governance}')`,
                     clipPath: 'polygon(11% 50%, 100% 50%, 100% 100%, 22% 100%)',
                   }}
                 />
@@ -290,14 +253,14 @@ export default function SustainabilityPage() {
                 <div
                   className="absolute inset-0 bg-cover bg-center"
                   style={{
-                    backgroundImage: `url('${IMAGES.sustainability.governance}')`,
+                    backgroundImage: `url('${IMAGES.sustainability.nature}')`,
                     clipPath: 'polygon(10% 0, 100% 0, 100% 50%, 22% 50%)',
                   }}
                 />
                 <div
                   className="absolute inset-0 bg-cover bg-center"
                   style={{
-                    backgroundImage: `url('${IMAGES.sustainability.governance}')`,
+                    backgroundImage: `url('${IMAGES.sustainability.nature}')`,
                     clipPath: 'polygon(11% 50%, 100% 50%, 100% 100%, 22% 100%)',
                   }}
                 />
@@ -322,26 +285,24 @@ export default function SustainabilityPage() {
             </Reveal>
             <Reveal variant="right" delay={0.15}>
               <div>
-                <span className="inline-flex items-center gap-1.5 text-sm text-[#DB1B0C] mb-3">
-                  Our SDG Goals{' '}
-                  <svg
-                    width="13"
-                    height="13"
-                    viewBox="0 0 13 13"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M7.5 0.5L1 7.5h5L4.5 12.5l7.5-8h-5z" />
-                  </svg>
-                </span>
                 <h2 className="text-2xl md:text-3xl font-bold text-[var(--fipl-heading)] mb-4">
-                  Our Commitment to SDG Goals
+                  Our SDG Goals
                 </h2>
+                <p className="text-[var(--fipl-body)] leading-relaxed mb-4 text-base">
+                  At FIPL, sustainability is embedded in the way we operate. We align our business
+                  and community development initiatives with the United Nations Sustainable
+                  Development Goals (SDGs), ensuring our actions create lasting value for people,
+                  communities, and the environment.
+                </p>
                 <p className="text-[var(--fipl-body)] leading-relaxed text-base">
-                  We align our projects with the United Nations Sustainable Development Goals,
-                  focusing on affordable and clean energy, quality education, and decent work and
-                  economic growth, ensuring our impact contributes to building a better future for
-                  all.
+                  Our commitment to affordable and clean energy is reflected in our efforts to
+                  provide reliable and efficient power while continuously improving environmental
+                  performance. Through our investment in quality education, we support STEM
+                  programs, scholarships, and learning opportunities that equip young people with
+                  the knowledge and skills to shape the future. We also promote decent work and
+                  economic growth by creating employment opportunities, developing local talent,
+                  and supporting initiatives that stimulate inclusive and sustainable economic
+                  development within our host communities.
                 </p>
               </div>
             </Reveal>
@@ -381,40 +342,23 @@ export default function SustainabilityPage() {
                   <br />
                   Building Futures
                 </h2>
-                <p className="text-[var(--fipl-body)] leading-relaxed mb-6 text-base">
-                  We partner with our host communities to drive development initiatives in health,
-                  education, empowerment, and infrastructure.
+                <p className="text-[var(--fipl-body)] leading-relaxed mb-4 text-base">
+                  We partner with our host communities to drive sustainable development through
+                  impactful initiatives in health, education, empowerment, and infrastructure.
                 </p>
-                <div className="space-y-4 mb-8">
-                  {[
-                    {
-                      title: 'Rural Electrification Projects',
-                      desc: 'Providing electricity to underserved communities, enabling education, healthcare, and economic activities after dark.',
-                    },
-                    {
-                      title: 'STEM Education & Scholarship Programs',
-                      desc: 'Supporting students with scholarships, mentorship programs, and hands-on learning opportunities in science and technology.',
-                    },
-                    {
-                      title: 'Healthcare Access Programs',
-                      desc: 'Organizing medical camps, health screenings, and awareness campaigns to improve community health outcomes.',
-                    },
-                    {
-                      title: 'Youth Empowerment Initiatives',
-                      desc: 'Providing vocational training, skill development workshops, and entrepreneurial support for young people.',
-                    },
-                  ].map(({ title, desc }) => (
-                    <div key={title} className="flex items-start gap-3">
-                      <Check />
-                      <div>
-                        <h4 className="font-semibold text-[var(--fipl-heading)] text-sm mb-1">
-                          {title}
-                        </h4>
-                        <p className="text-sm text-[var(--fipl-body)] leading-relaxed">{desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <p className="text-[var(--fipl-body)] leading-relaxed mb-4 text-base">
+                  Our community investment programmes include rural electrification projects that
+                  bring reliable electricity to underserved communities, enabling education,
+                  healthcare, and economic activities. We also support STEM education through
+                  scholarships, mentorship, and hands-on learning opportunities that inspire the
+                  next generation of innovators.
+                </p>
+                <p className="text-[var(--fipl-body)] leading-relaxed mb-6 text-base">
+                  Our healthcare access programmes provide medical outreach, health screenings, and
+                  awareness campaigns to improve community well-being, while our youth empowerment
+                  initiatives equip young people with vocational skills, entrepreneurship training,
+                  and the resources needed to build sustainable livelihoods.
+                </p>
               </div>
             </Reveal>
           </div>
