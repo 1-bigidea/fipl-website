@@ -265,7 +265,7 @@ export default function HomePage() {
         <div className="relative z-10 max-w-[1280px] mx-auto px-6">
           <div className="max-w-[520px]">
             <p className="text-xs font-bold uppercase tracking-widest text-white/80 mb-3">
-              FIPL Foundation{' '}
+              WE VALUE PEOPLE{' '}
               <svg
                 viewBox="0 0 24 24"
                 width="12"
