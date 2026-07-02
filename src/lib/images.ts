@@ -29,11 +29,13 @@ export const IMAGES = {
   },
   sustainability: {
     hero: '/images/sustainability/hero.png',
-    nature: '/images/sustainability/nature.png',
-    workplace: '/images/sustainability/safety.png',
-    governance: '/images/sustainability/governance.png',
-    community: '/images/sustainability/csr-community.png',
+    nature: '/images/sustainability/nature-planting.jpg',
+    workplace: '/images/sustainability/team-briefing.jpg',
+    governance: '/images/sustainability/governance-team.jpg',
+    community: '/images/sustainability/community-handover.jpg',
     sdg: '/images/sustainability/sdg.png',
+    projectHealth: '/images/sustainability/csr-community.png',
+    projectSchool: '/images/sustainability/nature.png',
   },
   news: {
     hero: '/images/news/hero.png',
