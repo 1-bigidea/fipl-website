@@ -3,7 +3,7 @@ export const IMAGES = {
     hero: '/images/home/backgroundimage.png',
     community: '/images/home/csr-community.jpg',
     plantOverview: 'https://picsum.photos/seed/fipl-h3/900/650',
-    team: '/images/home/careers-team.png',
+    team: '/images/home/careers-team-2.jpg',
     workerLeft: '/images/home/leftheroimage.png',
     workerRight: '/images/home/rightsideimage.png',
     whoWeAre: '/images/home/who-we-are.jpg',
