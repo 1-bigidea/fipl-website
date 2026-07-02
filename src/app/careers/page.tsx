@@ -167,12 +167,25 @@ export default async function CareersPage() {
                   </svg>
                 </span>
                 <h2 className="text-2xl md:text-3xl font-bold text-[var(--fipl-heading)] mb-4">
-                  What Drives Us
+                  Working in FIPL
                 </h2>
+                <p className="text-[var(--fipl-body)] leading-relaxed mb-4 text-base">
+                  FIPL is an active environment where the can-do spirit is very much alive. We at
+                  FIPL are always geared towards creating solutions and making things work. Our work
+                  environment and attitude are tailored towards achieving continuous improvements in
+                  our operations and outputs. Our Human Capital composition includes people from
+                  diverse professional, ethnic, religious, and cultural backgrounds, but united as a
+                  team with a common goal of pursuing productivity, solutions, and results. We are
+                  not gender-biased, even though the major operation of our company is engineering,
+                  we have a good mix of male and female gender, and the opportunities are open to
+                  anyone who can deliver results regardless of gender.
+                </p>
                 <p className="text-[var(--fipl-body)] leading-relaxed mb-6 text-base">
-                  Our work is guided by values that define who we are and how we operate — ensuring
-                  that every watt of energy we generate comes from a place of excellence and
-                  responsibility.
+                  In FIPL, we understand and work with employees individually and collectively to
+                  support them in their aspirations within the company by providing them with
+                  professionally challenging jobs and opportunities to help them attain
+                  self-discovery and grow whilst contributing to the achievement of our corporate
+                  objectives.
                 </p>
                 <div className="space-y-4">
                   {[
