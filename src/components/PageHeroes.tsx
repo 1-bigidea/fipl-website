@@ -460,6 +460,7 @@ export function RegisterHero() {
       minHeight="min-h-[420px] md:min-h-[520px] lg:min-h-[640px]"
       contentAlign="center"
       overlay="linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.22) 45%, rgba(0,0,0,0.72) 100%)"
+      imagePosition="center top"
       renderContent={(ready) => (
         <div className="w-full max-w-[1280px] mx-auto px-6 py-16 text-center">
           {ready && (

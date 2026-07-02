@@ -52,7 +52,7 @@ export const IMAGES = {
     hero: '/images/contact/hero.png',
   },
   register: {
-    hero: '/images/register/hero.png',
-    vendor: '/images/register/vendor.png',
+    hero: '/images/register/hero.jpg',
+    vendor: '/images/register/vendor-registration.png',
   },
 } as const
