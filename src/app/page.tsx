@@ -195,27 +195,6 @@ export default function HomePage() {
         <WhoWeAreSection />
       </div>
 
-      <section className="pb-16 md:pb-20 bg-[var(--fipl-bg)]">
-        <div className="max-w-[1280px] mx-auto px-6">
-          <div className="grid grid-cols-3 gap-3 md:gap-5">
-            {[IMAGES.home.people1, IMAGES.home.people2, IMAGES.home.people3].map((src, i) => (
-              <div
-                key={src}
-                className={`relative h-[160px] sm:h-[220px] md:h-[300px] rounded-2xl overflow-hidden shadow-sm ${i === 1 ? 'md:-translate-y-4' : ''}`}
-              >
-                <Image
-                  src={src}
-                  alt="FIPL people at work"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 33vw, 400px"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section
         className="pb-16 md:pb-20 relative overflow-hidden"
         style={{
