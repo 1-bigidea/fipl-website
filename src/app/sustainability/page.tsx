@@ -149,19 +149,19 @@ export default function SustainabilityPage() {
                   Sustainability
                 </h2>
                 <p className="text-[var(--fipl-body)] mb-4 text-base leading-relaxed">
-                  Our operations and maintenance philosophy is driven by efficiency,
-                  sustainability, and continuous improvement. We are committed to reducing carbon
-                  and fugitive emissions while exploring hardware upgrades and combined-cycle
-                  integration to enhance plant performance and reliability. Guided by ethical
-                  business practices, we continue to create shared value for our stakeholders and
-                  deliver sustainable growth.
+                  Our operations and maintenance philosophy is driven by efficiency, sustainability,
+                  and continuous improvement. We are committed to reducing carbon and fugitive
+                  emissions while exploring hardware upgrades and combined-cycle integration to
+                  enhance plant performance and reliability. Guided by ethical business practices,
+                  we continue to create shared value for our stakeholders and deliver sustainable
+                  growth.
                 </p>
                 <p className="text-[var(--fipl-body)] text-base leading-relaxed">
-                  We have also built strong partnerships with our host communities through
-                  impactful development initiatives, including skills acquisition programs,
-                  scholarship schemes, and STEM education. By promoting local human capital
-                  integration and community participation in our projects, we continue to foster
-                  inclusive growth and long-term social impact.
+                  We have also built strong partnerships with our host communities through impactful
+                  development initiatives, including skills acquisition programs, scholarship
+                  schemes, and STEM education. By promoting local human capital integration and
+                  community participation in our projects, we continue to foster inclusive growth
+                  and long-term social impact.
                 </p>
               </div>
             </Reveal>
@@ -300,8 +300,8 @@ export default function SustainabilityPage() {
                   performance. Through our investment in quality education, we support STEM
                   programs, scholarships, and learning opportunities that equip young people with
                   the knowledge and skills to shape the future. We also promote decent work and
-                  economic growth by creating employment opportunities, developing local talent,
-                  and supporting initiatives that stimulate inclusive and sustainable economic
+                  economic growth by creating employment opportunities, developing local talent, and
+                  supporting initiatives that stimulate inclusive and sustainable economic
                   development within our host communities.
                 </p>
               </div>

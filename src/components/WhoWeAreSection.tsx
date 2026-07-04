@@ -101,8 +101,8 @@ export function WhoWeAreSection() {
                 color: 'var(--fipl-body)',
               }}
             >
-              Driven by operational excellence, engineering innovation, and continuous investment
-              in our assets and people, we provide dependable power that supports industries,
+              Driven by operational excellence, engineering innovation, and continuous investment in
+              our assets and people, we provide dependable power that supports industries,
               businesses, and communities while contributing to Nigeria&apos;s energy future.
             </p>
             <p
