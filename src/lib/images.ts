@@ -15,10 +15,23 @@ export const IMAGES = {
   },
   plants: {
     hero: '/images/plants/hero.png',
-    omoku: '/images/plants/omoku.png',
-    transAmadi: '/images/plants/trans-amadi.png',
-    afam: '/images/plants/afam.png',
-    eleme: '/images/plants/eleme.png',
+    omoku: ['/images/plants/omoku-1.jpg', '/images/plants/omoku-2.jpg'],
+    transAmadi: [
+      '/images/plants/trans-amadi-1.jpg',
+      '/images/plants/trans-amadi-2.jpg',
+      '/images/plants/trans-amadi-3.jpg',
+    ],
+    afam: [
+      '/images/plants/afam-1.jpg',
+      '/images/plants/afam-2.jpg',
+      '/images/plants/afam-3.jpg',
+      '/images/plants/afam-4.jpg',
+    ],
+    eleme: [
+      '/images/plants/eleme-1.jpg',
+      '/images/plants/eleme-2.jpg',
+      '/images/plants/eleme-3.jpg',
+    ],
     step1: '/images/plants/step1.png',
     step2: '/images/plants/step2.png',
     step3: '/images/plants/step3.png',
