@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
+import { ArrowUpRight } from 'lucide-react'
 import { FaqSection } from '@/components/FaqSection'
 import { CounterStats } from '@/components/CounterStats'
 import { WhoWeAreSection } from '@/components/WhoWeAreSection'
@@ -265,7 +266,7 @@ export default function HomePage() {
         <div className="relative z-10 max-w-[1280px] mx-auto px-6">
           <div className="max-w-[520px]">
             <p className="text-xs font-bold uppercase tracking-widest text-white/80 mb-3">
-              FIPL Foundation{' '}
+              WE VALUE PEOPLE{' '}
               <svg
                 viewBox="0 0 24 24"
                 width="12"
@@ -309,7 +310,7 @@ export default function HomePage() {
               href="/sustainability"
               className="inline-flex items-center gap-2 bg-white text-primary font-semibold text-sm px-6 py-3 rounded-md hover:bg-gray-100 transition-colors"
             >
-              Learn More ↗
+              Learn More <ArrowUpRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -349,39 +350,29 @@ export default function HomePage() {
                 </svg>
               </p>
               <h2 className="text-2xl md:text-3xl lg:text-[36px] font-bold text-[var(--fipl-heading)] leading-snug mb-4">
-                Build Your Future With Us
+                Join Our Amazing Team
               </h2>
-              <p className="text-[var(--fipl-body)] text-[14px] leading-relaxed mb-6">
-                Join a team powering progress and driving innovation in Nigeria&apos;s energy
-                sector. At FIPL, we are committed to building sustainable solutions and empowering
-                the next generation of leaders in oil and gas and power.
+              <p className="text-[var(--fipl-body)] text-[14px] leading-relaxed mb-4">
+                At FIPL, our people are the driving force behind our success. We foster a culture of
+                collaboration, innovation, and continuous learning, empowering our employees to grow
+                professionally while making a meaningful impact on Nigeria&apos;s energy sector.
               </p>
-              <p className="font-semibold text-[var(--fipl-heading)] text-[15px] mb-4">
-                Why Work With Us?
+              <p className="text-[var(--fipl-body)] text-[14px] leading-relaxed mb-8">
+                Our work environment is built on excellence, safety, integrity, and continuous
+                improvement. By investing in our people and encouraging new ideas, we create
+                opportunities to deliver exceptional results, advance sustainable power generation,
+                and shape the future of energy together.
               </p>
-              <ul className="space-y-4 mb-8">
-                {[
-                  'Be part of impactful projects that keep the lights on across communities',
-                  'Grow your career with continuous learning and professional development',
-                  'Work in a culture of safety, integrity, and excellence',
-                  'Collaborate with passionate teams across engineering, operations, and management',
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <span className="w-5 h-5 rounded-full bg-primary/10 text-primary text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
-                      ✓
-                    </span>
-                    <span className="text-[13px] text-[var(--fipl-body)] leading-relaxed">
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
               <Link
                 href="/careers"
                 className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold text-sm px-6 py-3 rounded-md transition-colors"
               >
-                Explore Opportunities ↗
+                Explore Opportunities <ArrowUpRight className="w-4 h-4" />
               </Link>
+              <p className="text-[var(--fipl-body)] text-[13px] leading-relaxed mt-6">
+                <span className="font-semibold text-[var(--fipl-heading)]">Head Office:</span> 70/72
+                Ordinance, Trans-Amadi, Port Harcourt, Rivers State.
+              </p>
             </div>
           </div>
         </div>

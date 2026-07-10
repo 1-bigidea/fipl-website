@@ -1,4 +1,4 @@
-import { webpush } from '@/lib/webpush'
+import { getWebpush } from '@/lib/webpush'
 import { createServerClient } from '@/lib/supabase-server'
 
 interface PushPayload {
@@ -14,6 +14,7 @@ export async function notifyAllSubscribers(payload: PushPayload) {
   if (!subscriptions || subscriptions.length === 0) return
 
   const expiredIds: string[] = []
+  const webpush = getWebpush()
 
   await Promise.allSettled(
     subscriptions.map(async (sub) => {
