@@ -16,6 +16,12 @@ import {
   ChevronLeft,
   ChevronRight,
   Home,
+  Info,
+  Leaf,
+  Factory,
+  ClipboardList,
+  Handshake,
+  Phone,
 } from 'lucide-react'
 import AdminNotificationBell from '@/components/AdminNotificationBell'
 import AdminRefreshControl from '@/components/AdminRefreshControl'
@@ -35,6 +41,42 @@ const NAV = [
     href: '/admin/pages/home',
     label: 'Home Page',
     icon: Home,
+    roles: ['owner', 'content'] as AdminRole[],
+  },
+  {
+    href: '/admin/pages/about',
+    label: 'About Page',
+    icon: Info,
+    roles: ['owner', 'content'] as AdminRole[],
+  },
+  {
+    href: '/admin/pages/sustainability',
+    label: 'Sustainability Page',
+    icon: Leaf,
+    roles: ['owner', 'content'] as AdminRole[],
+  },
+  {
+    href: '/admin/pages/power-plants',
+    label: 'Power Plants Page',
+    icon: Factory,
+    roles: ['owner', 'content'] as AdminRole[],
+  },
+  {
+    href: '/admin/pages/register',
+    label: 'Register Page',
+    icon: ClipboardList,
+    roles: ['owner', 'content'] as AdminRole[],
+  },
+  {
+    href: '/admin/pages/careers',
+    label: 'Careers Page',
+    icon: Handshake,
+    roles: ['owner', 'content'] as AdminRole[],
+  },
+  {
+    href: '/admin/pages/contact',
+    label: 'Contact Page',
+    icon: Phone,
     roles: ['owner', 'content'] as AdminRole[],
   },
   {
