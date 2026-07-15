@@ -158,6 +158,7 @@ export default async function HomePage() {
   const row = data as Pick<PageContentRow, 'content'> | null
   const content = row?.content as Partial<HomeContent> | undefined
   const hero = content?.hero ?? defaultHomeContent.hero
+  const whoWeAre = content?.whoWeAre ?? defaultHomeContent.whoWeAre
   const sustainabilityCta = content?.sustainabilityCta ?? defaultHomeContent.sustainabilityCta
   const communityBanner = content?.communityBanner ?? defaultHomeContent.communityBanner
   const careersSection = content?.careersSection ?? defaultHomeContent.careersSection
@@ -214,7 +215,7 @@ export default async function HomePage() {
       </section>
 
       <div className="-mt-[60px]">
-        <WhoWeAreSection />
+        <WhoWeAreSection content={whoWeAre} />
       </div>
 
       <section

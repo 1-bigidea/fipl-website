@@ -47,6 +47,15 @@ const pages = [
           imageRight: '/images/home/rightsideimage.png',
         },
       },
+      whoWeAre: {
+        eyebrow: 'Who We Are ⚡',
+        heading: "A Trusted Energy Partner\nShaping Nigeria's Future.",
+        body1: 'First Independent Power Company Limited (FIPL) is a leading Nigerian power generation company committed to delivering reliable, responsible, and sustainable energy. We operate four gas turbine power plants in Trans-Amadi, Afam, Omoku, and Eleme, with a combined installed capacity of 541MW.',
+        body2: "Driven by operational excellence, engineering innovation, and continuous investment in our assets and people, we provide dependable power that supports industries, businesses, and communities while contributing to Nigeria's energy future.",
+        body3: "Since assuming operations in 2014, FIPL has consistently restored critical power assets, expanded generation capacity, and strengthened infrastructure to enhance grid reliability. Our commitment to excellence and sustainability continues to drive lasting value for our stakeholders and the nation's power sector.",
+        image: '/images/home/who-we-are.jpg',
+        ctaLabel: 'Learn More About Us',
+      },
       sustainabilityCta: {
         eyebrow: 'Sustainability & CSR',
         heading: 'Sustainability Beyond Power',

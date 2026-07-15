@@ -40,6 +40,10 @@ export default function HomeContentForm({ content }: Props) {
     setForm((prev) => ({ ...prev, hero: { ...prev.hero, overlay: { ...prev.hero.overlay, ...patch } } }))
   }
 
+  function updateWhoWeAre(patch: Partial<HomeContent['whoWeAre']>) {
+    setForm((prev) => ({ ...prev, whoWeAre: { ...prev.whoWeAre, ...patch } }))
+  }
+
   function updateSustainabilityCta(patch: Partial<HomeContent['sustainabilityCta']>) {
     setForm((prev) => ({ ...prev, sustainabilityCta: { ...prev.sustainabilityCta, ...patch } }))
   }
@@ -187,6 +191,52 @@ export default function HomeContentForm({ content }: Props) {
               onChange={(url) => updateOverlay({ imageRight: url })}
             />
           </div>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <p className={sectionLabelCls}>Who We Are</p>
+        <div className={cardCls}>
+          <TextField
+            label="Eyebrow"
+            value={form.whoWeAre.eyebrow}
+            onChange={(v) => updateWhoWeAre({ eyebrow: v })}
+          />
+          <div>
+            <label className={labelCls}>Heading</label>
+            <p className={hintCls + ' mb-1.5'}>Use a new line to control the second line</p>
+            <textarea
+              value={form.whoWeAre.heading}
+              onChange={(e) => updateWhoWeAre({ heading: e.target.value })}
+              rows={2}
+              className={`${inputCls} resize-none`}
+            />
+          </div>
+          <TextAreaField
+            label="Paragraph 1"
+            value={form.whoWeAre.body1}
+            onChange={(v) => updateWhoWeAre({ body1: v })}
+          />
+          <TextAreaField
+            label="Paragraph 2"
+            value={form.whoWeAre.body2}
+            onChange={(v) => updateWhoWeAre({ body2: v })}
+          />
+          <TextAreaField
+            label="Paragraph 3"
+            value={form.whoWeAre.body3}
+            onChange={(v) => updateWhoWeAre({ body3: v })}
+          />
+          <TextField
+            label="Button Label"
+            value={form.whoWeAre.ctaLabel}
+            onChange={(v) => updateWhoWeAre({ ctaLabel: v })}
+          />
+          <ImageField
+            label="Image"
+            value={form.whoWeAre.image}
+            onChange={(v) => updateWhoWeAre({ image: v })}
+          />
         </div>
       </div>
 

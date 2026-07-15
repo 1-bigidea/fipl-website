@@ -17,6 +17,7 @@ export default async function AdminHomePagePage() {
   const stored = row?.content as Partial<HomeContent> | undefined
   const content: HomeContent = {
     hero: stored?.hero ?? defaultHomeContent.hero,
+    whoWeAre: stored?.whoWeAre ?? defaultHomeContent.whoWeAre,
     sustainabilityCta: stored?.sustainabilityCta ?? defaultHomeContent.sustainabilityCta,
     communityBanner: stored?.communityBanner ?? defaultHomeContent.communityBanner,
     careersSection: stored?.careersSection ?? defaultHomeContent.careersSection,

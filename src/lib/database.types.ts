@@ -96,6 +96,15 @@ export type LabelValue = { label: string; value: string }
 
 export type HomeContent = {
   hero: HomeHeroContent
+  whoWeAre: {
+    eyebrow: string
+    heading: string
+    body1: string
+    body2: string
+    body3: string
+    image: string
+    ctaLabel: string
+  }
   sustainabilityCta: {
     eyebrow: string
     heading: string
