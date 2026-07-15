@@ -24,7 +24,10 @@ export default function SustainabilityContentForm({ content }: Props) {
     setForm((prev) => ({ ...prev, [key]: { ...prev[key], ...patch } }))
   }
 
-  function updateFocusArea(index: number, patch: Partial<SustainabilityContent['focusAreas'][number]>) {
+  function updateFocusArea(
+    index: number,
+    patch: Partial<SustainabilityContent['focusAreas'][number]>,
+  ) {
     setForm((prev) => ({
       ...prev,
       focusAreas: prev.focusAreas.map((f, i) => (i === index ? { ...f, ...patch } : f)),

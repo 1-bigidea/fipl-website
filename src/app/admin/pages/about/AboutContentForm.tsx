@@ -155,9 +155,7 @@ export default function AboutContentForm({ content }: Props) {
           <TextField
             label="Subheading"
             value={form.ceo.subheading}
-            onChange={(v) =>
-              setForm((prev) => ({ ...prev, ceo: { ...prev.ceo, subheading: v } }))
-            }
+            onChange={(v) => setForm((prev) => ({ ...prev, ceo: { ...prev.ceo, subheading: v } }))}
           />
         </div>
       </div>

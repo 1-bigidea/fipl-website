@@ -180,9 +180,7 @@ export default async function CareersPage() {
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[var(--fipl-heading)] mb-4">
                 {talentPool.heading}
               </h2>
-              <p className="text-[var(--fipl-body)] leading-relaxed text-base">
-                {talentPool.body}
-              </p>
+              <p className="text-[var(--fipl-body)] leading-relaxed text-base">{talentPool.body}</p>
             </div>
           </Reveal>
 

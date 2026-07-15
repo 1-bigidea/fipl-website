@@ -7,11 +7,7 @@ export const dynamic = 'force-dynamic'
 
 export default async function AdminHomePagePage() {
   const supabase = createServerClient()
-  const { data } = await supabase
-    .from('page_content')
-    .select('*')
-    .eq('page', 'home')
-    .maybeSingle()
+  const { data } = await supabase.from('page_content').select('*').eq('page', 'home').maybeSingle()
 
   const row = data as PageContentRow | null
   const stored = row?.content as Partial<HomeContent> | undefined

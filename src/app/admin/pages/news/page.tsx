@@ -7,11 +7,7 @@ export const dynamic = 'force-dynamic'
 
 export default async function AdminNewsPageContentPage() {
   const supabase = createServerClient()
-  const { data } = await supabase
-    .from('page_content')
-    .select('*')
-    .eq('page', 'news')
-    .maybeSingle()
+  const { data } = await supabase.from('page_content').select('*').eq('page', 'news').maybeSingle()
 
   const row = data as PageContentRow | null
   const stored = row?.content as Partial<NewsContent> | undefined

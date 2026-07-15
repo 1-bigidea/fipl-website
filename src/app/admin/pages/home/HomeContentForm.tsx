@@ -37,7 +37,10 @@ export default function HomeContentForm({ content }: Props) {
   }
 
   function updateOverlay(patch: Partial<HomeContent['hero']['overlay']>) {
-    setForm((prev) => ({ ...prev, hero: { ...prev.hero, overlay: { ...prev.hero.overlay, ...patch } } }))
+    setForm((prev) => ({
+      ...prev,
+      hero: { ...prev.hero, overlay: { ...prev.hero.overlay, ...patch } },
+    }))
   }
 
   function updateWhoWeAre(patch: Partial<HomeContent['whoWeAre']>) {

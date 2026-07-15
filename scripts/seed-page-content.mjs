@@ -50,9 +50,12 @@ const pages = [
       whoWeAre: {
         eyebrow: 'Who We Are ⚡',
         heading: "A Trusted Energy Partner\nShaping Nigeria's Future.",
-        body1: 'First Independent Power Company Limited (FIPL) is a leading Nigerian power generation company committed to delivering reliable, responsible, and sustainable energy. We operate four gas turbine power plants in Trans-Amadi, Afam, Omoku, and Eleme, with a combined installed capacity of 541MW.',
-        body2: "Driven by operational excellence, engineering innovation, and continuous investment in our assets and people, we provide dependable power that supports industries, businesses, and communities while contributing to Nigeria's energy future.",
-        body3: "Since assuming operations in 2014, FIPL has consistently restored critical power assets, expanded generation capacity, and strengthened infrastructure to enhance grid reliability. Our commitment to excellence and sustainability continues to drive lasting value for our stakeholders and the nation's power sector.",
+        body1:
+          'First Independent Power Company Limited (FIPL) is a leading Nigerian power generation company committed to delivering reliable, responsible, and sustainable energy. We operate four gas turbine power plants in Trans-Amadi, Afam, Omoku, and Eleme, with a combined installed capacity of 541MW.',
+        body2:
+          "Driven by operational excellence, engineering innovation, and continuous investment in our assets and people, we provide dependable power that supports industries, businesses, and communities while contributing to Nigeria's energy future.",
+        body3:
+          "Since assuming operations in 2014, FIPL has consistently restored critical power assets, expanded generation capacity, and strengthened infrastructure to enhance grid reliability. Our commitment to excellence and sustainability continues to drive lasting value for our stakeholders and the nation's power sector.",
         image: '/images/home/who-we-are.jpg',
         ctaLabel: 'Learn More About Us',
       },
@@ -71,8 +74,10 @@ const pages = [
       careersSection: {
         eyebrow: 'Careers',
         heading: 'Join Our Amazing Team',
-        body1: "At FIPL, our people are the driving force behind our success. We foster a culture of collaboration, innovation, and continuous learning, empowering our employees to grow professionally while making a meaningful impact on Nigeria's energy sector.",
-        body2: 'Our work environment is built on excellence, safety, integrity, and continuous improvement. By investing in our people and encouraging new ideas, we create opportunities to deliver exceptional results, advance sustainable power generation, and shape the future of energy together.',
+        body1:
+          "At FIPL, our people are the driving force behind our success. We foster a culture of collaboration, innovation, and continuous learning, empowering our employees to grow professionally while making a meaningful impact on Nigeria's energy sector.",
+        body2:
+          'Our work environment is built on excellence, safety, integrity, and continuous improvement. By investing in our people and encouraging new ideas, we create opportunities to deliver exceptional results, advance sustainable power generation, and shape the future of energy together.',
         image: '/images/home/careers-team-2.jpg',
         ctaLabel: 'Explore Opportunities',
         officeAddress: '70/72 Ordinance, Trans-Amadi, Port Harcourt, Rivers State.',
@@ -85,9 +90,12 @@ const pages = [
       purpose: {
         eyebrow: 'We are FIPL',
         heading: 'Our Purpose, Our Promise',
-        body1: 'First Independent Power Company Limited (FIPL) is a leading Nigerian power generation company committed to delivering reliable, responsible, and sustainable energy. We operate four gas turbine power plants in Trans-Amadi, Afam, Omoku, and Eleme, with a combined installed capacity of 541MW.',
-        body2: "Driven by operational excellence, engineering innovation, and continuous investment in our assets and people, we provide dependable power that supports industries, businesses, and communities while contributing to Nigeria's energy future.",
-        body3: "Since assuming operations in 2014, FIPL has consistently restored critical power assets, expanded generation capacity, and strengthened infrastructure to enhance grid reliability. Our commitment to excellence and sustainability continues to drive lasting value for our stakeholders and the nation's power sector.",
+        body1:
+          'First Independent Power Company Limited (FIPL) is a leading Nigerian power generation company committed to delivering reliable, responsible, and sustainable energy. We operate four gas turbine power plants in Trans-Amadi, Afam, Omoku, and Eleme, with a combined installed capacity of 541MW.',
+        body2:
+          "Driven by operational excellence, engineering innovation, and continuous investment in our assets and people, we provide dependable power that supports industries, businesses, and communities while contributing to Nigeria's energy future.",
+        body3:
+          "Since assuming operations in 2014, FIPL has consistently restored critical power assets, expanded generation capacity, and strengthened infrastructure to enhance grid reliability. Our commitment to excellence and sustainability continues to drive lasting value for our stakeholders and the nation's power sector.",
         stat1Value: '541',
         stat1Label: 'MW Installed Capacity',
         stat2Value: '10',
@@ -137,8 +145,10 @@ const pages = [
     content: {
       weCare: {
         heading: 'We Care',
-        body1: 'FIPL is conscious of the environment within which we operate, and we ensure that as a socially responsible company, we embark on some community development projects within our host communities to benefit the host community residents.',
-        body2: 'At the heart of our business objectives lies an unwavering commitment to promoting good corporate citizenship across the globe. This is achieved through FIPL Foundation – the vehicle for our Corporate Social Responsibility (CSR) initiatives. The activities of FIPL Foundation are aimed at empowering the communities where we operate in a sustainable, transparent, and efficient manner.',
+        body1:
+          'FIPL is conscious of the environment within which we operate, and we ensure that as a socially responsible company, we embark on some community development projects within our host communities to benefit the host community residents.',
+        body2:
+          'At the heart of our business objectives lies an unwavering commitment to promoting good corporate citizenship across the globe. This is achieved through FIPL Foundation – the vehicle for our Corporate Social Responsibility (CSR) initiatives. The activities of FIPL Foundation are aimed at empowering the communities where we operate in a sustainable, transparent, and efficient manner.',
       },
       focusAreas: [
         {
@@ -156,8 +166,10 @@ const pages = [
       ],
       sustainabilityBlock: {
         heading: 'Sustainability',
-        body1: 'Our operations and maintenance philosophy is driven by efficiency, sustainability, and continuous improvement. We are committed to reducing carbon and fugitive emissions while exploring hardware upgrades and combined-cycle integration to enhance plant performance and reliability. Guided by ethical business practices, we continue to create shared value for our stakeholders and deliver sustainable growth.',
-        body2: 'We have also built strong partnerships with our host communities through impactful development initiatives, including skills acquisition programs, scholarship schemes, and STEM education. By promoting local human capital integration and community participation in our projects, we continue to foster inclusive growth and long-term social impact.',
+        body1:
+          'Our operations and maintenance philosophy is driven by efficiency, sustainability, and continuous improvement. We are committed to reducing carbon and fugitive emissions while exploring hardware upgrades and combined-cycle integration to enhance plant performance and reliability. Guided by ethical business practices, we continue to create shared value for our stakeholders and deliver sustainable growth.',
+        body2:
+          'We have also built strong partnerships with our host communities through impactful development initiatives, including skills acquisition programs, scholarship schemes, and STEM education. By promoting local human capital integration and community participation in our projects, we continue to foster inclusive growth and long-term social impact.',
         image: '/images/sustainability/governance-team.jpg',
       },
       healthSafety: {
@@ -172,16 +184,21 @@ const pages = [
       },
       sdg: {
         heading: 'Our SDG Goals',
-        body1: 'At FIPL, sustainability is embedded in the way we operate. We align our business and community development initiatives with the United Nations Sustainable Development Goals (SDGs), ensuring our actions create lasting value for people, communities, and the environment.',
-        body2: 'Our commitment to affordable and clean energy is reflected in our efforts to provide reliable and efficient power while continuously improving environmental performance. Through our investment in quality education, we support STEM programs, scholarships, and learning opportunities that equip young people with the knowledge and skills to shape the future. We also promote decent work and economic growth by creating employment opportunities, developing local talent, and supporting initiatives that stimulate inclusive and sustainable economic development within our host communities.',
+        body1:
+          'At FIPL, sustainability is embedded in the way we operate. We align our business and community development initiatives with the United Nations Sustainable Development Goals (SDGs), ensuring our actions create lasting value for people, communities, and the environment.',
+        body2:
+          'Our commitment to affordable and clean energy is reflected in our efforts to provide reliable and efficient power while continuously improving environmental performance. Through our investment in quality education, we support STEM programs, scholarships, and learning opportunities that equip young people with the knowledge and skills to shape the future. We also promote decent work and economic growth by creating employment opportunities, developing local talent, and supporting initiatives that stimulate inclusive and sustainable economic development within our host communities.',
         image: '/images/sustainability/sdg.png',
       },
       community: {
         eyebrow: 'Our Initiatives',
         heading: 'Empowering Communities,\nBuilding Futures',
-        body1: 'We partner with our host communities to drive sustainable development through impactful initiatives in health, education, empowerment, and infrastructure.',
-        body2: 'Our community investment programmes include rural electrification projects that bring reliable electricity to underserved communities, enabling education, healthcare, and economic activities. We also support STEM education through scholarships, mentorship, and hands-on learning opportunities that inspire the next generation of innovators.',
-        body3: 'Our healthcare access programmes provide medical outreach, health screenings, and awareness campaigns to improve community well-being, while our youth empowerment initiatives equip young people with vocational skills, entrepreneurship training, and the resources needed to build sustainable livelihoods.',
+        body1:
+          'We partner with our host communities to drive sustainable development through impactful initiatives in health, education, empowerment, and infrastructure.',
+        body2:
+          'Our community investment programmes include rural electrification projects that bring reliable electricity to underserved communities, enabling education, healthcare, and economic activities. We also support STEM education through scholarships, mentorship, and hands-on learning opportunities that inspire the next generation of innovators.',
+        body3:
+          'Our healthcare access programmes provide medical outreach, health screenings, and awareness campaigns to improve community well-being, while our youth empowerment initiatives equip young people with vocational skills, entrepreneurship training, and the resources needed to build sustainable livelihoods.',
         image: '/images/sustainability/community-handover.jpg',
       },
       projects: {
@@ -218,14 +235,18 @@ const pages = [
     content: {
       intro: {
         heading: 'Vendor Registration Program',
-        body1: 'In our bid to enhance our business relationship with our vendors and ensure that their operations are guided professionally with the highest form of standards, we require all existing and intending vendors to register with FIPL. The services of a globally reputable company, Dun & Bradstreet, have been engaged to support FIPL in this exercise.',
-        body2: "The company shall review vendor's documents, conduct office, workshop, and business premises inspection to validate vendor's claims on the registration document. Upon satisfactory review, the company shall be issued a DUNS Number Certificate.",
+        body1:
+          'In our bid to enhance our business relationship with our vendors and ensure that their operations are guided professionally with the highest form of standards, we require all existing and intending vendors to register with FIPL. The services of a globally reputable company, Dun & Bradstreet, have been engaged to support FIPL in this exercise.',
+        body2:
+          "The company shall review vendor's documents, conduct office, workshop, and business premises inspection to validate vendor's claims on the registration document. Upon satisfactory review, the company shall be issued a DUNS Number Certificate.",
         ctaLabel: 'Register With Us',
       },
       duns: {
         heading: 'What is a DUNS Number?',
-        body1: 'A DUNS Number is a unique business status number that is provided only to companies that are certified to have met acceptable vendor registration requirements. The number gives the company the benefit of being part of a global database of credible companies that have been certified by Dun & Bradstreet, and the number can be quoted in all your correspondence with any company both locally and globally.',
-        body2: 'Companies who have paid the stipulated registration fee will be contacted by Dun & Bradstreet and required to provide some documents for the registration exercise. See below.',
+        body1:
+          'A DUNS Number is a unique business status number that is provided only to companies that are certified to have met acceptable vendor registration requirements. The number gives the company the benefit of being part of a global database of credible companies that have been certified by Dun & Bradstreet, and the number can be quoted in all your correspondence with any company both locally and globally.',
+        body2:
+          'Companies who have paid the stipulated registration fee will be contacted by Dun & Bradstreet and required to provide some documents for the registration exercise. See below.',
         ctaLabel: 'Click Here to View Vendor Registration Category',
       },
     },
@@ -253,8 +274,10 @@ const pages = [
       ],
       workingInFipl: {
         heading: 'Working in FIPL',
-        body1: 'FIPL is an active, can-do environment built on a diverse team united by a common goal of productivity, solutions, and results, with opportunities open to anyone who can deliver regardless of gender. We work with our people individually and collectively, offering challenging roles and opportunities for growth as they contribute to our corporate objectives.',
-        body2: "Our values guide everything we do: integrity means we do what's right, always; innovation drives us to challenge limits and improve continuously; safety puts people and the environment first; and collaboration and sustainability mean we achieve more together and remain committed to lasting impact.",
+        body1:
+          'FIPL is an active, can-do environment built on a diverse team united by a common goal of productivity, solutions, and results, with opportunities open to anyone who can deliver regardless of gender. We work with our people individually and collectively, offering challenging roles and opportunities for growth as they contribute to our corporate objectives.',
+        body2:
+          "Our values guide everything we do: integrity means we do what's right, always; innovation drives us to challenge limits and improve continuously; safety puts people and the environment first; and collaboration and sustainability mean we achieve more together and remain committed to lasting impact.",
         image: '/images/careers/team.png',
       },
       talentPool: {

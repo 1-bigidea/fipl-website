@@ -399,9 +399,7 @@ export default async function AboutPage() {
                 <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
                   {integrity.heading}
                 </h3>
-                <p className="text-white/70 text-sm leading-relaxed max-w-2xl">
-                  {integrity.body}
-                </p>
+                <p className="text-white/70 text-sm leading-relaxed max-w-2xl">{integrity.body}</p>
               </div>
               <a
                 href={integrity.buttonUrl}

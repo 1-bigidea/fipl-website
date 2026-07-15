@@ -17,7 +17,10 @@ export default function ContactContentForm({ content }: Props) {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
 
-  function updateContactItem(index: number, patch: Partial<ContactContent['contactItems'][number]>) {
+  function updateContactItem(
+    index: number,
+    patch: Partial<ContactContent['contactItems'][number]>,
+  ) {
     setForm((prev) => ({
       ...prev,
       contactItems: prev.contactItems.map((it, i) => (i === index ? { ...it, ...patch } : it)),
