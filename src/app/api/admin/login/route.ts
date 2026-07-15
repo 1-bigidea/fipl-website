@@ -12,13 +12,14 @@ export async function POST(req: NextRequest) {
   }
 
   const response = NextResponse.json({ ok: true, role })
-  const baseCookieOptions = {
+  const cookieOptions = {
+    httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax' as const,
     maxAge: 60 * 60 * 24 * 7,
     path: '/',
   }
-  response.cookies.set('admin_token', token, { ...baseCookieOptions, httpOnly: true })
-  response.cookies.set('admin_role', role, { ...baseCookieOptions, httpOnly: false })
+  response.cookies.set('admin_token', token, cookieOptions)
+  response.cookies.set('admin_role', role, cookieOptions)
   return response
 }
