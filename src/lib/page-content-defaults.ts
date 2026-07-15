@@ -6,6 +6,7 @@ import type {
   RegisterContent,
   CareersContent,
   ContactContent,
+  NewsContent,
 } from '@/lib/database.types'
 
 export const defaultHomeHero: HomeContent['hero'] = {
@@ -258,5 +259,12 @@ export const defaultContactContent: ContactContent = {
   newsletter: {
     heading: 'Subscribe For All The Top News!',
     body: 'Learn how we can serve you better with our daily newsletter.',
+  },
+}
+
+export const defaultNewsContent: NewsContent = {
+  insights: {
+    eyebrow: 'News & Blog',
+    heading: 'Insights, Updates & Industry News',
   },
 }

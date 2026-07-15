@@ -22,6 +22,7 @@ import {
   ClipboardList,
   Handshake,
   Phone,
+  Rss,
 } from 'lucide-react'
 import AdminNotificationBell from '@/components/AdminNotificationBell'
 import AdminRefreshControl from '@/components/AdminRefreshControl'
@@ -77,6 +78,12 @@ const NAV = [
     href: '/admin/pages/contact',
     label: 'Contact Page',
     icon: Phone,
+    roles: ['owner', 'content'] as AdminRole[],
+  },
+  {
+    href: '/admin/pages/news',
+    label: 'News & Media Page',
+    icon: Rss,
     roles: ['owner', 'content'] as AdminRole[],
   },
   {

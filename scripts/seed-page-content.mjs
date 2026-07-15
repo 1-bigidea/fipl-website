@@ -284,6 +284,15 @@ const pages = [
       },
     },
   },
+  {
+    page: 'news',
+    content: {
+      insights: {
+        eyebrow: 'News & Blog',
+        heading: 'Insights, Updates & Industry News',
+      },
+    },
+  },
 ]
 
 console.log(`Upserting ${pages.length} page content row(s)…`)

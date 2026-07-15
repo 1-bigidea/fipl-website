@@ -11,6 +11,7 @@ const ALLOWED_PAGES: Record<string, string> = {
   register: '/register',
   careers: '/careers',
   contact: '/contact',
+  news: '/news',
 }
 
 export async function GET(req: NextRequest, { params }: { params: { page: string } }) {

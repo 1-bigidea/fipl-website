@@ -184,6 +184,10 @@ export type ContactContent = {
   newsletter: { heading: string; body: string }
 }
 
+export type NewsContent = {
+  insights: { eyebrow: string; heading: string }
+}
+
 export type PageContentRow = {
   page: string
   content: Record<string, unknown>
