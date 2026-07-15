@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -7,10 +8,14 @@ import { CounterStats } from '@/components/CounterStats'
 import { WhoWeAreSection } from '@/components/WhoWeAreSection'
 import { HeroSlideshow } from '@/components/HeroSlideshow'
 import { IMAGES } from '@/lib/images'
+import { createServerClient } from '@/lib/supabase-server'
+import { defaultHomeHero } from '@/lib/page-content-defaults'
+import type { HomeHeroContent, PageContentRow } from '@/lib/database.types'
 
 export const metadata: Metadata = {
   title: 'Home – First Independent Power Limited (FIPL)',
 }
+export const dynamic = 'force-dynamic'
 
 const PlantIcon = (
   <svg
@@ -143,11 +148,22 @@ const faqs = [
   },
 ]
 
-export default function HomePage() {
+export default async function HomePage() {
+  const supabase = createServerClient()
+  const { data } = await supabase
+    .from('page_content')
+    .select('content')
+    .eq('page', 'home')
+    .maybeSingle()
+
+  const row = data as Pick<PageContentRow, 'content'> | null
+  const hero: HomeHeroContent = row?.content?.hero ?? defaultHomeHero
+  const overlayTitleLines = hero.overlay.title.split('\n')
+
   return (
     <>
       <section className="relative h-[600px] md:h-[660px] lg:h-[740px] bg-gray-900">
-        <HeroSlideshow />
+        <HeroSlideshow slides={hero.slides} />
       </section>
 
       <section className="relative z-10 -mt-[200px]">
@@ -158,7 +174,7 @@ export default function HomePage() {
               style={{
                 width: '420px',
                 height: '430px',
-                backgroundImage: `url('${IMAGES.home.workerLeft}')`,
+                backgroundImage: `url('${hero.overlay.imageLeft}')`,
               }}
             />
             <div className="shrink-0 bg-[var(--fipl-bg)] rounded-2xl shadow-xl flex flex-col items-center justify-center text-center px-6 py-5 w-[280px] sm:w-[308px] h-[240px] sm:h-[257px]">
@@ -170,14 +186,15 @@ export default function HomePage() {
                 className="shrink-0 mb-2.5"
               />
               <h2 className="text-sm font-bold text-[var(--fipl-heading)] leading-snug mb-1.5">
-                Our Power Plants,
-                <br />
-                Our Impact
+                {overlayTitleLines.map((line, i) => (
+                  <Fragment key={i}>
+                    {line}
+                    {i < overlayTitleLines.length - 1 && <br />}
+                  </Fragment>
+                ))}
               </h2>
               <p className="text-[11px] text-[var(--fipl-body)] leading-relaxed max-w-[240px]">
-                FIPL operates four world-class thermal power plants – Omoku, Afam, Trans-Amadi, and
-                Eleme – generating electricity that supports Nigeria&apos;s industrial and economic
-                growth.
+                {hero.overlay.body}
               </p>
             </div>
             <div
@@ -185,7 +202,7 @@ export default function HomePage() {
               style={{
                 width: '420px',
                 height: '430px',
-                backgroundImage: `url('${IMAGES.home.workerRight}')`,
+                backgroundImage: `url('${hero.overlay.imageRight}')`,
               }}
             />
           </div>

@@ -15,6 +15,7 @@ import {
   LogOut,
   ChevronLeft,
   ChevronRight,
+  Home,
 } from 'lucide-react'
 import AdminNotificationBell from '@/components/AdminNotificationBell'
 import AdminRefreshControl from '@/components/AdminRefreshControl'
@@ -23,6 +24,7 @@ import { ThemeToggle } from '@/components/ThemeToggle'
 
 const NAV = [
   { href: '/admin', label: 'Dashboard', exact: true, icon: LayoutDashboard },
+  { href: '/admin/pages/home', label: 'Home Page', icon: Home },
   { href: '/admin/news', label: 'News Articles', icon: Newspaper },
   { href: '/admin/media', label: 'Media Kits', icon: ImageIcon },
   { href: '/admin/jobs', label: 'Jobs', icon: Briefcase },

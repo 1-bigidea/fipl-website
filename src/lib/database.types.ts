@@ -72,3 +72,27 @@ export type TestimonialRow = {
   is_active: boolean
   created_at: string
 }
+
+export type HeroSlideContent = {
+  type: 'image' | 'video'
+  src: string
+  poster: string
+  line1: string
+  line2: string
+}
+
+export type HomeHeroContent = {
+  slides: HeroSlideContent[]
+  overlay: {
+    title: string
+    body: string
+    imageLeft: string
+    imageRight: string
+  }
+}
+
+export type PageContentRow = {
+  page: string
+  content: { hero: HomeHeroContent }
+  updated_at: string
+}
