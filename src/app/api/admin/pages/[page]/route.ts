@@ -5,6 +5,12 @@ import { requireRole } from '@/lib/admin-auth'
 
 const ALLOWED_PAGES: Record<string, string> = {
   home: '/',
+  about: '/about',
+  sustainability: '/sustainability',
+  'power-plants': '/power-plants',
+  register: '/register',
+  careers: '/careers',
+  contact: '/contact',
 }
 
 export async function GET(req: NextRequest, { params }: { params: { page: string } }) {

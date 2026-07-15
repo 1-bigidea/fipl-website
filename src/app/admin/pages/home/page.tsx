@@ -1,7 +1,7 @@
 import { createServerClient } from '@/lib/supabase-server'
-import { defaultHomeHero } from '@/lib/page-content-defaults'
-import type { HomeHeroContent, PageContentRow } from '@/lib/database.types'
-import HeroContentForm from './HeroContentForm'
+import { defaultHomeContent } from '@/lib/page-content-defaults'
+import type { HomeContent, PageContentRow } from '@/lib/database.types'
+import HomeContentForm from './HomeContentForm'
 
 export const dynamic = 'force-dynamic'
 
@@ -14,17 +14,23 @@ export default async function AdminHomePagePage() {
     .maybeSingle()
 
   const row = data as PageContentRow | null
-  const hero: HomeHeroContent = row?.content?.hero ?? defaultHomeHero
+  const stored = row?.content as Partial<HomeContent> | undefined
+  const content: HomeContent = {
+    hero: stored?.hero ?? defaultHomeContent.hero,
+    sustainabilityCta: stored?.sustainabilityCta ?? defaultHomeContent.sustainabilityCta,
+    communityBanner: stored?.communityBanner ?? defaultHomeContent.communityBanner,
+    careersSection: stored?.careersSection ?? defaultHomeContent.careersSection,
+  }
 
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="text-xl font-bold text-gray-900 dark:text-white">Home Page — Hero</h1>
+        <h1 className="text-xl font-bold text-gray-900 dark:text-white">Home Page</h1>
         <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
-          Edit the hero slideshow and the impact card shown at the top of the home page
+          Edit the hero slideshow, impact card, and the marketing sections shown on the home page
         </p>
       </div>
-      <HeroContentForm hero={hero} />
+      <HomeContentForm content={content} />
     </div>
   )
 }

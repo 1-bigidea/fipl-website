@@ -7,10 +7,9 @@ import { FaqSection } from '@/components/FaqSection'
 import { CounterStats } from '@/components/CounterStats'
 import { WhoWeAreSection } from '@/components/WhoWeAreSection'
 import { HeroSlideshow } from '@/components/HeroSlideshow'
-import { IMAGES } from '@/lib/images'
 import { createServerClient } from '@/lib/supabase-server'
-import { defaultHomeHero } from '@/lib/page-content-defaults'
-import type { HomeHeroContent, PageContentRow } from '@/lib/database.types'
+import { defaultHomeContent } from '@/lib/page-content-defaults'
+import type { HomeContent, PageContentRow } from '@/lib/database.types'
 
 export const metadata: Metadata = {
   title: 'Home – First Independent Power Limited (FIPL)',
@@ -157,8 +156,13 @@ export default async function HomePage() {
     .maybeSingle()
 
   const row = data as Pick<PageContentRow, 'content'> | null
-  const hero: HomeHeroContent = row?.content?.hero ?? defaultHomeHero
+  const content = row?.content as Partial<HomeContent> | undefined
+  const hero = content?.hero ?? defaultHomeContent.hero
+  const sustainabilityCta = content?.sustainabilityCta ?? defaultHomeContent.sustainabilityCta
+  const communityBanner = content?.communityBanner ?? defaultHomeContent.communityBanner
+  const careersSection = content?.careersSection ?? defaultHomeContent.careersSection
   const overlayTitleLines = hero.overlay.title.split('\n')
+  const communityHeadingLines = communityBanner.heading.split('\n')
 
   return (
     <>
@@ -243,7 +247,7 @@ export default async function HomePage() {
                 color: 'rgba(255,255,255,0.9)',
               }}
             >
-              Sustainability &amp; CSR{' '}
+              {sustainabilityCta.eyebrow}{' '}
               <svg
                 viewBox="0 0 24 24"
                 width="18"
@@ -256,12 +260,10 @@ export default async function HomePage() {
               </svg>
             </p>
             <h2 className="text-[28px] md:text-[36px] lg:text-[40px] font-bold text-white leading-tight mb-3">
-              Sustainability Beyond Power
+              {sustainabilityCta.heading}
             </h2>
             <p className="text-white/75 text-[14px] leading-relaxed max-w-2xl mx-auto">
-              Our responsibility goes beyond megawatts. Through CSR and sustainable practices we are
-              empowering communities, protecting the environment, and driving progress aligned with
-              the UN SDGs.
+              {sustainabilityCta.body}
             </p>
           </div>
           <CounterStats stats={stats} />
@@ -271,7 +273,7 @@ export default async function HomePage() {
       <div className="bg-[var(--fipl-bg)] h-4 md:h-6" />
       <section
         className="relative py-20 md:py-28 bg-cover bg-center"
-        style={{ backgroundImage: `url('${IMAGES.home.community}')` }}
+        style={{ backgroundImage: `url('${communityBanner.image}')` }}
       >
         <div
           className="absolute inset-0"
@@ -283,7 +285,7 @@ export default async function HomePage() {
         <div className="relative z-10 max-w-[1280px] mx-auto px-6">
           <div className="max-w-[520px]">
             <p className="text-xs font-bold uppercase tracking-widest text-white/80 mb-3">
-              WE VALUE PEOPLE{' '}
+              {communityBanner.eyebrow}{' '}
               <svg
                 viewBox="0 0 24 24"
                 width="12"
@@ -304,9 +306,12 @@ export default async function HomePage() {
                 lineHeight: '1.15',
               }}
             >
-              Empowering Communities,
-              <br />
-              Preserving the Environment
+              {communityHeadingLines.map((line, i) => (
+                <Fragment key={i}>
+                  {line}
+                  {i < communityHeadingLines.length - 1 && <br />}
+                </Fragment>
+              ))}
             </h2>
             <p
               className="mb-7"
@@ -319,15 +324,13 @@ export default async function HomePage() {
                 maxWidth: '400px',
               }}
             >
-              FIPL is conscious of the environment within which we operate, and we ensure that as a
-              socially responsible company, we embark on community development projects within our
-              host communities to benefit the host community residents.
+              {communityBanner.body}
             </p>
             <Link
               href="/sustainability"
               className="inline-flex items-center gap-2 bg-white text-primary font-semibold text-sm px-6 py-3 rounded-md hover:bg-gray-100 transition-colors"
             >
-              Learn More <ArrowUpRight className="w-4 h-4" />
+              {communityBanner.ctaLabel} <ArrowUpRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -340,21 +343,21 @@ export default async function HomePage() {
               <div
                 className="absolute inset-0 bg-cover bg-center"
                 style={{
-                  backgroundImage: `url('${IMAGES.home.team}')`,
+                  backgroundImage: `url('${careersSection.image}')`,
                   clipPath: 'polygon(0 0, 90% 0, 78% 50%, 0 50%)',
                 }}
               />
               <div
                 className="absolute inset-0 bg-cover bg-center"
                 style={{
-                  backgroundImage: `url('${IMAGES.home.team}')`,
+                  backgroundImage: `url('${careersSection.image}')`,
                   clipPath: 'polygon(0 50%, 89% 50%, 78% 100%, 0 100%)',
                 }}
               />
             </div>
             <div>
               <p className="text-xs font-bold uppercase tracking-widest text-primary mb-3">
-                Careers{' '}
+                {careersSection.eyebrow}{' '}
                 <svg
                   viewBox="0 0 24 24"
                   width="12"
@@ -367,28 +370,23 @@ export default async function HomePage() {
                 </svg>
               </p>
               <h2 className="text-2xl md:text-3xl lg:text-[36px] font-bold text-[var(--fipl-heading)] leading-snug mb-4">
-                Join Our Amazing Team
+                {careersSection.heading}
               </h2>
               <p className="text-[var(--fipl-body)] text-[14px] leading-relaxed mb-4">
-                At FIPL, our people are the driving force behind our success. We foster a culture of
-                collaboration, innovation, and continuous learning, empowering our employees to grow
-                professionally while making a meaningful impact on Nigeria&apos;s energy sector.
+                {careersSection.body1}
               </p>
               <p className="text-[var(--fipl-body)] text-[14px] leading-relaxed mb-8">
-                Our work environment is built on excellence, safety, integrity, and continuous
-                improvement. By investing in our people and encouraging new ideas, we create
-                opportunities to deliver exceptional results, advance sustainable power generation,
-                and shape the future of energy together.
+                {careersSection.body2}
               </p>
               <Link
                 href="/careers"
                 className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold text-sm px-6 py-3 rounded-md transition-colors"
               >
-                Explore Opportunities <ArrowUpRight className="w-4 h-4" />
+                {careersSection.ctaLabel} <ArrowUpRight className="w-4 h-4" />
               </Link>
               <p className="text-[var(--fipl-body)] text-[13px] leading-relaxed mt-6">
-                <span className="font-semibold text-[var(--fipl-heading)]">Head Office:</span> 70/72
-                Ordinance, Trans-Amadi, Port Harcourt, Rivers State.
+                <span className="font-semibold text-[var(--fipl-heading)]">Head Office:</span>{' '}
+                {careersSection.officeAddress}
               </p>
             </div>
           </div>
