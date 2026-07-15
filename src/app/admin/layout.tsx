@@ -141,6 +141,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <div className="w-px h-4 bg-gray-100 dark:bg-gray-800 mx-1" />
               <ThemeToggle className="text-gray-400 dark:text-gray-400" />
               <AdminNotificationBell />
+              <div className="w-px h-4 bg-gray-100 dark:bg-gray-800 mx-1" />
+              <button
+                onClick={handleLogout}
+                title="Sign Out"
+                aria-label="Sign Out"
+                className="w-7 h-7 rounded-lg flex items-center justify-center text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              >
+                <LogOut className="w-4 h-4" strokeWidth={1.8} />
+              </button>
             </div>
           </header>
 
