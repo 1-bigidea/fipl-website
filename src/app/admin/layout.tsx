@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard,
@@ -21,16 +21,53 @@ import AdminNotificationBell from '@/components/AdminNotificationBell'
 import AdminRefreshControl from '@/components/AdminRefreshControl'
 import { ToastProvider } from '@/components/AdminToast'
 import { ThemeToggle } from '@/components/ThemeToggle'
+import type { AdminRole } from '@/lib/admin-auth'
 
 const NAV = [
-  { href: '/admin', label: 'Dashboard', exact: true, icon: LayoutDashboard },
-  { href: '/admin/pages/home', label: 'Home Page', icon: Home },
-  { href: '/admin/news', label: 'News Articles', icon: Newspaper },
-  { href: '/admin/media', label: 'Media Kits', icon: ImageIcon },
-  { href: '/admin/jobs', label: 'Jobs', icon: Briefcase },
-  { href: '/admin/alerts', label: 'Site Alerts', icon: AlertTriangle },
-  { href: '/admin/testimonials', label: 'Testimonials', icon: Quote },
-  { href: '/admin/submissions', label: 'Submissions', icon: Mail },
+  {
+    href: '/admin',
+    label: 'Dashboard',
+    exact: true,
+    icon: LayoutDashboard,
+    roles: ['owner'] as AdminRole[],
+  },
+  {
+    href: '/admin/pages/home',
+    label: 'Home Page',
+    icon: Home,
+    roles: ['owner', 'content'] as AdminRole[],
+  },
+  {
+    href: '/admin/news',
+    label: 'News Articles',
+    icon: Newspaper,
+    roles: ['owner', 'content'] as AdminRole[],
+  },
+  {
+    href: '/admin/media',
+    label: 'Media Kits',
+    icon: ImageIcon,
+    roles: ['owner', 'content'] as AdminRole[],
+  },
+  { href: '/admin/jobs', label: 'Jobs', icon: Briefcase, roles: ['owner', 'hr'] as AdminRole[] },
+  {
+    href: '/admin/alerts',
+    label: 'Site Alerts',
+    icon: AlertTriangle,
+    roles: ['owner', 'content'] as AdminRole[],
+  },
+  {
+    href: '/admin/testimonials',
+    label: 'Testimonials',
+    icon: Quote,
+    roles: ['owner', 'content'] as AdminRole[],
+  },
+  {
+    href: '/admin/submissions',
+    label: 'Submissions',
+    icon: Mail,
+    roles: ['owner', 'content'] as AdminRole[],
+  },
 ]
 
 function getPageTitle(pathname: string): string {
@@ -41,12 +78,24 @@ function getPageTitle(pathname: string): string {
   return 'Admin'
 }
 
+function getCookie(name: string): string | null {
+  const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'))
+  return match ? decodeURIComponent(match[1]) : null
+}
+
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const router = useRouter()
   const [collapsed, setCollapsed] = useState(false)
+  const [role, setRole] = useState<AdminRole | null>(null)
+
+  useEffect(() => {
+    setRole(getCookie('admin_role') as AdminRole | null)
+  }, [pathname])
 
   if (pathname === '/admin/login') return <>{children}</>
+
+  const visibleNav = NAV.filter((item) => role === null || item.roles.includes(role))
 
   async function handleLogout() {
     await fetch('/api/admin/logout', { method: 'POST' })
@@ -95,7 +144,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
 
           <nav className="flex-1 px-2 py-3 space-y-0.5 overflow-hidden">
-            {NAV.map(({ href, label, exact, icon: Icon }) => {
+            {visibleNav.map(({ href, label, exact, icon: Icon }) => {
               const active = exact ? pathname === href : pathname.startsWith(href)
               return (
                 <Link
